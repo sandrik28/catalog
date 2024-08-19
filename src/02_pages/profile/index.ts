@@ -1,0 +1,1 @@
+import {ProfilePage} from './ui/Page/Page'

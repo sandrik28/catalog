@@ -1,0 +1,1 @@
+import {ProductPage} from './ui/Page/Page'
