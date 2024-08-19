@@ -25,6 +25,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.3.2'
 
     implementation 'org.springframework.boot:spring-boot-starter-security:3.2.4'
+
+    implementation project(':Domain')
+    implementation project(':Repo')
 }
 
 test {
