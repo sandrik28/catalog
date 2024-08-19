@@ -18,4 +18,8 @@ include 'ProductMS:Service'
 findProject(':ProductMS:Service')?.name = 'Service'
 include 'ProductMS:Repo'
 findProject(':ProductMS:Repo')?.name = 'Repo'
+include 'Service'
+include 'Repo'
+include 'Domain'
+include 'Controller'
 
