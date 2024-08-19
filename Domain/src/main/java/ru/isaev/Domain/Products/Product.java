@@ -95,7 +95,7 @@ public class Product {
     public void setUser(User owner, Boolean add) {
         this.owner = owner;
         if (owner != null && add) {
-            owner.addCat(this, false);
+            owner.addProduct(this, false);
         }
     }
 }
