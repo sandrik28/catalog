@@ -12,6 +12,7 @@ import ru.isaev.Service.Utilities.Exceptions.NotYourProfileException;
 import ru.isaev.Service.Utilities.Exceptions.UserNotFoundException;
 
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -38,6 +39,14 @@ public class UserService implements IUserService {
                 () -> new UserNotFoundException("Not found user with id = " + id));
 
         return user;
+    }
+
+    @Override
+    public List<User> getUserByRole(Roles role) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
+        return userRepo.findByRole(role);
     }
 
     public void updateUser(User user) {
