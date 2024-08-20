@@ -100,6 +100,30 @@ public class User {
         this.productsList = productsList;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Notification> getNotificationsList() {
+        return notificationsList;
+    }
+
+    public void setNotificationsList(List<Notification> notificationsList) {
+        this.notificationsList = notificationsList;
+    }
+
+    public List<Product> getFollowedProductsList() {
+        return followedProductsList;
+    }
+
+    public void setFollowedProductsList(List<Product> followedProductsList) {
+        this.followedProductsList = followedProductsList;
+    }
+
     public void addProduct(Product product, Boolean set) {
         if (product != null) {
             productsList.add(product);
