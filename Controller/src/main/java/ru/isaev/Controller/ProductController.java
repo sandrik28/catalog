@@ -12,7 +12,7 @@ import ru.isaev.Service.ProductService.IProductService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cats")
+@RequestMapping("/products")
 public class ProductController {
     private final IProductService productService;
 
@@ -40,7 +40,7 @@ public class ProductController {
         );
     }
     @PostMapping("/add")
-    public ResponseEntity<ProductDto> addCat(@RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto) {
         Product product = mapper.productDtoToProduct(productDto);
         productService.addProduct(product);
 
@@ -48,14 +48,14 @@ public class ProductController {
     }
 
     @PutMapping("/edit")
-    public ResponseEntity<ProductDto> editCat(@RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> editProduct(@RequestBody ProductDto productDto) {
         Product product = mapper.productDtoToProduct(productDto);
         productService.updateProduct(product);
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCatById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProductById(@PathVariable Long id) {
         productService.removeProductById(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
