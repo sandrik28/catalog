@@ -131,7 +131,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public void subscribeOnProductById(Long productId) {
+    public Product subscribeOnProductById(Long productId) {
         MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = currentPrincipal.getUser();
 
@@ -150,35 +150,43 @@ public class ProductService implements IProductService {
 
         userRepo.save(currentUser);
         productRepo.save(product);
+
+        return product;
     }
 
     @Override
-    public void unsubscribeFromProductById(Long productId) {
+    public Product unsubscribeFromProductById(Long productId) {
         MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = currentPrincipal.getUser();
 
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
+
+        return product;
     }
 
     @Override
-    public void approveOfPublishingOrEditingProductById(Long productId) {
+    public Product approveOfPublishingOrEditingProductById(Long productId) {
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
 
         product.setStatus(Status.APPROVED);
         productRepo.save(product);
+
+        return product;
     }
 
     @Override
-    public void archiveProductById(Long productId) {
+    public Product archiveProductById(Long productId) {
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
 
         product.setStatus(Status.ARCHIVED);
         productRepo.save(product);
+
+        return product;
     }
 }

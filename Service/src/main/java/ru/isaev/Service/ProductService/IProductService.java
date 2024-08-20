@@ -26,11 +26,11 @@ public interface IProductService {
 
     public void removeProductById(Long id);
 
-    public void subscribeOnProductById(Long id);
+    public Product subscribeOnProductById(Long id);
 
-    public void unsubscribeFromProductById(Long productId);
+    public Product unsubscribeFromProductById(Long productId);
 
-    public void approveOfPublishingOrEditingProductById(Long productId);
+    public Product approveOfPublishingOrEditingProductById(Long productId);
 
-    public void archiveProductById(Long productId);
+    public Product archiveProductById(Long productId);
 }
