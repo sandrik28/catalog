@@ -1,11 +1,11 @@
 package ru.isaev.Domain.Users;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import jakarta.persistence.*;
 import ru.isaev.Domain.Notifications.Notification;
 import ru.isaev.Domain.Products.Product;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,11 +18,12 @@ public class User {
     private String firstName;
 
     private String lastName;
-    private LocalDate birthday;
 
     private String password;
 
     private Roles role;
+
+    private String email;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -47,8 +48,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "followed_product_id")
     )
     private List<Product> followedProductsList = new ArrayList<>();
-
-    private String email;
 
     public User() {
     }
@@ -99,14 +98,6 @@ public class User {
 
     public void setProductsList(List<Product> productsList) {
         this.productsList = productsList;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
     }
 
     public void addProduct(Product product, Boolean set) {

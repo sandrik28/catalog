@@ -21,7 +21,6 @@ public class Product {
     )
     private List<User> subscribersList = new ArrayList<>();
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     private User owner;
 
@@ -32,6 +31,8 @@ public class Product {
     private String linkToWebSite;
 
     private String description;
+
+    private String category;
 
     public Product() {
     }
@@ -90,6 +91,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setUser(User owner, Boolean add) {
