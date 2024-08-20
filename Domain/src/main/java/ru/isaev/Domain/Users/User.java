@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import ru.isaev.Domain.Notifications.Notification;
 import ru.isaev.Domain.Products.Product;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "USER")
@@ -131,5 +131,18 @@ public class User {
         if (set) {
             product.setUser(this, false);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(password, user.password) && role == user.role && Objects.equals(email, user.email) && Objects.equals(productsList, user.productsList) && Objects.equals(notificationsList, user.notificationsList) && Objects.equals(followedProductsList, user.followedProductsList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, password, role, email, productsList, notificationsList, followedProductsList);
     }
 }

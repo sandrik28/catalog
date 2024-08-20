@@ -1,12 +1,13 @@
 package ru.isaev.Domain.ProductDtos;
 
-import ru.isaev.Domain.Products.Types;
-import ru.isaev.Domain.Users.User;
+import ru.isaev.Domain.Products.Status;
 
 public class ProductDto {
     private Long ownerId;
 
-    private Types type;
+    private String title;
+
+    private Status type;
 
     private String emailOFSupport;
 
@@ -24,11 +25,11 @@ public class ProductDto {
         this.ownerId = ownerId;
     }
 
-    public Types getType() {
+    public Status getType() {
         return type;
     }
 
-    public void setType(Types type) {
+    public void setType(Status type) {
         this.type = type;
     }
 
@@ -58,6 +59,14 @@ public class ProductDto {
 
     public String getCategory() {
         return category;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setCategory(String category) {

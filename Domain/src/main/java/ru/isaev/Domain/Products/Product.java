@@ -5,6 +5,7 @@ import ru.isaev.Domain.Users.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -12,6 +13,8 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String title;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -24,7 +27,7 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     private User owner;
 
-    private Types type;
+    private Status status;
 
     private String emailOFSupport;
 
@@ -57,16 +60,24 @@ public class Product {
         return owner;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public void setOwner(User owner) {
         this.owner = owner;
     }
 
-    public Types getType() {
-        return type;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setType(Types type) {
-        this.type = type;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getEmailOFSupport() {
@@ -106,5 +117,18 @@ public class Product {
         if (owner != null && add) {
             owner.addProduct(this, false);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) && Objects.equals(title, product.title) && Objects.equals(subscribersList, product.subscribersList) && Objects.equals(owner, product.owner) && status == product.status && Objects.equals(emailOFSupport, product.emailOFSupport) && Objects.equals(linkToWebSite, product.linkToWebSite) && Objects.equals(description, product.description) && Objects.equals(category, product.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, subscribersList, owner, status, emailOFSupport, linkToWebSite, description, category);
     }
 }
