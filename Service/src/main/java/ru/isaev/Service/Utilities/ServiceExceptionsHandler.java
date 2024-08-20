@@ -4,10 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.isaev.Service.Utilities.Exceptions.NotYourProductException;
-import ru.isaev.Service.Utilities.Exceptions.NotYourProfileException;
-import ru.isaev.Service.Utilities.Exceptions.ProductNotFoundExceptions;
-import ru.isaev.Service.Utilities.Exceptions.UserNotFoundException;
+import ru.isaev.Service.Utilities.Exceptions.*;
 
 import java.util.Date;
 
@@ -46,6 +43,16 @@ public class ServiceExceptionsHandler {
 
     @ExceptionHandler(NotYourProfileException.class)
     public ResponseEntity<ErrorMessage> notYourProfileException(NotYourProfileException ex) {
+        ErrorMessage message = new ErrorMessage(
+                HttpStatus.NOT_FOUND.value(),
+                new Date(),
+                ex.getMessage());
+
+        return new ResponseEntity<ErrorMessage>(message, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(NotYourProfileException.class)
+    public ResponseEntity<ErrorMessage> SubscriptionException(SubscriptionException ex) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.NOT_FOUND.value(),
                 new Date(),
