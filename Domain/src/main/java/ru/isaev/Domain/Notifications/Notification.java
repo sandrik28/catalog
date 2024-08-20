@@ -3,6 +3,7 @@ package ru.isaev.Domain.Notifications;
 import jakarta.persistence.*;
 import ru.isaev.Domain.Users.User;
 
+@Entity
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

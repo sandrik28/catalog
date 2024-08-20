@@ -4,13 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.isaev.Service.Utilities.Exceptions.*;
 
 import java.util.Date;
 
 @ControllerAdvice
 public class ServiceExceptionsHandler {
-
     @ExceptionHandler(ProductNotFoundExceptions.class)
     public ResponseEntity<ErrorMessage> catNotFoundException(ProductNotFoundExceptions ex) {
         ErrorMessage message = new ErrorMessage(
@@ -51,7 +51,7 @@ public class ServiceExceptionsHandler {
         return new ResponseEntity<ErrorMessage>(message, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(NotYourProfileException.class)
+    @ExceptionHandler(SubscriptionException.class)
     public ResponseEntity<ErrorMessage> SubscriptionException(SubscriptionException ex) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.NOT_FOUND.value(),
