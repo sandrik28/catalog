@@ -9,6 +9,8 @@ import ru.isaev.Repo.ProductRepo;
 import ru.isaev.Repo.UserRepo;
 import ru.isaev.Service.Security.MyUserDetails;
 
+import java.util.List;
+
 @Service
 public class ProductService implements IProductService {
     private final ProductRepo productRepo;
@@ -18,6 +20,11 @@ public class ProductService implements IProductService {
     public ProductService(ProductRepo productRepo, UserRepo userRepo) {
         this.productRepo = productRepo;
         this.userRepo = userRepo;
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return null;
     }
 
     @Override
