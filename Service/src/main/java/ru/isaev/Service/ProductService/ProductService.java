@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.isaev.Domain.Products.Product;
+import ru.isaev.Domain.Products.Status;
 import ru.isaev.Domain.Users.Roles;
 import ru.isaev.Domain.Users.User;
 import ru.isaev.Repo.ProductRepo;
@@ -12,6 +13,7 @@ import ru.isaev.Service.Security.MyUserDetails;
 import ru.isaev.Service.Utilities.Exceptions.NotYourProductException;
 import ru.isaev.Service.Utilities.Exceptions.NotYourProfileException;
 import ru.isaev.Service.Utilities.Exceptions.ProductNotFoundExceptions;
+import ru.isaev.Service.Utilities.Exceptions.SubscriptionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +36,56 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public List<Product> getProductsByStatus(Status status) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
+        return productRepo.findByStatus(status);
+    }
+
+    @Override
+    public List<Product> getProductsFollowedByUser(Long id) {
+        List<Product> allProducts =  productRepo.findAll();
+        List<Product> productsFollowedByUser = new ArrayList<>();
+
+        for (Product p :
+                allProducts) {
+            List<User> subscribersList = p.getSubscribersList();
+
+            for (User user:
+                 subscribersList) {
+                if (user.getId().equals(id)) {
+                    productsFollowedByUser.add(p);
+                    break;
+                }
+            }
+        }
+
+        return productsFollowedByUser;
+    }
+
+    @Override
+    public List<Product> getProductsByTitle(String title) {
+        return productRepo.findByTitle(title);
+    }
+
+    @Override
+    public List<Product> getProductsByCategory(String category) {
+        return productRepo.findByCategory(category);
+    }
+
+    @Override
+    public List<Product> getProductsByTitleAndCategory(String title, String category) {
+        return productRepo.findByTitleAndCategory(title, category);
+    }
+
+
+    @Override
     public void addProduct(Product product) {
         MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = currentPrincipal.getUser();
+
+        product.setStatus(Status.ON_MODERATION_FOR_PUBLISHING);
 
         product.setOwner(currentUser);
         List<Product> productsOfUser = currentUser.getProductsList();
@@ -62,6 +111,7 @@ public class ProductService implements IProductService {
         if (!Objects.equals(product.getOwner().getId(), currentUser.getId()) && currentUser.getRole() != Roles.ROLE_ADMIN)
             throw new NotYourProductException("Not your product with id = " + product.getId());
 
+        product.setStatus(Status.ON_MODERATION_FOR_EDITING);
         productRepo.save(product);
     }
 
@@ -78,5 +128,57 @@ public class ProductService implements IProductService {
             throw new NotYourProfileException("Not your profile with id = " + id);
 
         productRepo.deleteById(id);
+    }
+
+    @Override
+    public void subscribeOnProductById(Long productId) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
+        Product product = productRepo.findById(productId).orElseThrow(
+                () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
+        );
+
+        if (product.getOwner().getId().equals(currentUser.getId()))
+            throw new SubscriptionException("You can't subscribe to your project");
+
+        List<Product> productsFollowedByUserList = currentUser.getFollowedProductsList();
+        List<User> subsbcribersOfProductList = product.getSubscribersList();
+
+        productsFollowedByUserList.remove(product);
+        subsbcribersOfProductList.remove(currentUser);
+
+        userRepo.save(currentUser);
+        productRepo.save(product);
+    }
+
+    @Override
+    public void unsubscribeFromProductById(Long productId) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
+        Product product = productRepo.findById(productId).orElseThrow(
+                () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
+        );
+    }
+
+    @Override
+    public void approveOfPublishingOrEditingProductById(Long productId) {
+        Product product = productRepo.findById(productId).orElseThrow(
+                () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
+        );
+
+        product.setStatus(Status.APPROVED);
+        productRepo.save(product);
+    }
+
+    @Override
+    public void archiveProductById(Long productId) {
+        Product product = productRepo.findById(productId).orElseThrow(
+                () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
+        );
+
+        product.setStatus(Status.ARCHIVED);
+        productRepo.save(product);
     }
 }
