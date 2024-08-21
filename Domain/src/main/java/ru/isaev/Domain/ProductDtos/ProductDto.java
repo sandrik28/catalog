@@ -3,7 +3,10 @@ package ru.isaev.Domain.ProductDtos;
 import ru.isaev.Domain.Products.Status;
 
 public class ProductDto {
+    private Long id;
     private Long ownerId;
+
+    private String nameOfOwner;
 
     private String title;
 
@@ -16,6 +19,22 @@ public class ProductDto {
     private String description;
 
     private String category;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNameOfOwner() {
+        return nameOfOwner;
+    }
+
+    public void setNameOfOwner(String nameOfOwner) {
+        this.nameOfOwner = nameOfOwner;
+    }
 
     public Long getOwnerId() {
         return ownerId;

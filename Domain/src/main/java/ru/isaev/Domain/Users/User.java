@@ -15,9 +15,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-
-    private String lastName;
+    private String name;
 
     private String password;
 
@@ -76,20 +74,12 @@ public class User {
         this.role = role;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Product> getProductsList() {
@@ -138,11 +128,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(password, user.password) && role == user.role && Objects.equals(email, user.email) && Objects.equals(productsList, user.productsList) && Objects.equals(notificationsList, user.notificationsList) && Objects.equals(followedProductsList, user.followedProductsList);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(password, user.password) && role == user.role && Objects.equals(email, user.email) && Objects.equals(productsList, user.productsList) && Objects.equals(notificationsList, user.notificationsList) && Objects.equals(followedProductsList, user.followedProductsList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, password, role, email, productsList, notificationsList, followedProductsList);
+        return Objects.hash(id, name, password, role, email, productsList, notificationsList, followedProductsList);
     }
 }
