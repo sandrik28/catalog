@@ -1,7 +1,12 @@
 package ru.isaev.Domain.Notifications;
 
-import jakarta.persistence.*;
-import ru.isaev.Domain.Users.User;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Notification {
@@ -10,6 +15,18 @@ public class Notification {
     private Long id;
     private Long userId;
     private String message;
+
+    private LocalDateTime timestamp;
+
+    public Notification(Long userId, String message) {
+        this.userId = userId;
+        this.message = message;
+        timestamp = LocalDateTime.now();
+    }
+
+    public Notification() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -24,6 +41,10 @@ public class Notification {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
     public String getMessage() {

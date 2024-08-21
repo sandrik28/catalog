@@ -174,8 +174,11 @@ public class ProductService implements IProductService {
         List<Product> productsFollowedByUserList = currentUser.getFollowedProductsList();
         List<User> subsbcribersOfProductList = product.getSubscribersList();
 
-        productsFollowedByUserList.remove(product);
-        subsbcribersOfProductList.remove(currentUser);
+        productsFollowedByUserList.add(product);
+        subsbcribersOfProductList.add(currentUser);
+
+        currentUser.setFollowedProductsList(productsFollowedByUserList);
+        product.setSubscribersList(subsbcribersOfProductList);
 
         userRepo.save(currentUser);
         productRepo.save(product);
@@ -191,6 +194,18 @@ public class ProductService implements IProductService {
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
+
+        List<Product> productsFollowedByUserList = currentUser.getFollowedProductsList();
+        List<User> subsbcribersOfProductList = product.getSubscribersList();
+
+        productsFollowedByUserList.remove(product);
+        subsbcribersOfProductList.remove(currentUser);
+
+        currentUser.setFollowedProductsList(productsFollowedByUserList);
+        product.setSubscribersList(subsbcribersOfProductList);
+
+        userRepo.save(currentUser);
+        productRepo.save(product);
 
         return product;
     }
