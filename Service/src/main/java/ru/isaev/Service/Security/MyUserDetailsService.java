@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.isaev.Domain.Users.User;
 import ru.isaev.Repo.UserRepo;
+import ru.isaev.Service.Utilities.Exceptions.UserNotFoundException;
 
 import java.util.Optional;
 
@@ -17,8 +18,9 @@ public class MyUserDetailsService implements UserDetailsService  {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepo.findById(Long.valueOf(username));
-
-        return new MyUserDetails(user.get());
+        User user = userRepo.findByEmail(username).orElseThrow(
+                () -> new UserNotFoundException("Not found user with email = " + username));
+        
+        return new MyUserDetails(user);
     }
 }

@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.isaev.Domain.Notifications.Notification;
-import ru.isaev.Domain.Products.Product;
 import ru.isaev.Domain.Users.User;
 import ru.isaev.Repo.NotificationRepo;
-import ru.isaev.Repo.ProductRepo;
 import ru.isaev.Repo.UserRepo;
 import ru.isaev.Service.Security.MyUserDetails;
 import ru.isaev.Service.Utilities.Exceptions.UserNotFoundException;
@@ -17,6 +15,7 @@ import java.util.List;
 @Service
 public class NotificationService implements INotificationService {
     private final UserRepo userRepo;
+
     private final NotificationRepo notificationRepo;
 
     @Autowired
