@@ -1,5 +1,7 @@
 package ru.isaev.Domain.ProductDtos;
 
+import ru.isaev.Domain.Products.Status;
+
 public class ProductPreviewCardDto {
     private Long id;
 
@@ -11,12 +13,15 @@ public class ProductPreviewCardDto {
 
     private String category;
 
-    public ProductPreviewCardDto(Long id, Long ownerId, String nameOfOwner, String description, String category) {
+    private Status status;
+
+    public ProductPreviewCardDto(Long id, Long ownerId, String nameOfOwner, String description, String category, Status status) {
         this.id = id;
         this.ownerId = ownerId;
         this.nameOfOwner = nameOfOwner;
         this.description = description;
         this.category = category;
+        this.status = status;
     }
 
     public Long getId() {
@@ -25,6 +30,14 @@ public class ProductPreviewCardDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Long getOwnerId() {

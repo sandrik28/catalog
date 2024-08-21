@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.isaev.Controller.Mapper.IMyMapper;
 import ru.isaev.Domain.ProductDtos.ProductDto;
+import ru.isaev.Domain.ProductDtos.ProductPreviewCardDto;
 import ru.isaev.Domain.Products.Product;
 import ru.isaev.Domain.Products.Status;
 import ru.isaev.Service.ProductService.IProductService;
@@ -26,44 +27,44 @@ public class ProductController {
     }
 
     @GetMapping("/status")
-    public ResponseEntity<List<ProductDto>> getByStatus(@RequestParam(name = "status", required = false) Status status) {
+    public ResponseEntity<List<ProductPreviewCardDto>> getByStatus(@RequestParam(name = "status", required = false) Status status) {
         return new ResponseEntity<>(
-                mapper.mapListOfProductsToListOfDtos(productService.getProductsByStatus(status)),
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsByStatus(status)),
                 HttpStatus.OK
         );
     }
 
     @GetMapping("/followed_by_user/{id}")
-    public ResponseEntity<List<ProductDto>> getProductsFollowedByUser(@PathVariable Long id) {
+    public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUser(@PathVariable Long id) {
         return new ResponseEntity<>(
-                mapper.mapListOfProductsToListOfDtos(productService.getProductsFollowedByUser(id)),
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsFollowedByUser(id)),
                 HttpStatus.OK
         );
     }
 
     @GetMapping("/title")
-    public ResponseEntity<List<ProductDto>> getByTitle(@RequestParam(name = "title", required = false) String title) {
+    public ResponseEntity<List<ProductPreviewCardDto>> getByTitle(@RequestParam(name = "title", required = false) String title) {
         return new ResponseEntity<>(
-                mapper.mapListOfProductsToListOfDtos(productService.getProductsByTitle(title)),
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsByTitle(title)),
                 HttpStatus.OK
         );
     }
 
     @GetMapping("/category")
-    public ResponseEntity<List<ProductDto>> getByCategory(@RequestParam(name = "category", required = false) String category) {
+    public ResponseEntity<List<ProductPreviewCardDto>> getByCategory(@RequestParam(name = "category", required = false) String category) {
         return new ResponseEntity<>(
-                mapper.mapListOfProductsToListOfDtos(productService.getProductsByCategory(category)),
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsByCategory(category)),
                 HttpStatus.OK
         );
     }
 
     @GetMapping("/title_and_category")
-    public ResponseEntity<List<ProductDto>> getByTitleAndCategory(
+    public ResponseEntity<List<ProductPreviewCardDto>> getByTitleAndCategory(
             @RequestParam(name = "title", required = false) String title,
             @RequestParam(name = "title", required = false) String category
     ) {
         return new ResponseEntity<>(
-                mapper.mapListOfProductsToListOfDtos(productService.getProductsByTitleAndCategory(title, category)),
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsByTitleAndCategory(title, category)),
                 HttpStatus.OK
         );
     }
@@ -77,9 +78,9 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<ProductDto>> getAll() {
+    public ResponseEntity<List<ProductPreviewCardDto>> getAll() {
         return new ResponseEntity<>(
-                mapper.mapListOfProductsToListOfDtos(productService.getAllProducts()),
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllProducts()),
                 HttpStatus.OK
         );
     }
