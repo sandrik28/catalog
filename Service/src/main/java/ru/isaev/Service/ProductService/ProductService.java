@@ -3,12 +3,14 @@ package ru.isaev.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import ru.isaev.Domain.Notifications.Notification;
 import ru.isaev.Domain.Products.Product;
 import ru.isaev.Domain.Products.Status;
 import ru.isaev.Domain.Users.Roles;
 import ru.isaev.Domain.Users.User;
 import ru.isaev.Repo.ProductRepo;
 import ru.isaev.Repo.UserRepo;
+import ru.isaev.Service.NotificationService.NotificationService;
 import ru.isaev.Service.Security.MyUserDetails;
 import ru.isaev.Service.Utilities.Exceptions.*;
 
@@ -21,10 +23,13 @@ public class ProductService implements IProductService {
     private final ProductRepo productRepo;
     private final UserRepo userRepo;
 
+    private final NotificationService notificationService;
+
     @Autowired
-    public ProductService(ProductRepo productRepo, UserRepo userRepo) {
+    public ProductService(ProductRepo productRepo, UserRepo userRepo, NotificationService notificationService) {
         this.productRepo = productRepo;
         this.userRepo = userRepo;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -83,6 +88,10 @@ public class ProductService implements IProductService {
         User currentUser = currentPrincipal.getUser();
 
         product.setStatus(Status.ON_MODERATION_FOR_PUBLISHING);
+        Notification notification = new Notification();
+        notification.setUserId(currentUser.getId());
+        notification.setMessage("You requested publication of product with id= " + product.getId());
+        notificationService.addNotification(notification);
 
         product.setOwner(currentUser);
         List<Product> productsOfUser = currentUser.getProductsList();
@@ -183,6 +192,9 @@ public class ProductService implements IProductService {
 
     @Override
     public Product approveOfPublishingOrEditingProductById(Long productId) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
@@ -190,7 +202,11 @@ public class ProductService implements IProductService {
         if (product.getStatus().equals(Status.ON_MODERATION_FOR_PUBLISHING)) {
             product.setStatus(Status.APPROVED);
             productRepo.save(product);
-            //TODO. Notify
+
+            Notification notification = new Notification();
+            notification.setUserId(currentUser.getId());
+            notification.setMessage("Publishing of product with id= " + productId + " was approved");
+            notificationService.addNotification(notification);
             return product;
         }
 
@@ -207,46 +223,71 @@ public class ProductService implements IProductService {
 
         productRepo.deleteById(productId);
         productRepo.save(oldVersionOfProduct);
-        //TODO. Notify
+
+        Notification notification = new Notification();
+        notification.setUserId(currentUser.getId());
+        notification.setMessage("Editing of product with id= " + oldVersionOfProduct.getId() + " was approved");
+        notificationService.addNotification(notification);
         return product;
-
-
-
-
-
     }
 
     @Override
     public Product archiveProductById(Long productId) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
 
         if (product.getStatus().equals(Status.ON_MODERATION_FOR_PUBLISHING)) {
+
+            Notification notification = new Notification();
+            notification.setUserId(currentUser.getId());
+            notification.setMessage("You you have removed the product with id= " + product.getId() + " from moderation for publishing");
+            notificationService.addNotification(notification);
+
             productRepo.deleteById(productId);
             return product;
         }
 
-        if (product.getChildProduct() != null) {
+        if (product.getChildProduct() != null && product.getChildProduct().getStatus().equals(Status.ON_MODERATION_FOR_EDITING)) {
             Product childProduct = product.getChildProduct();
             productRepo.deleteById(childProduct.getId());
+            Notification notification1 = new Notification();
+            notification1.setUserId(currentUser.getId());
+            notification1.setMessage("You you have removed the product with id= " + product.getId() + " from moderation for publishing");
+            notificationService.addNotification(notification1);
+
             product.setStatus(Status.ARCHIVED);
             productRepo.save(product);
-            //TODO. Notification
+            Notification notification = new Notification();
+            notification.setUserId(currentUser.getId());
+            notification.setMessage("Archivation of product with id= " + product.getId());
+            notificationService.addNotification(notification);
             return product;
         }
 
-        if (product.getParentProduct() != null) {
+        if (product.getParentProduct() != null && product.getStatus().equals(Status.ON_MODERATION_FOR_EDITING)) {
             Product parentProduct = product.getParentProduct();
             productRepo.deleteById(productId);
             parentProduct.setChildProduct(null);
+
+            Notification notification = new Notification();
+            notification.setUserId(currentUser.getId());
+            notification.setMessage("You you have removed the product with id= " + parentProduct.getId() + " from moderation for editing");
+            notificationService.addNotification(notification);
 
             return product;
         }
 
         product.setStatus(Status.ARCHIVED);
-        //TODO. Notification
         productRepo.save(product);
+
+        Notification notification = new Notification();
+        notification.setUserId(currentUser.getId());
+        notification.setMessage("Archivation of product with id= " + product.getId());
+        notificationService.addNotification(notification);
 
         return product;
     }
