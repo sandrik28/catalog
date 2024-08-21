@@ -171,6 +171,10 @@ public class ProductService implements IProductService {
         if (product.getOwner().getId().equals(currentUser.getId()))
             throw new SubscriptionException("You can't subscribe to your project");
 
+        if (!(product.getStatus().equals(Status.APPROVED) || product.getStatus().equals(Status.ARCHIVED))) {
+            throw new SubscriptionException("You can't subscribe to project on moderation");
+        }
+
         List<Product> productsFollowedByUserList = currentUser.getFollowedProductsList();
         List<User> subsbcribersOfProductList = product.getSubscribersList();
 
