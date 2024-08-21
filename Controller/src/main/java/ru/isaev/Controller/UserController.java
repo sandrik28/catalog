@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/email")
-    public ResponseEntity<UserDto> getByEmail(@PathVariable("email") String email) {
+    public ResponseEntity<UserDto> getByEmail(@RequestParam(name = "email", required = false) String email) {
         return new ResponseEntity<>(
                 mapper.userToUserDto(userService.getUserByEmail(email)),
                 HttpStatus.OK
