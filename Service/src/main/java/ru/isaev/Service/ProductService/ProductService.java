@@ -135,6 +135,11 @@ public class ProductService implements IProductService {
 
         product.setStatus(Status.ON_MODERATION_FOR_EDITING);
 
+        Notification notification = new Notification();
+        notification.setUserId(currentUser.getId());
+        notification.setMessage("You requested editing of product with id= " + oldVersionOfProduct.getId() + " was approved");
+        notificationService.addNotification(notification);
+
         productRepo.save(oldVersionOfProduct);
         productRepo.save(product);
     }
