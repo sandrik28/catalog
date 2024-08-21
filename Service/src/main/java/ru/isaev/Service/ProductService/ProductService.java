@@ -111,6 +111,10 @@ public class ProductService implements IProductService {
         if (!Objects.equals(product.getOwner().getId(), currentUser.getId()) && currentUser.getRole() != Roles.ROLE_ADMIN)
             throw new NotYourProductException("Not your product with id = " + product.getId());
 
+        if (product.getStatus().equals(Status.ON_MODERATION_FOR_EDITING)) {
+            productRepo.save(product);
+            return;
+        }
         product.setStatus(Status.ON_MODERATION_FOR_EDITING);
         productRepo.save(product);
     }
@@ -173,6 +177,7 @@ public class ProductService implements IProductService {
         );
 
         product.setStatus(Status.APPROVED);
+
         productRepo.save(product);
 
         return product;
@@ -184,7 +189,30 @@ public class ProductService implements IProductService {
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
 
+        if (product.getStatus().equals(Status.ON_MODERATION_FOR_PUBLISHING)) {
+            productRepo.deleteById(productId);
+            return product;
+        }
+
+        if (product.getChildProduct() != null) {
+            Product childProduct = product.getChildProduct();
+            productRepo.deleteById(childProduct.getId());
+            product.setStatus(Status.ARCHIVED);
+            productRepo.save(product);
+            //TODO. Notification
+            return product;
+        }
+
+        if (product.getParentProduct() != null) {
+            Product parentProduct = product.getParentProduct();
+            productRepo.deleteById(productId);
+            parentProduct.setChildProduct(null);
+
+            return product;
+        }
+
         product.setStatus(Status.ARCHIVED);
+        //TODO. Notification
         productRepo.save(product);
 
         return product;
