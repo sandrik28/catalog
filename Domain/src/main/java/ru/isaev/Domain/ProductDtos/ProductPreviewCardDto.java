@@ -15,6 +15,8 @@ public class ProductPreviewCardDto {
 
     private Status status;
 
+    private Boolean isFollowedByCurrentUser;
+
     public ProductPreviewCardDto(Long id, Long ownerId, String nameOfOwner, String description, String category, Status status) {
         this.id = id;
         this.ownerId = ownerId;
@@ -38,6 +40,14 @@ public class ProductPreviewCardDto {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Boolean getFollowedByCurrentUser() {
+        return isFollowedByCurrentUser;
+    }
+
+    public void setFollowedByCurrentUser(Boolean followedByCurrentUser) {
+        isFollowedByCurrentUser = followedByCurrentUser;
     }
 
     public Long getOwnerId() {

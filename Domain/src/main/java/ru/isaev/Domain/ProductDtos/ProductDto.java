@@ -20,6 +20,8 @@ public class ProductDto {
 
     private String category;
 
+    private Boolean isFollowedByCurrentUser;
+
     public Long getId() {
         return id;
     }
@@ -30,6 +32,14 @@ public class ProductDto {
 
     public String getNameOfOwner() {
         return nameOfOwner;
+    }
+
+    public Boolean getFollowedByCurrentUser() {
+        return isFollowedByCurrentUser;
+    }
+
+    public void setFollowedByCurrentUser(Boolean followedByCurrentUser) {
+        isFollowedByCurrentUser = followedByCurrentUser;
     }
 
     public void setNameOfOwner(String nameOfOwner) {
