@@ -47,6 +47,22 @@ public class Product {
     public Product() {
     }
 
+    public Product getChildProduct() {
+        return childProduct;
+    }
+
+    public void setChildProduct(Product childProduct) {
+        this.childProduct = childProduct;
+    }
+
+    public Product getParentProduct() {
+        return parentProduct;
+    }
+
+    public void setParentProduct(Product parentProduct) {
+        this.parentProduct = parentProduct;
+    }
+
     public Long getId() {
         return id;
     }
