@@ -234,9 +234,7 @@ public class ProductService implements IProductService {
             return product;
         }
 
-        Product parentProduct = productRepo.findById(product.getId()).orElseThrow(
-                () -> new ProductNotFoundExceptions("Not found parent product with id = " + product.getId())
-        );
+        Product parentProduct = product.getParentProduct();
 
         parentProduct.setChildProduct(null);
         parentProduct.setTitle(product.getTitle());
@@ -261,6 +259,29 @@ public class ProductService implements IProductService {
             notificationService.addNotification(notificationForSubscriber);
         }
         return product;
+    }
+
+    @Override
+    public void rejectOfPublishingOrEditingProductById(Long productId) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
+        Product product = productRepo.findById(productId).orElseThrow(
+                () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
+        );
+
+        if (product.getStatus().equals(Status.ON_MODERATION_FOR_PUBLISHING)) {
+            Notification notification = new Notification();
+            notification.setUserId(currentUser.getId());
+            notification.setMessage("Publishing of product with id= " + productId + " was rejected");
+            notificationService.addNotification(notification);
+        }
+
+        Product parentProduct = product.getParentProduct();
+        Notification notification = new Notification();
+        notification.setUserId(currentUser.getId());
+        notification.setMessage("Editing of product with id= " + parentProduct.getId() + " was rejected");
+        notificationService.addNotification(notification);
     }
 
     @Override
@@ -334,6 +355,34 @@ public class ProductService implements IProductService {
             Notification notificationForSubscriber = new Notification(
                     user.getId(),
                     "Subscription notification: Product with id= " + product.getId() + " was archived");
+            notificationService.addNotification(notificationForSubscriber);
+        }
+
+        return product;
+    }
+
+    @Override
+    public Product unarchiveProductById(Long productId) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
+        Product product = productRepo.findById(productId).orElseThrow(
+                () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
+        );
+
+        product.setStatus(Status.APPROVED);
+        productRepo.save(product);
+
+        Notification notification = new Notification();
+        notification.setUserId(currentUser.getId());
+        notification.setMessage("Archivation of product with id= " + product.getId());
+        notificationService.addNotification(notification);
+
+        for (User user :
+                product.getSubscribersList()) {
+            Notification notificationForSubscriber = new Notification(
+                    user.getId(),
+                    "Subscription notification: Product with id= " + product.getId() + " was unarchived");
             notificationService.addNotification(notificationForSubscriber);
         }
 
