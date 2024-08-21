@@ -7,6 +7,8 @@ public class ProductPreviewCardDto {
 
     private Long ownerId;
 
+    private String title;
+
     private String nameOfOwner;
 
     private String description;
@@ -17,21 +19,20 @@ public class ProductPreviewCardDto {
 
     private Boolean isFollowedByCurrentUser;
 
-    public ProductPreviewCardDto(Long id, Long ownerId, String nameOfOwner, String description, String category, Status status) {
-        this.id = id;
-        this.ownerId = ownerId;
-        this.nameOfOwner = nameOfOwner;
-        this.description = description;
-        this.category = category;
-        this.status = status;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Status getStatus() {

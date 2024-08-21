@@ -54,4 +54,8 @@ public class Notification {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }

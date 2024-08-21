@@ -20,7 +20,7 @@ public class Product {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "subscribers_of_product",
-            joinColumns = @JoinColumn(name = "prodcut_id"),
+            joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> subscribersList = new ArrayList<>();
