@@ -1,15 +1,16 @@
-package ru.isaev.Domain.Notifications;
+package ru.isaev.Domain.NotificationDtos;
 
-import jakarta.persistence.*;
-import ru.isaev.Domain.Users.User;
-
-@Entity
-public class Notification {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class NotificationDto {
     private Long id;
     private Long userId;
     private String message;
+
+    public NotificationDto(Long id, Long userId, String message) {
+        this.id = id;
+        this.userId = userId;
+        this.message = message;
+    }
+
     public Long getId() {
         return id;
     }
