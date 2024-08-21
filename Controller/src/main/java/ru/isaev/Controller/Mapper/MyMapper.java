@@ -1,6 +1,8 @@
 package ru.isaev.Controller.Mapper;
 
 import org.springframework.stereotype.Component;
+import ru.isaev.Domain.NotificationDtos.NotificationDto;
+import ru.isaev.Domain.Notifications.Notification;
 import ru.isaev.Domain.ProductDtos.ProductDto;
 import ru.isaev.Domain.ProductDtos.ProductPreviewCardDto;
 import ru.isaev.Domain.Products.Product;
@@ -53,6 +55,21 @@ public class MyMapper implements IMyMapper {
 
     @Override
     public User userDtoToUser(UserDto userDto) {
+        return null;
+    }
+
+    @Override
+    public NotificationDto notificationToNotificationDto(Notification notification) {
+        return null;
+    }
+
+    @Override
+    public Notification notificationDtoToNotification(NotificationDto notificationDto) {
+        return null;
+    }
+
+    @Override
+    public List<NotificationDto> mapListOfNotificationsToListOfDtos(List<Notification> listOfNotifications) {
         return null;
     }
 }
