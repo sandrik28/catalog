@@ -7,7 +7,7 @@ interface SessionState {
 
 
 const initialState: SessionState = {
-  userId: "0", 
+  userId: "0",
   role: "user",
 };
 

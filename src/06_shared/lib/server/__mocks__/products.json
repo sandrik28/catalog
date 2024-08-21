@@ -1,0 +1,202 @@
+[
+    {
+        "ownerId": 0,
+        "id": 1,
+        "title": "Продуктовый магазин в айти на сайте",
+        "type": "follow",
+        "linkToWebSite": "pluto244.ru",
+        "description": "Предназначен для регистрации и публикации цифровых продуктов, доступных участникам клуба.",
+        "category": "Сервисы и ИТ-аутсорсинг",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 0,
+        "id": 2,
+        "title": "Почти Продуктовый магазин в айти на сайте",
+        "type": "unfollow",
+        "linkToWebSite": "pluto244.ru",
+        "description": "Предназначен для регистрации и публикации цифровых продуктов, доступных участникам клуба.",
+        "category": "Сервисы и ИТ-аутсорсинг",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 1,
+        "id": 3,
+        "title": "Онлайн курс по веб-разработке",
+        "type": "course",
+        "linkToWebSite": "webcourse.com",
+        "description": "Курс по основам веб-разработки для начинающих.",
+        "category": "Образование",
+        "status": "PENDING"
+    },
+    {
+        "ownerId": 2,
+        "id": 4,
+        "title": "Цифровая библиотека",
+        "type": "library",
+        "linkToWebSite": "digitallibrary.com",
+        "description": "Коллекция цифровых книг и учебных материалов.",
+        "category": "Образование",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 3,
+        "id": 5,
+        "title": "Программное обеспечение для управления проектами",
+        "type": "software",
+        "linkToWebSite": "projectmanagementsoft.com",
+        "description": "Инструмент для планирования и управления проектами в реальном времени.",
+        "category": "Сервисы и ИТ-аутсорсинг",
+        "status": "ON_MODERATION_FOR_PUBL"
+    },
+    {
+        "ownerId": 4,
+        "id": 6,
+        "title": "Онлайн-конструктор сайтов",
+        "type": "websiteBuilder",
+        "linkToWebSite": "sitebuilder.com",
+        "description": "Создание и настройка сайтов без навыков программирования.",
+        "category": "Веб-разработка",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 5,
+        "id": 7,
+        "title": "Видеоредактор",
+        "type": "software",
+        "linkToWebSite": "videoeditor.com",
+        "description": "Мощный инструмент для редактирования видео и создания фильмов.",
+        "category": "Мультимедиа",
+        "status": "ON_MODERATION_FOR_ED"
+    },
+    {
+        "ownerId": 6,
+        "id": 8,
+        "title": "Платформа для управления контентом",
+        "type": "cms",
+        "linkToWebSite": "cmsplatform.com",
+        "description": "Платформа для создания, управления и распространения цифрового контента.",
+        "category": "Веб-разработка",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 7,
+        "id": 9,
+        "title": "Облачное хранилище данных",
+        "type": "cloudStorage",
+        "linkToWebSite": "cloudstorage.com",
+        "description": "Услуга для безопасного хранения данных в облаке.",
+        "category": "Сервисы и ИТ-аутсорсинг",
+        "status": "PENDING"
+    },
+    {
+        "ownerId": 8,
+        "id": 10,
+        "title": "Платформа для онлайн обучения",
+        "type": "elearning",
+        "linkToWebSite": "elearningplatform.com",
+        "description": "Платформа для проведения онлайн курсов и тренингов.",
+        "category": "Образование",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 9,
+        "id": 11,
+        "title": "Электронный магазин",
+        "type": "ecommerce",
+        "linkToWebSite": "ecommerceplatform.com",
+        "description": "Платформа для создания и управления онлайн магазинами.",
+        "category": "Сервисы и ИТ-аутсорсинг",
+        "status": "ON_MODERATION_FOR_PUBL"
+    },
+    {
+        "ownerId": 10,
+        "id": 12,
+        "title": "Система управления клиентами (CRM)",
+        "type": "crm",
+        "linkToWebSite": "crmplatform.com",
+        "description": "Инструмент для управления взаимоотношениями с клиентами.",
+        "category": "Сервисы и ИТ-аутсорсинг",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 11,
+        "id": 13,
+        "title": "Платформа для автоматизации маркетинга",
+        "type": "marketingAutomation",
+        "linkToWebSite": "marketingautomation.com",
+        "description": "Решение для автоматизации маркетинговых кампаний.",
+        "category": "Маркетинг",
+        "status": "PENDING"
+    },
+    {
+        "ownerId": 12,
+        "id": 14,
+        "title": "Платформа для аналитики данных",
+        "type": "dataAnalytics",
+        "linkToWebSite": "dataanalytics.com",
+        "description": "Инструмент для анализа и визуализации данных.",
+        "category": "Сервисы и ИТ-аутсорсинг",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 13,
+        "id": 15,
+        "title": "Система управления цепочками поставок",
+        "type": "supplyChainManagement",
+        "linkToWebSite": "supplychain.com",
+        "description": "Инструмент для управления и оптимизации цепочек поставок.",
+        "category": "Логистика",
+        "status": "ON_MODERATION_FOR_ED"
+    },
+    {
+        "ownerId": 14,
+        "id": 16,
+        "title": "Платформа для управления финансами",
+        "type": "financeManagement",
+        "linkToWebSite": "financemanagement.com",
+        "description": "Решение для управления финансовыми операциями и бюджетами.",
+        "category": "Финансы",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 15,
+        "id": 17,
+        "title": "Инструмент для управления временем и задачами",
+        "type": "taskManagement",
+        "linkToWebSite": "taskmanagement.com",
+        "description": "Программа для планирования и контроля задач.",
+        "category": "Продуктивность",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 16,
+        "id": 18,
+        "title": "Цифровая маркетинговая платформа",
+        "type": "digitalMarketing",
+        "linkToWebSite": "digitalmarketing.com",
+        "description": "Платформа для управления цифровыми маркетинговыми кампаниями.",
+        "category": "Маркетинг",
+        "status": "PENDING"
+    },
+    {
+        "ownerId": 17,
+        "id": 19,
+        "title": "Платформа для управления проектами",
+        "type": "projectManagement",
+        "linkToWebSite": "projectmanagement.com",
+        "description": "Инструмент для планирования и выполнения проектов.",
+        "category": "Сервисы и ИТ-аутсорсинг",
+        "status": "APPROVED"
+    },
+    {
+        "ownerId": 18,
+        "id": 20,
+        "title": "Виртуальный ассистент",
+        "type": "virtualAssistant",
+        "linkToWebSite": "virtualassistant.com",
+        "description": "Инструмент для автоматизации рутинных задач.",
+        "category": "Продуктивность",
+        "status": "APPROVED"
+    }
+]

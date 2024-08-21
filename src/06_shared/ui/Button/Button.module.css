@@ -37,6 +37,13 @@
     width: 18px;
 }
 
+
+.actions {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
 @keyframes rotating {
     from {
         transform: rotate(0deg);

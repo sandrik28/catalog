@@ -1,0 +1,29 @@
+.root{
+    width: 304px;
+    height: 168px;
+    padding: 12px;
+    padding-bottom: 8px;
+}
+
+.productHeader{
+    width: 292px;
+    height: 42px;
+    margin-bottom: 12px;
+}
+
+.productDescriptionSlot{
+    width: 292px;
+    height: 64px;
+    margin-bottom: 8px;
+}
+
+.productCategorySlot{
+    width: 292px;
+    height: 16px;
+    margin-bottom: 2px;
+}
+
+.productInfoSlot{
+    width: 292px;
+    height: 16px;
+}

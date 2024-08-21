@@ -2,11 +2,12 @@ import cn from 'classnames'
 import React from 'react'
 import css from './Icon.module.css'
 
-export type IconType =
-    | 'headerUser'
-    | 'teamlogo'
-    | 'loader'
-
+export type IconType = 
+  | 'headerUser'
+  | 'teamlogo'
+  | 'loader'
+  | 'activeHeart'
+  | 'heart'
 
 export type Props = {
     className?: string

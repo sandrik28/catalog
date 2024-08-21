@@ -57,7 +57,27 @@ a:hover {
     font-size: 1rem;
 }
 
-
 .text_bold {
     font-weight: 600;
+}
+
+.text_descr {
+    font-size: 18px;
+}
+
+.text_span {
+    font-size: 18px;
+}
+
+.text_product_title{
+    font-size: 18px;
+}
+
+.text_product_description{
+    font-size: 18px;
+}
+
+.product_category{
+    color: var(--color-gray);
+    font-size: 14px;
 }
