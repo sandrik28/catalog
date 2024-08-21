@@ -10,10 +10,7 @@ import ru.isaev.Domain.Users.User;
 import ru.isaev.Repo.ProductRepo;
 import ru.isaev.Repo.UserRepo;
 import ru.isaev.Service.Security.MyUserDetails;
-import ru.isaev.Service.Utilities.Exceptions.NotYourProductException;
-import ru.isaev.Service.Utilities.Exceptions.NotYourProfileException;
-import ru.isaev.Service.Utilities.Exceptions.ProductNotFoundExceptions;
-import ru.isaev.Service.Utilities.Exceptions.SubscriptionException;
+import ru.isaev.Service.Utilities.Exceptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,11 +108,25 @@ public class ProductService implements IProductService {
         if (!Objects.equals(product.getOwner().getId(), currentUser.getId()) && currentUser.getRole() != Roles.ROLE_ADMIN)
             throw new NotYourProductException("Not your product with id = " + product.getId());
 
-        if (product.getStatus().equals(Status.ON_MODERATION_FOR_EDITING)) {
+        if (product.getStatus().equals(Status.ON_MODERATION_FOR_EDITING) ||
+                product.getStatus().equals(Status.ON_MODERATION_FOR_PUBLISHING)) {
             productRepo.save(product);
             return;
         }
+
+        if (product.getStatus().equals(Status.ARCHIVED)) {
+            throw new InvalidProductOperationException("You can't edit archived product with id = " + product.getId());
+        }
+
+        Product oldVersionOfProduct = productRepo.findById(product.getId()).orElseThrow(
+                () -> new ProductNotFoundExceptions("Not found product with id = " + product.getId())
+        );
+        oldVersionOfProduct.setChildProduct(product);
+        product.setParentProduct(oldVersionOfProduct);
+
         product.setStatus(Status.ON_MODERATION_FOR_EDITING);
+
+        productRepo.save(oldVersionOfProduct);
         productRepo.save(product);
     }
 
@@ -176,11 +187,33 @@ public class ProductService implements IProductService {
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
 
-        product.setStatus(Status.APPROVED);
+        if (product.getStatus().equals(Status.ON_MODERATION_FOR_PUBLISHING)) {
+            product.setStatus(Status.APPROVED);
+            productRepo.save(product);
+            //TODO. Notify
+            return product;
+        }
 
-        productRepo.save(product);
+        Product oldVersionOfProduct = productRepo.findById(product.getId()).orElseThrow(
+                () -> new ProductNotFoundExceptions("Not found parent product with id = " + product.getId())
+        );
 
+        oldVersionOfProduct.setChildProduct(null);
+        oldVersionOfProduct.setTitle(product.getTitle());
+        oldVersionOfProduct.setEmailOFSupport(product.getEmailOFSupport());
+        oldVersionOfProduct.setLinkToWebSite(product.getLinkToWebSite());
+        oldVersionOfProduct.setDescription(product.getDescription());
+        oldVersionOfProduct.setCategory(product.getCategory());
+
+        productRepo.deleteById(productId);
+        productRepo.save(oldVersionOfProduct);
+        //TODO. Notify
         return product;
+
+
+
+
+
     }
 
     @Override

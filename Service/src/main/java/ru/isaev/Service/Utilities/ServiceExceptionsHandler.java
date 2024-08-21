@@ -11,8 +11,18 @@ import java.util.Date;
 
 @ControllerAdvice
 public class ServiceExceptionsHandler {
+    @ExceptionHandler(InvalidProductOperationException.class)
+    public ResponseEntity<ErrorMessage> invalidProductOperationException(InvalidProductOperationException ex) {
+        ErrorMessage message = new ErrorMessage(
+                HttpStatus.NOT_FOUND.value(),
+                new Date(),
+                ex.getMessage());
+
+        return new ResponseEntity<ErrorMessage>(message, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(ProductNotFoundExceptions.class)
-    public ResponseEntity<ErrorMessage> catNotFoundException(ProductNotFoundExceptions ex) {
+    public ResponseEntity<ErrorMessage> productNotFoundException(ProductNotFoundExceptions ex) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.NOT_FOUND.value(),
                 new Date(),
