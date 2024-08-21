@@ -33,6 +33,14 @@ public class UserController {
         );
     }
 
+    @GetMapping("/email")
+    public ResponseEntity<UserDto> getByEmail(@PathVariable("email") String email) {
+        return new ResponseEntity<>(
+                mapper.userToUserDto(userService.getUserByEmail(email)),
+                HttpStatus.OK
+        );
+    }
+
     @GetMapping("/role")
     public ResponseEntity<List<UserDto>> getByRole(@RequestParam(name = "role", required = false) Roles role) {
         return new ResponseEntity<>(

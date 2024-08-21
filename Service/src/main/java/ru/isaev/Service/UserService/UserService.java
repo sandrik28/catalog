@@ -34,9 +34,15 @@ public class UserService implements IUserService {
     }
 
     public User getUserById(Long id) {
-
         User user = userRepo.findById(id).orElseThrow(
                 () -> new UserNotFoundException("Not found user with id = " + id));
+
+        return user;
+    }
+
+    public User getUserByEmail(String email) {
+        User user = userRepo.findByEmail(email).orElseThrow(
+                () -> new UserNotFoundException("Not found user with email = " + email));
 
         return user;
     }
