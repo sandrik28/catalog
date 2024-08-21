@@ -2,6 +2,7 @@ package ru.isaev.Controller.Mapper;
 
 import org.springframework.stereotype.Component;
 import ru.isaev.Domain.ProductDtos.ProductDto;
+import ru.isaev.Domain.ProductDtos.ProductPreviewCardDto;
 import ru.isaev.Domain.Products.Product;
 import ru.isaev.Domain.UserDtos.UserDto;
 import ru.isaev.Domain.Users.User;
@@ -16,12 +17,27 @@ public class MyMapper implements IMyMapper {
     }
 
     @Override
+    public ProductPreviewCardDto productToProductPreviewCardDto(Product product) {
+        return null;
+    }
+
+    @Override
     public Product productDtoToProduct(ProductDto productDto) {
         return null;
     }
 
     @Override
+    public Product productPreviewCardDtoToProduct(ProductPreviewCardDto productPreviewCardDto) {
+        return null;
+    }
+
+    @Override
     public List<ProductDto> mapListOfProductsToListOfDtos(List<Product> listOfProducts) {
+        return null;
+    }
+
+    @Override
+    public List<ProductPreviewCardDto> mapListOfProductsToListOfProductPreviewCardDtos(List<Product> listOfProducts) {
         return null;
     }
 
