@@ -1,6 +1,7 @@
 package ru.isaev.Domain.Products;
 
 import jakarta.persistence.*;
+import ru.isaev.Domain.ProductDtos.ProductDto;
 import ru.isaev.Domain.Users.User;
 
 import java.util.ArrayList;
@@ -26,6 +27,12 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User owner;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Product childProduct;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Product parentProduct;
 
     private Status status;
 
