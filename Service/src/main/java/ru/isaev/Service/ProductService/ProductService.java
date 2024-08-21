@@ -234,24 +234,32 @@ public class ProductService implements IProductService {
             return product;
         }
 
-        Product oldVersionOfProduct = productRepo.findById(product.getId()).orElseThrow(
+        Product parentProduct = productRepo.findById(product.getId()).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found parent product with id = " + product.getId())
         );
 
-        oldVersionOfProduct.setChildProduct(null);
-        oldVersionOfProduct.setTitle(product.getTitle());
-        oldVersionOfProduct.setEmailOFSupport(product.getEmailOFSupport());
-        oldVersionOfProduct.setLinkToWebSite(product.getLinkToWebSite());
-        oldVersionOfProduct.setDescription(product.getDescription());
-        oldVersionOfProduct.setCategory(product.getCategory());
+        parentProduct.setChildProduct(null);
+        parentProduct.setTitle(product.getTitle());
+        parentProduct.setEmailOFSupport(product.getEmailOFSupport());
+        parentProduct.setLinkToWebSite(product.getLinkToWebSite());
+        parentProduct.setDescription(product.getDescription());
+        parentProduct.setCategory(product.getCategory());
 
         productRepo.deleteById(productId);
-        productRepo.save(oldVersionOfProduct);
+        productRepo.save(parentProduct);
 
         Notification notification = new Notification();
         notification.setUserId(currentUser.getId());
-        notification.setMessage("Editing of product with id= " + oldVersionOfProduct.getId() + " was approved");
+        notification.setMessage("Editing of product with id= " + parentProduct.getId() + " was approved");
         notificationService.addNotification(notification);
+
+        for (User user :
+                parentProduct.getSubscribersList()) {
+            Notification notificationForSubscriber = new Notification(
+                    user.getId(),
+                    "Subscription notification: Product with id= " + parentProduct.getId() + " was updated");
+            notificationService.addNotification(notificationForSubscriber);
+        }
         return product;
     }
 
@@ -289,6 +297,14 @@ public class ProductService implements IProductService {
             notification.setUserId(currentUser.getId());
             notification.setMessage("Archivation of product with id= " + product.getId());
             notificationService.addNotification(notification);
+
+            for (User user :
+                    product.getSubscribersList()) {
+                Notification notificationForSubscriber = new Notification(
+                        user.getId(),
+                        "Subscription notification: Product with id= " + product.getId() + " was archived");
+                notificationService.addNotification(notificationForSubscriber);
+            }
             return product;
         }
 
@@ -312,6 +328,14 @@ public class ProductService implements IProductService {
         notification.setUserId(currentUser.getId());
         notification.setMessage("Archivation of product with id= " + product.getId());
         notificationService.addNotification(notification);
+
+        for (User user :
+                product.getSubscribersList()) {
+            Notification notificationForSubscriber = new Notification(
+                    user.getId(),
+                    "Subscription notification: Product with id= " + product.getId() + " was archived");
+            notificationService.addNotification(notificationForSubscriber);
+        }
 
         return product;
     }
