@@ -44,7 +44,7 @@ export function Modal ({type, children} : Props) {
         )}>
           {children}
           <Button onClick={closeModal}>
-            ГЛАВНЫЙ ЭКРАН
+            Главный экран
           </Button>
         </div>
       </div>
