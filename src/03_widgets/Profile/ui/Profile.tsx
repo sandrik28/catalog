@@ -11,19 +11,8 @@ export const Profile = () => {
 
   return (
     <div className={css.root}>
-      <div className={css.container}>
-        <h2 className={css.profile_title}>Профиль</h2>
-        {
-          userId === id ?
-            <Link to='edit'>
-              <Button>Редактировать</Button>
-            </Link> :
-            null
-        }
-      </div>
-      {
-        userId === id ? <AddNewProduct/> : null
-      }
+      <h2 className={css.profile_title}>Профиль</h2>
+      { userId === id ? <AddNewProduct/> : null }
     </div>
   )
 }

@@ -2,14 +2,9 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
+  align-items: center;
 }
 
 .profile_title {
   font-size: 2em;
-}
-
-.container {
-  display: flex;
-  gap: 20px;
-  align-items: center;
 }

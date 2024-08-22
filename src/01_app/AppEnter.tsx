@@ -6,7 +6,6 @@ import store from './AppStore'
 import { MainPage } from '@/02_pages/main';
 import { ProfilePage } from '@/02_pages/profile/ui/Page/Page';
 import { ProductCard, ProductCardType } from '@/05_entities/product';
-import { EditProfile } from '@/02_pages/editProfile/ui/Page';
 import { NewProduct } from '@/02_pages/newProduct';
 
 
@@ -29,7 +28,6 @@ export function AppEnter() {
                 <Routes>
                     <Route path='/' element={<MainPage/>}/>
                     <Route path='/profile/:id' element={<ProfilePage/>}/>
-                    <Route path='/profile/:id/edit' element={<EditProfile/>}/>
                     <Route path='/addNewProduct' element={<NewProduct/>}/>
                     <Route path='/catalog/all' element={<ProductCard product={productCardJson} info={<span className="product_category">sss</span>} />}/>
                 </Routes>
