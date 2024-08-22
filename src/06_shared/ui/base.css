@@ -46,7 +46,11 @@ a:hover {
     color: var(--link-colorPressed);
 }
 
-
+a, p,h1,h2,h3{
+    margin: 0;
+    padding: 0;
+    display: inline-block;  
+}
 
 
 .text_header {
@@ -75,13 +79,27 @@ a:hover {
 
 .text_product_title{
     font-size: 18px;
+    color: var(--text-color);
+    line-height: 1.1;
+
 }
 
 .text_product_description{
-    font-size: 18px;
+    font-size: 14px;
+    line-height: 1.1;
+    color: var(--text-color)
+}
+
+.product_card_category_span{
+    color: var(--color-gray);
+    font-size: 14px;
+    line-height: 1;
+
 }
 
 .product_category{
-    color: var(--color-gray);
+    color: var(--color-red);
     font-size: 14px;
+    line-height: 1;
+
 }

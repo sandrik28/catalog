@@ -1,29 +1,46 @@
-.root{
+.root {
     width: 304px;
     height: 168px;
-    padding: 12px;
-    padding-bottom: 8px;
+
 }
 
-.productHeader{
+.link {
+    display: block;
+    width: 180px;
+    height: 316px;
+    text-decoration: none;
+}
+
+.productCard {
+    margin: 0;
+    width: 316px;
+    height: 180px;
+    padding: 12px;
+    padding-bottom: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--color-gray) ;
+    box-sizing: border-box;
+}
+
+.productHeader {
     width: 292px;
     height: 42px;
     margin-bottom: 12px;
 }
 
-.productDescriptionSlot{
+.productDescriptionSlot {
     width: 292px;
     height: 64px;
     margin-bottom: 8px;
 }
 
-.productCategorySlot{
+.productCategorySlot {
     width: 292px;
     height: 16px;
     margin-bottom: 2px;
 }
 
-.productInfoSlot{
+.productInfoSlot {
     width: 292px;
     height: 16px;
 }
