@@ -10,6 +10,9 @@ declare global {
     export type Id = number
   
     export type Url = string
+
+    declare type RootState = import('../src/app/appStore').RootState
+    declare type AppDispatch = import('../src/app/appStore').AppDispatch
 }
 
 

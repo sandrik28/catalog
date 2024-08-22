@@ -6,7 +6,7 @@ import {
   toggleWishlistProduct,
 } from '@/05_entities/wishlist';
 import { wishlistApi } from '@/05_entities/wishlist';
-import type { RootState } from '@/01_app/AppStore'; // Импортируем тип RootState из store
+import type { RootState } from '@/01_app/AppStore';
 
 export const toggleWishlistProductThunk = createAsyncThunk<
   void,

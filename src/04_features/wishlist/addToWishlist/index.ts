@@ -1,1 +1,0 @@
-export {AddToWishlistIcon} from "./ui/AddToWishlistIcon"
