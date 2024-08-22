@@ -1,3 +1,4 @@
+import { Profile } from '@/03_widgets/Profile';
 import { User } from '@/05_entities/user';
 import { useModal } from '@/06_shared/lib/useModal';
 import { Button } from '@/06_shared/ui/Button/Button'
@@ -27,6 +28,7 @@ export function ProfilePage() {
 
   return (  
     <main>
+      <Profile/>
       <User
         // TODO: берется из запроса
         user={{

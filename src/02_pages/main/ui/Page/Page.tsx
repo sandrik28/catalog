@@ -1,9 +1,10 @@
+import { AddNewProduct } from '@/04_features/newProduct/addNewProduct'
 import React from 'react'
 
 export function MainPage() {
   return (
-    <div>
-        <h1>Приветик</h1>
-    </div>
+    <main>
+      <AddNewProduct/>
+    </main>
   )
 }
