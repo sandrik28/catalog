@@ -13,16 +13,16 @@ export const ProductCard = (props: Props) => {
     const { product, actionSlot, info } = props;
 
     return (
-        <div className={css.productCard}>
                 <Link to={`/product/${product.id}`} className={css.link}>
+        <div className={css.productCard}>
                 <div className={css.productHeader}>
                     <h3 className="text_product_title">{product.title}</h3>
                     {actionSlot}
                 </div>
                 <div className={css.productDescriptionSlot}>
-                    <h3 className="text_product_description">
+                    <p className="text_product_description">
                         {product.description}
-                    </h3>
+                    </p>
                 </div>
                 <div className={css.productCategorySlot}>
                     <span className="product_card_category_span">{product.category}</span>
@@ -30,7 +30,7 @@ export const ProductCard = (props: Props) => {
                 <div className={css.productInfoSlot}>
                     {info}
                 </div>
-        </Link>
             </div>
+        </Link>
     );
 };
