@@ -32,6 +32,10 @@ body {
     color: var(--text-color);
 }
 
+main {
+    padding: 0 18px;
+}
+
 
 a {
     color: var(--link-color);

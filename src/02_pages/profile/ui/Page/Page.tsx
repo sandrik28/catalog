@@ -1,3 +1,4 @@
+import { User } from '@/05_entities/user';
 import { useModal } from '@/06_shared/lib/useModal';
 import { Button } from '@/06_shared/ui/Button/Button'
 import { Modal } from '@/06_shared/ui/Modal/Modal';
@@ -23,11 +24,20 @@ export function ProfilePage() {
   };
 
   return (  
-    <>
+    <main>
+      <User
+        // TODO: берется из стора
+        user={{
+          id: 0,
+          firstName: 'Егор',
+          lastName: 'Росошанский',
+          email: 'test@mail.com'
+        }}
+      />
       {isModalOpen && <Modal type={modalType}><h3>{modalContent}</h3></Modal>}
       <div>
         <Button children = {'Попап'} onClick = {publishProduct} isLoading={false} disabled={false}/>
       </div>
-    </>
+    </main>
   )
 }
