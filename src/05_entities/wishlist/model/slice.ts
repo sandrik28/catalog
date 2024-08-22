@@ -24,9 +24,9 @@ export const wishlistSlice = createSlice({
         },
         toggleWishlistProduct: (state, action: PayloadAction<ProductId>) => {
             if (state.products[action.payload]) {
-                delete state.products[action.payload]; // Удаляем продукт из избранного
+                delete state.products[action.payload];
             } else {
-                state.products[action.payload] = true; // Добавляем продукт в избранное
+                state.products[action.payload] = true;
             }
         },
     },
@@ -54,7 +54,7 @@ export const selectProductIdsInWishlist = createSelector(
     (products) =>
         Object.keys(products)
             .filter((id) => products[id as unknown as ProductId])
-            .map((id) => Number(id) as ProductId), // Преобразуем строки в ProductId
+            .map((id) => Number(id) as ProductId),
 );
 
 export const { toggleWishlistProduct, clearWishlistData } = wishlistSlice.actions;

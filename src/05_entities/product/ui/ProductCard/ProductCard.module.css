@@ -22,12 +22,25 @@
     box-sizing: border-box;
 }
 
-.productHeader {
+.productHeaderSlot{
+    display: flex;
     width: 292px;
+    height: 42px;
+}
+
+.productHeader {
+    width: 250px;
     height: 42px;
     margin-bottom: 12px;
 }
 
+.productFeature {
+    display: flex;
+    justify-content: flex-end;
+    width: 42px;
+    height: 42px;
+    
+}
 .productDescriptionSlot {
     width: 292px;
     height: 64px;
