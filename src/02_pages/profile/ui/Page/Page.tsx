@@ -8,6 +8,8 @@ export function ProfilePage() {
 
   const { isModalOpen, modalContent, modalType, openModal } = useModal(); 
 
+  // TODO: получить данные пользователя по id при загрузке страницы
+
   // пример работы попапа
   const publishProduct = async () => {
     try {
@@ -26,12 +28,11 @@ export function ProfilePage() {
   return (  
     <main>
       <User
-        // TODO: берется из стора
+        // TODO: берется из запроса
         user={{
           id: 0,
-          firstName: 'Егор',
-          lastName: 'Росошанский',
-          email: 'test@mail.com'
+          name: 'Егор Росошанский',
+          email: 'test@mail.com',
         }}
       />
       {isModalOpen && <Modal type={modalType}><h3>{modalContent}</h3></Modal>}

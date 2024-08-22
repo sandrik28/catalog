@@ -8,8 +8,10 @@ type Props = {
 export const User = ({user} : Props) => {
   return (
     <div className={css.root}>
-      <h1>{`${user.lastName} ${user.firstName}`}</h1>
-      <p>Связаться: <a href={`mailto:${user.email}`}> {user.email}</a></p>
+      <h1>{user.name}</h1>
+      <p>Связаться: 
+        <a href={`mailto:${user.email}`}>{user.email}</a>
+      </p>
     </div> 
   )
 };

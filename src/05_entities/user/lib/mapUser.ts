@@ -4,8 +4,7 @@ import { UserType } from "../model/types";
 export function mapUser(dto: UserDto): UserType {
   return {
     id: dto.id,
-    firstName: dto.firstName,
-    lastName: dto.lastName,
+    name: dto.name,
     email: dto.email,
   }
 }
