@@ -49,6 +49,14 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public List<Product> getAllProductsByUserId(Long userId) {
+        User user = userRepo.findById(userId).orElseThrow(
+                () -> new UserNotFoundException("Not found user with id = " + userId));
+
+        return productRepo.getProductsByOwner(user);
+    }
+
+    @Override
     public List<Product> getProductsFollowedByUser(Long id) {
         List<Product> allProducts =  productRepo.findAll();
         List<Product> productsFollowedByUser = new ArrayList<>();

@@ -13,6 +13,8 @@ public interface IProductService {
 
     public List<Product> getAllProductsByUser(User user);
 
+    public List<Product> getAllProductsByUserId(Long userId);
+
     public List<Product> getProductsFollowedByUser(Long id);
 
     public List<Product> getProductsByTitle(String title);

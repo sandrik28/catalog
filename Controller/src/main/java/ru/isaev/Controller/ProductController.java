@@ -84,6 +84,14 @@ public class ProductController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<ProductPreviewCardDto>> getAllProductsOfUserById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllProductsByUserId(id)),
+                HttpStatus.OK
+        );
+    }
     @PostMapping("/add")
     public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto) {
         Product product = mapper.productDtoToProduct(productDto);
@@ -123,10 +131,21 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
     }
 
+    @PostMapping("/decline_of_moderation/{id}")
+    public ResponseEntity<ProductDto> declineOfModerationByProductId(@PathVariable Long id) {
+        ProductDto productDto = mapper.productToProductDto(productService.declineOfModerationByProductId(id));
+        return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
+    }
+
+    @PostMapping("/unarchive/{id}")
+    public ResponseEntity<Void> unarchiveProductById(@PathVariable Long id) {
+        productService.unarchiveProductById(id);
+        return (ResponseEntity<Void>) ResponseEntity.status(HttpStatus.CREATED);
+    }
+
     @PostMapping("/archive/{id}")
     public ResponseEntity<Void> archiveProductById(@PathVariable Long id) {
         productService.archiveProductById(id);
         return (ResponseEntity<Void>) ResponseEntity.status(HttpStatus.CREATED);
     }
 }
-
