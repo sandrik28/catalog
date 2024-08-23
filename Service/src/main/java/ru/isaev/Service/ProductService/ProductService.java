@@ -301,6 +301,17 @@ public class ProductService implements IProductService {
 
         if (product.getStatus().equals(Status.ARCHIVED)) {
             this.removeProductById(productId);
+
+            Notification notification = new Notification(
+                    product.getOwner().getId(),
+                    product.getId(),
+                    product.getCategory(),
+                    NotificationMessage.PRODUCT_WAS_DELETED
+            );
+            notificationService.addNotification(notification);
+            notificationService.addNotificationToSubscribersOfProduct(notification, product);
+
+            return;
         }
 
         Status oldStatus = product.getStatus();
