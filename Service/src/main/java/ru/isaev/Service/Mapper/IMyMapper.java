@@ -1,4 +1,4 @@
-package ru.isaev.Controller.Mapper;
+package ru.isaev.Service.Mapper;
 
 import ru.isaev.Domain.NotificationDtos.NotificationDto;
 import ru.isaev.Domain.Notifications.Notification;
@@ -16,7 +16,6 @@ public interface IMyMapper {
     ProductPreviewCardDto productToProductPreviewCardDto(Product product);
 
     Product productDtoToProduct(ProductDto productDto);
-    Product productPreviewCardDtoToProduct(ProductPreviewCardDto productPreviewCardDto);
 
     List<ProductDto> mapListOfProductsToListOfDtos(List<Product> listOfProducts);
 
@@ -29,8 +28,6 @@ public interface IMyMapper {
     User userDtoToUser(UserDto userDto);
 
     NotificationDto notificationToNotificationDto(Notification notification);
-
-    Notification notificationDtoToNotification(NotificationDto notificationDto);
 
     List<NotificationDto> mapListOfNotificationsToListOfDtos(List<Notification> listOfNotifications);
 }

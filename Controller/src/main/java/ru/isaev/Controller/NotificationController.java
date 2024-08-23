@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.isaev.Controller.Mapper.IMyMapper;
+import ru.isaev.Service.Mapper.IMyMapper;
 import ru.isaev.Domain.NotificationDtos.NotificationDto;
-import ru.isaev.Domain.Notifications.Notification;
 import ru.isaev.Service.NotificationService.INotificationService;
 
 import java.util.List;

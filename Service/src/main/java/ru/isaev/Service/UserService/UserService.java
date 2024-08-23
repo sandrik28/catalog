@@ -8,6 +8,7 @@ import ru.isaev.Domain.Users.Roles;
 import ru.isaev.Domain.Users.User;
 import ru.isaev.Repo.UserRepo;
 import ru.isaev.Service.Security.MyUserDetails;
+import ru.isaev.Service.Utilities.Exceptions.InvalidProductOperationException;
 import ru.isaev.Service.Utilities.Exceptions.NotYourProfileException;
 import ru.isaev.Service.Utilities.Exceptions.UserNotFoundException;
 
@@ -59,8 +60,17 @@ public class UserService implements IUserService {
         MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = currentPrincipal.getUser();
 
+        if (user.getId() == null)
+            throw new InvalidProductOperationException("You can't edit user who doesn't exist. No id provided");
+
         if (!Objects.equals(currentUser.getId(), user.getId()) && currentUser.getRole() != Roles.ROLE_ADMIN)
             throw new NotYourProfileException("Not your profile with id = " + user.getId());
+
+        User userSavedInDatabase = this.getUserById(user.getId());
+        userSavedInDatabase.setName(user.getName());
+        userSavedInDatabase.setPassword(user.getPassword());
+        userSavedInDatabase.setRole(user.getRole());
+        userSavedInDatabase.setEmail(user.getEmail());
 
         userRepo.save(user);
     }
