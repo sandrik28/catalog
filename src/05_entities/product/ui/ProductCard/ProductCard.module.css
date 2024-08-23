@@ -26,12 +26,12 @@
     display: flex;
     width: 292px;
     height: 42px;
+    margin-bottom: 12px;
 }
 
 .productHeader {
     width: 250px;
     height: 42px;
-    margin-bottom: 12px;
 }
 
 .productFeature {
