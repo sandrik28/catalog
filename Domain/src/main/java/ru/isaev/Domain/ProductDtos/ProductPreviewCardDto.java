@@ -17,21 +17,9 @@ public class ProductPreviewCardDto {
 
     private String category;
 
-    private String status;
+    private Status status;
 
-    private String timeOfLastApproval;
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getTimeOfLastApproval() {
-        return timeOfLastApproval;
-    }
-
-    public void setTimeOfLastApproval(String timeOfLastApproval) {
-        this.timeOfLastApproval = timeOfLastApproval;
-    }
+    private LocalDateTime timeOfLastApproval;
 
     public Long getId() {
         return id;
@@ -81,7 +69,19 @@ public class ProductPreviewCardDto {
         this.category = category;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getTimeOfLastApproval() {
+        return timeOfLastApproval;
+    }
+
+    public void setTimeOfLastApproval(LocalDateTime timeOfLastApproval) {
+        this.timeOfLastApproval = timeOfLastApproval;
     }
 }
