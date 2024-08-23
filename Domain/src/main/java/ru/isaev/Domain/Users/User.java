@@ -12,13 +12,16 @@ import java.util.Objects;
 @Table(name = "USERS")
 public class User {
     @Id
-    private String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String name;
 
     private String password;
 
     private Roles role;
 
+    @Column(unique = true)
     private String email;
 
     @OneToMany(fetch = FetchType.EAGER)
