@@ -10,6 +10,7 @@ import ru.isaev.Repo.NotificationRepo;
 import ru.isaev.Repo.UserRepo;
 import ru.isaev.Service.Security.MyUserDetails;
 import ru.isaev.Service.Utilities.Exceptions.UserNotFoundException;
+import ru.isaev.Service.Utilities.NotificationsTimestampComparator;
 
 import java.util.List;
 
@@ -39,7 +40,9 @@ public class NotificationService implements INotificationService {
         MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = currentPrincipal.getUser();
 
-        return notificationRepo.findByUserId(currentUser.getId());
+        List<Notification> notificationsList = notificationRepo.findByUserId(currentUser.getId());
+        notificationsList.sort(new NotificationsTimestampComparator());
+        return notificationsList;
     }
 
     @Override

@@ -6,9 +6,11 @@ import java.time.LocalDateTime;
 
 public class NotificationDto {
     private Long id;
+
     private Long userId;
 
     private Long productId;
+
     private NotificationMessage message;
 
     private LocalDateTime timestamp;

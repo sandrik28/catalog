@@ -109,9 +109,19 @@ public class ProductService implements IProductService {
 
     @Override
     public Product getProductById(Long id) {
-        return productRepo.findById(id).orElseThrow(
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
+        Product product = productRepo.findById(id).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + id)
         );
+
+        if (!product.getOwner().getId().equals(currentUser.getId()) &&
+        product.getStatus().equals(Status.ON_MODERATION) ||
+        product.getStatus().equals(Status.MODERATION_DENIED)) {
+            throw new InvalidProductOperationException("You can't view this product with id = " + product.getId());
+        }
+        return product;
     }
 
     @Override

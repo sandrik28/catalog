@@ -22,27 +22,12 @@ public class NotificationController {
         this.notificationService = notificationService;
         this.mapper = mapper;
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<NotificationDto> getById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(
-                mapper.notificationToNotificationDto(notificationService.getNotificationById(id)),
-                HttpStatus.OK
-        );
-    }
-
+    
     @GetMapping("/all")
     public ResponseEntity<List<NotificationDto>> getAll() {
         return new ResponseEntity<>(
                 mapper.mapListOfNotificationsToListOfDtos(notificationService.getAllNotifications()),
                 HttpStatus.OK
         );
-    }
-    @PostMapping("/add")
-    public ResponseEntity<NotificationDto> addNotification(@RequestBody NotificationDto notificationDto) {
-        Notification notification = mapper.notificationDtoToNotification(notificationDto);
-        notificationService.addNotification(notification);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(notificationDto);
     }
 }
