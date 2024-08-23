@@ -2,6 +2,8 @@ package ru.isaev.Domain.ProductDtos;
 
 import ru.isaev.Domain.Products.Status;
 
+import java.time.LocalDateTime;
+
 public class ProductPreviewCardDto {
     private Long id;
 
@@ -18,6 +20,16 @@ public class ProductPreviewCardDto {
     private Status status;
 
     private Boolean isFollowedByCurrentUser;
+
+    private LocalDateTime timeOfLastApproval;
+
+    public LocalDateTime getTimeOfLastApproval() {
+        return timeOfLastApproval;
+    }
+
+    public void setTimeOfLastApproval(LocalDateTime timeOfLastApproval) {
+        this.timeOfLastApproval = timeOfLastApproval;
+    }
 
     public Long getId() {
         return id;

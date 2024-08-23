@@ -1,9 +1,9 @@
 package ru.isaev.Domain.Products;
 
 import jakarta.persistence.*;
-import ru.isaev.Domain.ProductDtos.ProductDto;
 import ru.isaev.Domain.Users.User;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,12 +28,6 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     private User owner;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private Product childProduct;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    private Product parentProduct;
-
     private Status status;
 
     private String emailOFSupport;
@@ -44,23 +38,17 @@ public class Product {
 
     private String category;
 
+    private LocalDateTime timeOfLastApproval;
+
     public Product() {
     }
 
-    public Product getChildProduct() {
-        return childProduct;
+    public LocalDateTime getTimeOfLastApproval() {
+        return timeOfLastApproval;
     }
 
-    public void setChildProduct(Product childProduct) {
-        this.childProduct = childProduct;
-    }
-
-    public Product getParentProduct() {
-        return parentProduct;
-    }
-
-    public void setParentProduct(Product parentProduct) {
-        this.parentProduct = parentProduct;
+    public void setTimeOfLastApproval(LocalDateTime timeOfLastApproval) {
+        this.timeOfLastApproval = timeOfLastApproval;
     }
 
     public Long getId() {
