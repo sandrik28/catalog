@@ -1,11 +1,15 @@
 package ru.isaev.Domain.NotificationDtos;
 
+import ru.isaev.Domain.Notifications.NotificationMessage;
+
 import java.time.LocalDateTime;
 
 public class NotificationDto {
     private Long id;
     private Long userId;
-    private String message;
+
+    private Long productId;
+    private NotificationMessage message;
 
     private LocalDateTime timestamp;
 
@@ -33,11 +37,19 @@ public class NotificationDto {
         this.timestamp = timestamp;
     }
 
-    public String getMessage() {
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public NotificationMessage getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(NotificationMessage message) {
         this.message = message;
     }
 }

@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,17 +13,47 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
-    private String message;
+    private Long productId;
+    private String categoryOfProduct;
+
+    private NotificationMessage message;
 
     private LocalDateTime timestamp;
 
-    public Notification(Long userId, String message) {
+    public Notification(Long id, Long userId, Long productId, String categoryOfProduct, NotificationMessage message) {
+        this.id = id;
         this.userId = userId;
+        this.productId = productId;
+        this.categoryOfProduct = categoryOfProduct;
         this.message = message;
         timestamp = LocalDateTime.now();
     }
 
     public Notification() {
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public NotificationMessage getMessage() {
+        return message;
+    }
+
+    public String getCategoryOfProduct() {
+        return categoryOfProduct;
+    }
+
+    public void setCategoryOfProduct(String categoryOfProduct) {
+        this.categoryOfProduct = categoryOfProduct;
+    }
+
+    public void setMessage(NotificationMessage message) {
+        this.message = message;
     }
 
     public Long getId() {
@@ -47,13 +76,6 @@ public class Notification {
         return timestamp;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
