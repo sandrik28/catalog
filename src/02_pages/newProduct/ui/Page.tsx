@@ -1,11 +1,9 @@
-import { LabeledField } from "@/06_shared/ui/LabeledField/LabeledFieled"
+import { CreateProductForm } from "@/03_widgets/CreateProductForm"
 
 export const NewProduct = () => {
   return (
     <main>
-      <p>Страница создания продукта</p>
-      <LabeledField label={'Название продукта'}/>
-      <LabeledField label={'Категория'}/>
+      <CreateProductForm/>
     </main>
   )
 }
