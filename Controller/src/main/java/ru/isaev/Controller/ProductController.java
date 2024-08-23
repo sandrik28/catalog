@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.isaev.Controller.Mapper.IMyMapper;
+import ru.isaev.Service.Mapper.IMyMapper;
 import ru.isaev.Domain.ProductDtos.ProductDto;
 import ru.isaev.Domain.ProductDtos.ProductPreviewCardDto;
 import ru.isaev.Domain.Products.Product;
@@ -119,14 +119,14 @@ public class ProductController {
 
     @PostMapping("/approve_of_publishing_or_editing/{id}")
     public ResponseEntity<ProductDto> approveOfPublishingOrEditingProductById(@PathVariable Long id) {
-        ProductDto productDto = mapper.productToProductDto(productService.approveOfPublishingOrEditingProductById(id));
+        ProductDto productDto = mapper.productToProductDto(productService.approveProductById(id));
         return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
     }
 
     @PostMapping("/archive/{id}")
-    public ResponseEntity<ProductDto> archiveProductById(@PathVariable Long id) {
-        ProductDto productDto = mapper.productToProductDto(productService.archiveProductById(id));
-        return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
+    public ResponseEntity<Void> archiveProductById(@PathVariable Long id) {
+        productService.archiveProductById(id);
+        return (ResponseEntity<Void>) ResponseEntity.status(HttpStatus.CREATED);
     }
 }
 
