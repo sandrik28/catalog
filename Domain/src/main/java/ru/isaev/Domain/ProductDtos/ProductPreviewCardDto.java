@@ -90,4 +90,8 @@ public class ProductPreviewCardDto {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getStatus() {
+        return status;
+    }
 }
