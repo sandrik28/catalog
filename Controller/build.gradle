@@ -23,8 +23,6 @@ dependencies {
     implementation 'org.javassist:javassist:3.30.2-GA'
     // https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka
 
-    implementation 'org.springframework.boot:spring-boot-starter-security:3.2.4'
-
     implementation project(":Service")
     implementation project(":Domain")
 }
