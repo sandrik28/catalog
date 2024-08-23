@@ -1,6 +1,5 @@
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import css from './Profile.module.css'
-import { Button } from '@/06_shared/ui/Button/Button'
 import { AddNewProduct } from '@/04_features/newProduct/addNewProduct'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/01_app/AppStore'
