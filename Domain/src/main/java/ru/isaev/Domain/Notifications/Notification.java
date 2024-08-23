@@ -20,7 +20,7 @@ public class Notification {
 
     private LocalDateTime timestamp;
 
-    public Notification(Long id, Long userId, Long productId, String categoryOfProduct, NotificationMessage message) {
+    public Notification(Long userId, Long productId, String categoryOfProduct, NotificationMessage message) {
         this.id = id;
         this.userId = userId;
         this.productId = productId;

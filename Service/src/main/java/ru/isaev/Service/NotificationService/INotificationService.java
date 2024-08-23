@@ -12,5 +12,7 @@ public interface INotificationService {
 
     public void addNotification(Notification notification);
 
+    public void addNotificationToSubscribersOfProduct(Notification notification, Product product);
+
     public void deleteNotificationById(Long notificationId);
 }

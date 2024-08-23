@@ -30,11 +30,11 @@ public interface IProductService {
 
     public Product unsubscribeFromProductById(Long productId);
 
-    public Product approveOfPublishingOrEditingProductById(Long productId);
+    public Product approveProductById(Long productId);
 
-    public void rejectOfPublishingOrEditingProductById(Long productId);
+    public Product declineOfModerationByProductId(Long productId);
 
-    public Product archiveProductById(Long productId);
+    public void archiveProductById(Long productId);
 
     public Product unarchiveProductById(Long productId);
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.isaev.Domain.Notifications.Notification;
+import ru.isaev.Domain.Products.Product;
 import ru.isaev.Domain.Users.User;
 import ru.isaev.Repo.NotificationRepo;
 import ru.isaev.Repo.UserRepo;
@@ -44,6 +45,17 @@ public class NotificationService implements INotificationService {
     @Override
     public void addNotification(Notification notification) {
         notificationRepo.save(notification);
+    }
+
+    @Override
+    public void addNotificationToSubscribersOfProduct(Notification notification, Product product) {
+        for (User user :
+                product.getSubscribersList()) {
+            notification.setUserId(user.getId());
+            notification.setProductId(product.getId());
+            notification.setCategoryOfProduct(product.getCategory());
+            this.addNotification(notification);
+        }
     }
 
     @Override
