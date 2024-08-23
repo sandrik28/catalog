@@ -19,8 +19,6 @@ public class ProductPreviewCardDto {
 
     private String status;
 
-    private Boolean isFollowedByCurrentUser;
-
     private String timeOfLastApproval;
 
     public void setStatus(String status) {
@@ -49,14 +47,6 @@ public class ProductPreviewCardDto {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Boolean getFollowedByCurrentUser() {
-        return isFollowedByCurrentUser;
-    }
-
-    public void setFollowedByCurrentUser(Boolean followedByCurrentUser) {
-        isFollowedByCurrentUser = followedByCurrentUser;
     }
 
     public Long getOwnerId() {
