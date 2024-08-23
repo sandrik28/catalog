@@ -11,9 +11,9 @@ public class NotificationDto {
 
     private Long productId;
 
-    private String message;
+    private NotificationMessage message;
 
-    private String timestamp;
+    private LocalDateTime timestamp;
 
     public Long getId() {
         return id;
@@ -31,14 +31,6 @@ public class NotificationDto {
         this.userId = userId;
     }
 
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public Long getProductId() {
         return productId;
     }
@@ -47,11 +39,19 @@ public class NotificationDto {
         this.productId = productId;
     }
 
-    public String getMessage() {
+    public NotificationMessage getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(NotificationMessage message) {
         this.message = message;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 }

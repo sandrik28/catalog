@@ -1,6 +1,7 @@
 package ru.isaev.Domain.ProductDtos;
 
 import ru.isaev.Domain.Products.Status;
+import ru.isaev.Domain.Users.Roles;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +13,7 @@ public class ProductDto {
 
     private String title;
 
-    private String status;
+    private Status status;
 
     private String emailOFSupport;
 
@@ -22,16 +23,7 @@ public class ProductDto {
 
     private String category;
 
-
-    private String timeOfLastApproval;
-
-    public String getTimeOfLastApproval() {
-        return timeOfLastApproval;
-    }
-
-    public void setTimeOfLastApproval(String timeOfLastApproval) {
-        this.timeOfLastApproval = timeOfLastApproval;
-    }
+    private LocalDateTime timeOfLastApproval;
 
     public Long getId() {
         return id;
@@ -57,12 +49,20 @@ public class ProductDto {
         this.ownerId = ownerId;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public LocalDateTime getTimeOfLastApproval() {
+        return timeOfLastApproval;
+    }
+
+    public void setTimeOfLastApproval(LocalDateTime timeOfLastApproval) {
+        this.timeOfLastApproval = timeOfLastApproval;
     }
 
     public String getEmailOFSupport() {
