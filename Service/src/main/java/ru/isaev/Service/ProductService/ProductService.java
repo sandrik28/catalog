@@ -40,10 +40,12 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getProductsByStatus(Status status) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
-
         return productRepo.findByStatus(status);
+    }
+
+    @Override
+    public List<Product> getAllProductsByUser(User user) {
+        return productRepo.getProductsByOwner(user);
     }
 
     @Override
@@ -88,6 +90,8 @@ public class ProductService implements IProductService {
         MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = currentPrincipal.getUser();
 
+        product.setId(currentUser.getId());
+
         product.setStatus(Status.ON_MODERATION);
         Notification notification = new Notification(
                 product.getOwner().getId(),
@@ -130,7 +134,7 @@ public class ProductService implements IProductService {
         User currentUser = currentPrincipal.getUser();
 
         if (product.getId() == null)
-            throw new InvalidProductOperationException("You can't edit product which doesn't exist");
+            throw new InvalidProductOperationException("You can't edit product which doesn't exist. No id provided");
 
         Product productSavedInDatabase = getProductById(product.getId());
         if (!Objects.equals(productSavedInDatabase.getOwner().getId(), currentUser.getId()) && currentUser.getRole() != Roles.ROLE_ADMIN)

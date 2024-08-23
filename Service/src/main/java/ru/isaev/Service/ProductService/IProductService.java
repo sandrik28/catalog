@@ -2,6 +2,7 @@ package ru.isaev.Service.ProductService;
 
 import ru.isaev.Domain.Products.Product;
 import ru.isaev.Domain.Products.Status;
+import ru.isaev.Domain.Users.User;
 
 import java.util.List;
 
@@ -9,6 +10,8 @@ public interface IProductService {
     public List<Product> getAllProducts();
 
     public List<Product> getProductsByStatus(Status status);
+
+    public List<Product> getAllProductsByUser(User user);
 
     public List<Product> getProductsFollowedByUser(Long id);
 
