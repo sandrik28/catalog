@@ -12,7 +12,7 @@ public class ProductDto {
 
     private String title;
 
-    private Status type;
+    private String status;
 
     private String emailOFSupport;
 
@@ -66,12 +66,12 @@ public class ProductDto {
         this.ownerId = ownerId;
     }
 
-    public Status getType() {
-        return type;
+    public String getStatus() {
+        return status;
     }
 
-    public void setType(Status type) {
-        this.type = type;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getEmailOFSupport() {
