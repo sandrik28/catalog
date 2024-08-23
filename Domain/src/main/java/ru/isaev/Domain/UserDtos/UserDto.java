@@ -1,11 +1,15 @@
 package ru.isaev.Domain.UserDtos;
 
+import java.util.List;
+
 public class UserDto {
     private Long id;
 
     private String name;
 
     private String email;
+
+    private List<Long> idOfFollowedProductsList;
 
     public Long getId() {
         return id;
@@ -29,5 +33,13 @@ public class UserDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Long> getIdOfFollowedProductsList() {
+        return idOfFollowedProductsList;
+    }
+
+    public void setIdOfFollowedProductsList(List<Long> idOfFollowedProductsList) {
+        this.idOfFollowedProductsList = idOfFollowedProductsList;
     }
 }

@@ -24,7 +24,7 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "products_of_user",
-            joinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "user_email"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> productsList = new ArrayList<>();
