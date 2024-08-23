@@ -17,17 +17,21 @@ public class ProductPreviewCardDto {
 
     private String category;
 
-    private Status status;
+    private String status;
 
     private Boolean isFollowedByCurrentUser;
 
-    private LocalDateTime timeOfLastApproval;
+    private String timeOfLastApproval;
 
-    public LocalDateTime getTimeOfLastApproval() {
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTimeOfLastApproval() {
         return timeOfLastApproval;
     }
 
-    public void setTimeOfLastApproval(LocalDateTime timeOfLastApproval) {
+    public void setTimeOfLastApproval(String timeOfLastApproval) {
         this.timeOfLastApproval = timeOfLastApproval;
     }
 
@@ -45,14 +49,6 @@ public class ProductPreviewCardDto {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
     public Boolean getFollowedByCurrentUser() {

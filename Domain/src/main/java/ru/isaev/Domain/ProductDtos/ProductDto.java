@@ -24,13 +24,13 @@ public class ProductDto {
 
     private Boolean isFollowedByCurrentUser;
 
-    private LocalDateTime timeOfLastApproval;
+    private String timeOfLastApproval;
 
-    public LocalDateTime getTimeOfLastApproval() {
+    public String getTimeOfLastApproval() {
         return timeOfLastApproval;
     }
 
-    public void setTimeOfLastApproval(LocalDateTime timeOfLastApproval) {
+    public void setTimeOfLastApproval(String timeOfLastApproval) {
         this.timeOfLastApproval = timeOfLastApproval;
     }
 
