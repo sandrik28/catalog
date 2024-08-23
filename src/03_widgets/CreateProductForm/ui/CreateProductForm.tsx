@@ -1,7 +1,10 @@
+import { CancelButton } from '@/04_features/CancelButton'
 import { SendToModeratorButton } from '@/04_features/sendToModerator'
 import { LabeledField } from '@/06_shared/ui/LabeledField/LabeledField'
+import css from './CreateProductForm.module.css'
 
 export const CreateProductForm = () => {
+
   return (
     <form>
       <LabeledField label={'Название продукта'}/>
@@ -13,7 +16,10 @@ export const CreateProductForm = () => {
         maxLength={500}
       />
       <LabeledField label={'Контакт поддержки'}/>
-      <SendToModeratorButton/>
+      <div className={css.container}>
+        <SendToModeratorButton/>
+        <CancelButton/>  
+      </div>
     </form>
   )
 }
