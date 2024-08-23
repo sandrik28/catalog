@@ -13,7 +13,7 @@ public class NotificationDto {
 
     private String message;
 
-    private LocalDateTime timestamp;
+    private String timestamp;
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class NotificationDto {
         this.userId = userId;
     }
 
-    public LocalDateTime getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
