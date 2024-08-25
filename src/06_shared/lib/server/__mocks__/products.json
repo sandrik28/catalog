@@ -7,7 +7,8 @@
         "linkToWebSite": "pluto244.ru",
         "description": "Предназначен для регистрации и публикации цифровых продуктов, доступных участникам клуба.",
         "category": "Сервисы и ИТ-аутсорсинг",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support1@example.com"
     },
     {
         "ownerId": 0,
@@ -17,7 +18,8 @@
         "linkToWebSite": "pluto244.ru",
         "description": "Предназначен для регистрации и публикации цифровых продуктов, доступных участникам клуба.",
         "category": "Сервисы и ИТ-аутсорсинг",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support2@example.com"
     },
     {
         "ownerId": 1,
@@ -27,7 +29,8 @@
         "linkToWebSite": "webcourse.com",
         "description": "Курс по основам веб-разработки для начинающих.",
         "category": "Образование",
-        "status": "PENDING"
+        "status": "PENDING",
+        "emailOfSupport": "support3@example.com"
     },
     {
         "ownerId": 2,
@@ -37,7 +40,8 @@
         "linkToWebSite": "digitallibrary.com",
         "description": "Коллекция цифровых книг и учебных материалов.",
         "category": "Образование",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support4@example.com"
     },
     {
         "ownerId": 3,
@@ -47,7 +51,8 @@
         "linkToWebSite": "projectmanagementsoft.com",
         "description": "Инструмент для планирования и управления проектами в реальном времени.",
         "category": "Сервисы и ИТ-аутсорсинг",
-        "status": "ON_MODERATION_FOR_PUBL"
+        "status": "ON_MODERATION_FOR_PUBL",
+        "emailOfSupport": "support5@example.com"
     },
     {
         "ownerId": 4,
@@ -57,7 +62,8 @@
         "linkToWebSite": "sitebuilder.com",
         "description": "Создание и настройка сайтов без навыков программирования.",
         "category": "Веб-разработка",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support6@example.com"
     },
     {
         "ownerId": 5,
@@ -67,7 +73,8 @@
         "linkToWebSite": "videoeditor.com",
         "description": "Мощный инструмент для редактирования видео и создания фильмов.",
         "category": "Мультимедиа",
-        "status": "ON_MODERATION_FOR_ED"
+        "status": "ON_MODERATION_FOR_ED",
+        "emailOfSupport": "support7@example.com"
     },
     {
         "ownerId": 6,
@@ -77,7 +84,8 @@
         "linkToWebSite": "cmsplatform.com",
         "description": "Платформа для создания, управления и распространения цифрового контента.",
         "category": "Веб-разработка",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support8@example.com"
     },
     {
         "ownerId": 7,
@@ -87,7 +95,8 @@
         "linkToWebSite": "cloudstorage.com",
         "description": "Услуга для безопасного хранения данных в облаке.",
         "category": "Сервисы и ИТ-аутсорсинг",
-        "status": "PENDING"
+        "status": "PENDING",
+        "emailOfSupport": "support9@example.com"
     },
     {
         "ownerId": 8,
@@ -97,7 +106,8 @@
         "linkToWebSite": "elearningplatform.com",
         "description": "Платформа для проведения онлайн курсов и тренингов.",
         "category": "Образование",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support10@example.com"
     },
     {
         "ownerId": 9,
@@ -107,7 +117,8 @@
         "linkToWebSite": "ecommerceplatform.com",
         "description": "Платформа для создания и управления онлайн магазинами.",
         "category": "Сервисы и ИТ-аутсорсинг",
-        "status": "ON_MODERATION_FOR_PUBL"
+        "status": "ON_MODERATION_FOR_PUBL",
+        "emailOfSupport": "support11@example.com"
     },
     {
         "ownerId": 10,
@@ -117,7 +128,8 @@
         "linkToWebSite": "crmplatform.com",
         "description": "Инструмент для управления взаимоотношениями с клиентами.",
         "category": "Сервисы и ИТ-аутсорсинг",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support12@example.com"
     },
     {
         "ownerId": 11,
@@ -127,7 +139,8 @@
         "linkToWebSite": "marketingautomation.com",
         "description": "Решение для автоматизации маркетинговых кампаний.",
         "category": "Маркетинг",
-        "status": "PENDING"
+        "status": "PENDING",
+        "emailOfSupport": "support13@example.com"
     },
     {
         "ownerId": 12,
@@ -137,7 +150,8 @@
         "linkToWebSite": "dataanalytics.com",
         "description": "Инструмент для анализа и визуализации данных.",
         "category": "Сервисы и ИТ-аутсорсинг",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support14@example.com"
     },
     {
         "ownerId": 13,
@@ -147,7 +161,8 @@
         "linkToWebSite": "supplychain.com",
         "description": "Инструмент для управления и оптимизации цепочек поставок.",
         "category": "Логистика",
-        "status": "ON_MODERATION_FOR_ED"
+        "status": "ON_MODERATION_FOR_ED",
+        "emailOfSupport": "support15@example.com"
     },
     {
         "ownerId": 14,
@@ -157,7 +172,8 @@
         "linkToWebSite": "financemanagement.com",
         "description": "Решение для управления финансовыми операциями и бюджетами.",
         "category": "Финансы",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support16@example.com"
     },
     {
         "ownerId": 15,
@@ -167,7 +183,8 @@
         "linkToWebSite": "taskmanagement.com",
         "description": "Программа для планирования и контроля задач.",
         "category": "Продуктивность",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support17@example.com"
     },
     {
         "ownerId": 16,
@@ -177,7 +194,8 @@
         "linkToWebSite": "digitalmarketing.com",
         "description": "Платформа для управления цифровыми маркетинговыми кампаниями.",
         "category": "Маркетинг",
-        "status": "PENDING"
+        "status": "PENDING",
+        "emailOfSupport": "support18@example.com"
     },
     {
         "ownerId": 17,
@@ -187,7 +205,8 @@
         "linkToWebSite": "projectmanagement.com",
         "description": "Инструмент для планирования и выполнения проектов.",
         "category": "Сервисы и ИТ-аутсорсинг",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support19@example.com"
     },
     {
         "ownerId": 18,
@@ -197,6 +216,7 @@
         "linkToWebSite": "virtualassistant.com",
         "description": "Инструмент для автоматизации рутинных задач.",
         "category": "Продуктивность",
-        "status": "APPROVED"
+        "status": "APPROVED",
+        "emailOfSupport": "support20@example.com"
     }
 ]
