@@ -1,11 +1,11 @@
-import type { ProductDto } from "../api/types";
-import type { ProductCardType } from "../model/types";
+import type { ProductCardType, ProductPreviewCardDto } from "../model/types";
 
-export function mapProduct(dto: ProductDto): ProductCardType {
+export function mapProduct(dto: ProductPreviewCardDto): ProductCardType {
     return {
         id: dto.id as number,        
         title: dto.title,
         description: dto.description,   
         category: dto.category,
+        status: dto.status, 
     };
 }

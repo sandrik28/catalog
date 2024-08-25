@@ -9,6 +9,7 @@ import { ProductCard, type ProductCardType, type ProductId } from '@/05_entities
 import { ProductFormPage } from '@/02_pages/newProduct';
 import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddToWishlistIcon';
 import { ProductPage } from '@/02_pages/product/ui/Page/Page';
+import { Status } from '@/05_entities/product/model/types';
 
 
 
@@ -19,11 +20,12 @@ export function AppEnter() {
 
     
     const productCardJson: ProductCardType = {
-        id: 1,
-        title: 'ProductNameTest for test in test01',
-        description: 'Product Description is our mission 01 Product Description is our mission 01 Product Description is our mission 01',
-        category: 'itAndAllWorld'
-    }
+        "id": 18,
+        "title": "Сервис управления закупками ProcurePlus",
+        "description": "Платформа для автоматизации процессов закупок с поддержкой тендеров и интеграцией с ERP системами.",
+        "category": "Закупки",
+        "status": "ON_MODERATION" as Status,
+      }
 
 
     return (

@@ -1,3 +1,4 @@
-import { ProductDto } from "@/05_entities/product/api/types";
+import { ProductPreviewCardDto,  } from "@/05_entities/product/model/types";
 
-export type WishlistDto = ProductDto[]
+
+export type WishlistDto = ProductPreviewCardDto[]

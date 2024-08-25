@@ -6,7 +6,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useModal } from '@/06_shared/lib/useModal'
 import { Modal } from '@/06_shared/ui/Modal/Modal'
 import { productsMock } from '@/06_shared/lib/server'
-import { ProductDto } from '@/05_entities/product'
+import { ProductDto, ProductId } from '@/05_entities/product'
+import { Status } from '@/05_entities/product/model/types'
 
 export type TCreateProductForm = {
   title: string
@@ -25,7 +26,7 @@ const defaultFormValues = {
 }
 
 type Props = {
-  productId?: string | undefined
+  productId?: ProductId | undefined
 }
 
 export const CreateProductForm = ({productId} : Props) => {
@@ -51,12 +52,17 @@ export const CreateProductForm = ({productId} : Props) => {
   })
 
   // моковый запрос получения данных продукта
-  const getProductById = (productId: number): Promise<ProductDto> => {
+  const getProductById = (productId: ProductId): Promise<ProductDto> => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const product = productsMock.find(product => product.id === productId)
         if (product) {
-          resolve(product);
+          const productWithCorrectTypes: ProductDto = {
+            ...product,
+            timeOfLastApproval: new Date(product.timeOfLastApproval),
+            status: product.status as Status, 
+          };
+          resolve(productWithCorrectTypes);
         } else {
           reject(new Error('Продукт не найден'))
         }

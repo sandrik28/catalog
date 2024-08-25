@@ -1,5 +1,5 @@
 import { HttpResponse, delay, http } from 'msw';
-import mockProducts from '@/06_shared/lib/server/__mocks__/products.json'; // Моки продуктов
+import mockProducts from '@/06_shared/lib/server/__mocks__/productsCards.json'; // Моки продуктов
 
 // Заглушка для данных избранного
 const mockWishlist = {
@@ -8,7 +8,6 @@ const mockWishlist = {
 };
 
 export const wishlistHandlers = [
-    // Обработчик GET-запроса для получения продуктов из избранного
     http.get(
         'http://localhost:3000/wishlist/products',
         async ({ request }) => {

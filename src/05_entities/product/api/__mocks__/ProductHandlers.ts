@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw'
-import productsMock from '@/06_shared/lib/server/__mocks__/products.json'
+import productsMock from '@/06_shared/lib/server/__mocks__/productsCards.json'
 
 export const productsHandlers = [
   http.get('http://localhost:3000/products', async ({ request }) => {

@@ -1,16 +1,38 @@
-export type ProductId = Brand<number, 'ProductId'>;
+export type ProductId = number;
 export type OwnerId = Brand<number, 'OwnerId'>;
 
-export type ProductDto = {
-    ownerId: OwnerId;
-    id: ProductId;
+export interface ProductDto {
+    id: number;
+    ownerId: number;
+    nameOfOwner: string;
     title: string;
-    type: string;
+    status: Status;
+    emailOfSupport: string;
     linkToWebSite: string;
     description: string;
     category: string;
-    status: string;
-};
+    timeOfLastApproval: Date; 
+}
+
+export enum Status {
+    ON_MODERATION = 'ON_MODERATION',
+    APPROVED = 'APPROVED',
+    ARCHIVED = 'ARCHIVED',
+    MODERATION_DENIED = 'MODERATION_DENIED',
+}
+
+
+export interface ProductPreviewCardDto {
+    id: number;
+    ownerId: number;
+    title: string;
+    nameOfOwner: string;
+    description: string;
+    category: string;
+    status: Status;
+    timeOfLastApproval: Date;
+}
+
 
 
 export type ProductCardType = {
@@ -18,4 +40,5 @@ export type ProductCardType = {
     title: string;
     description: string;
     category: string;
-};
+    status: Status;
+}

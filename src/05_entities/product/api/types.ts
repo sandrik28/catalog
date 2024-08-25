@@ -1,11 +1,15 @@
-export type ProductDto = {
-    ownerId: number;
+import { Status } from "../model/types";
+
+
+export interface ProductDto {
     id: number;
+    ownerId: number;
+    nameOfOwner: string;
     title: string;
-    type: string;
+    status: Status;
+    emailOfSupport: string;
     linkToWebSite: string;
     description: string;
     category: string;
-    status: string;
-    emailOfSupport: string
-}
+    timeOfLastApproval: Date; 
+  }
