@@ -1,9 +1,14 @@
 import { CreateProductForm } from "@/03_widgets/CreateProductForm"
+import { useParams } from "react-router-dom";
 
-export const NewProduct = () => {
+export const ProductFormPage = () => {
+  const { id } = useParams()
+
+  // TODO: добавить лоадер
+
   return (
     <main>
-      <CreateProductForm/>
+      <CreateProductForm productId={id}/>
     </main>
   )
 }

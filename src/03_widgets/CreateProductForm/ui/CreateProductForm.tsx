@@ -5,6 +5,9 @@ import css from './CreateProductForm.module.css'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useModal } from '@/06_shared/lib/useModal'
 import { Modal } from '@/06_shared/ui/Modal/Modal'
+import { useEffect } from 'react'
+import { productsMock } from '@/06_shared/lib/server'
+import { ProductDto } from '@/05_entities/product'
 
 export type TCreateProductForm = {
   title: string
@@ -14,17 +17,55 @@ export type TCreateProductForm = {
   emailOfSupport: string
 }
 
-export const CreateProductForm = () => {
+type Props = {
+  productId?: string | undefined
+}
+
+export const CreateProductForm = ({productId} : Props) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<TCreateProductForm>()
 
-  const { isModalOpen, modalContent, modalType, openModal } = useModal() 
+  const { isModalOpen, modalContent, modalType, openModal } = useModal()
+
+  // моковый запрос получения данных продукта
+  const getProductById = (productId: number): Promise<ProductDto> => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const product = productsMock.find(product => product.id === productId)
+        if (product) {
+          resolve(product);
+        } else {
+          reject(new Error('Продукт не найден'))
+        }
+      }, 2000)
+    })
+  }
+
+  useEffect(() => {
+    if (productId) {
+      const loadProductData = async () => {
+        try {
+          const product = await getProductById(Number(productId))
+          setValue('title', product.title)
+          setValue('category', product.category)
+          setValue('linkToWebSite', product.linkToWebSite)
+          setValue('description', product.description)
+          setValue('emailOfSupport', product.emailOfSupport)
+        } catch (error) {
+          openModal('Произошла ошибка при загрузке данных', 'error')
+        }
+      }
+
+      loadProductData()
+    }
+  }, [productId, setValue, openModal]);
 
   const onSubmit: SubmitHandler<TCreateProductForm> = async (data) => {
-    // TODO: запрос
+    // TODO: запрос 
     try {
       // const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
       const response = await fetch('https://jsonplaceholder.typicode.com/todos/18765432')
@@ -32,7 +73,7 @@ export const CreateProductForm = () => {
       if (response.ok) {
         openModal('Успешно', 'success')
       } else {
-        throw new Error()
+        throw new Error('Произошла ошибка')
       }
     } catch(error) {
       openModal('Произошла ошибка', 'error')

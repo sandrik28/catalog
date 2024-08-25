@@ -6,8 +6,9 @@ import store from './AppStore'
 import { MainPage } from '@/02_pages/main';
 import { ProfilePage } from '@/02_pages/profile/ui/Page/Page';
 import { ProductCard, type ProductCardType, type ProductId } from '@/05_entities/product';
-import { NewProduct } from '@/02_pages/newProduct';
+import { ProductFormPage } from '@/02_pages/newProduct';
 import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddToWishlistIcon';
+import { ProductPage } from '@/02_pages/product/ui/Page/Page';
 
 
 
@@ -32,7 +33,9 @@ export function AppEnter() {
                 <Routes>
                     <Route path='/' element={<MainPage />} />
                     <Route path='/profile/:id' element={<ProfilePage />} />
-                    <Route path='/addNewProduct' element={<NewProduct />} />
+                    <Route path='/product/:id' element={<ProductPage />} />
+                    <Route path='/product/:id/edit' element={<ProductFormPage />} />
+                    <Route path='/addNewProduct' element={<ProductFormPage />} />
                     <Route path='/catalog/all' element={<ProductCard actionSlot={<AddToWishlistIcon productId={productCardJson.id as ProductId} />} product={productCardJson} info={<span className="product_category">sss</span>} />} />
                 </Routes>
             </Router>

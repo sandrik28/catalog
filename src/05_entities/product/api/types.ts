@@ -7,4 +7,5 @@ export type ProductDto = {
     description: string;
     category: string;
     status: string;
+    emailOfSupport: string
 }
