@@ -2,3 +2,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+.field_error {
+  margin-bottom: 10px;
+  color: var(--color-red)
+}
