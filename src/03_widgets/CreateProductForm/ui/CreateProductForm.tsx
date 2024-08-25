@@ -5,7 +5,6 @@ import css from './CreateProductForm.module.css'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useModal } from '@/06_shared/lib/useModal'
 import { Modal } from '@/06_shared/ui/Modal/Modal'
-import { useEffect } from 'react'
 import { productsMock } from '@/06_shared/lib/server'
 import { ProductDto } from '@/05_entities/product'
 
@@ -17,19 +16,39 @@ export type TCreateProductForm = {
   emailOfSupport: string
 }
 
+const defaultFormValues = {
+  title: '',
+  category: '',
+  linkToWebSite: '',
+  description: '',
+  emailOfSupport: '',
+}
+
 type Props = {
   productId?: string | undefined
 }
 
 export const CreateProductForm = ({productId} : Props) => {
+  const { isModalOpen, modalContent, modalType, openModal } = useModal()
+
   const {
     register,
     handleSubmit,
-    setValue,
-    formState: { errors, isSubmitting },
-  } = useForm<TCreateProductForm>()
-
-  const { isModalOpen, modalContent, modalType, openModal } = useModal()
+    formState: { errors, isSubmitting, isDirty, dirtyFields, isLoading },
+  } = useForm<TCreateProductForm>({
+    defaultValues: async () => {
+      if (productId) {
+        try {
+          return await getProductById(Number(productId))
+        } catch (error) {
+          openModal('Произошла ошибка при загрузке данных', 'error')
+          return defaultFormValues
+        }
+      } else {
+        return defaultFormValues
+      }
+    }
+  })
 
   // моковый запрос получения данных продукта
   const getProductById = (productId: number): Promise<ProductDto> => {
@@ -45,31 +64,15 @@ export const CreateProductForm = ({productId} : Props) => {
     })
   }
 
-  useEffect(() => {
-    if (productId) {
-      const loadProductData = async () => {
-        try {
-          const product = await getProductById(Number(productId))
-          setValue('title', product.title)
-          setValue('category', product.category)
-          setValue('linkToWebSite', product.linkToWebSite)
-          setValue('description', product.description)
-          setValue('emailOfSupport', product.emailOfSupport)
-        } catch (error) {
-          openModal('Произошла ошибка при загрузке данных', 'error')
-        }
-      }
-
-      loadProductData()
-    }
-  }, [productId, setValue, openModal]);
-
   const onSubmit: SubmitHandler<TCreateProductForm> = async (data) => {
+    if (!isDirty) {
+      return
+    }
+    
     // TODO: запрос 
     try {
       // const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
       const response = await fetch('https://jsonplaceholder.typicode.com/todos/18765432')
-      console.log(response)
       if (response.ok) {
         openModal('Успешно', 'success')
       } else {
@@ -84,33 +87,39 @@ export const CreateProductForm = ({productId} : Props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <LabeledField label={'Название продукта'} register={register('title', { required: true })} />
-        <LabeledField label={'Категория'} register={register('category', { required: true })} />
-        <LabeledField 
-          label={'Ссылка на продукт'} 
-          register={register('linkToWebSite', { 
-            required: true, 
-          })} 
-        />
-        <LabeledField
-          label={'Описание продукта'}
-          type={'description'}
-          maxLength={500}
-          register={register('description', { 
-            required: true, 
-            // minLength: 10
-          })}     
-        />
-        <LabeledField label={'Контакт поддержки'} register={register('emailOfSupport', { required: true })} />
-        {Object.keys(errors).length > 0 && 
-          <div className={css.field_error}>Все поля должны быть заполнены</div>
-        }
-        <div className={css.container}>
-          <SendToModeratorButton disabled={isSubmitting} />
-          <CancelButton />
-        </div>
-      </form>
+      {
+        isLoading ? <h1>Загрузка</h1> : 
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <LabeledField label={'Название продукта'} register={register('title', { required: true })} />
+          <LabeledField label={'Категория'} register={register('category', { required: true })} />
+          <LabeledField 
+            label={'Ссылка на продукт'} 
+            register={register('linkToWebSite', { 
+              required: true, 
+            })} 
+          />
+          <LabeledField
+            label={'Описание продукта'}
+            type={'description'}
+            maxLength={500}
+            register={register('description', { 
+              required: true, 
+              // minLength: 10
+            })}     
+          />
+          <LabeledField label={'Контакт поддержки'} register={register('emailOfSupport', { required: true })} />
+          {Object.keys(errors).length > 0 && 
+            <div className={css.field_error}>Все поля должны быть заполнены</div>
+          }
+          {productId && Object.keys(dirtyFields).length === 0 && (
+            <div className={css.field_error}>Продукт не был изменен</div>
+          )}
+          <div className={css.container}>
+            <SendToModeratorButton disabled={isSubmitting} />
+            <CancelButton />
+          </div>
+        </form>
+      }
       {isModalOpen && <Modal type={modalType}><h3>{modalContent}</h3></Modal>}
     </>
   )
