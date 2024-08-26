@@ -119,5 +119,6 @@ h1 {
 .category-buttons{
     margin: 0 15px 32px 15px;
     display: flex;
+    justify-content: center;
     flex-direction: row;
 }
