@@ -10,8 +10,11 @@ const mockProducts: ProductPreviewCardDto[] = productsMockCards.map(product => {
 });
 
 
-export const fetchMainProducts = async (): Promise<ProductPreviewCardDto[]> => {
-    const activeMocks = mockProducts.filter(product => product.status === Status.APPROVED)
+export const fetchMainProducts = async (ids?: number[]): Promise<ProductPreviewCardDto[]> => {
+    let activeMocks = mockProducts.filter(product => product.status === Status.APPROVED)
+    if (ids) {
+        activeMocks = activeMocks.filter(product => ids.includes(product.ownerId));
+    }
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(activeMocks);
@@ -27,6 +30,7 @@ export const fetchFavoriteProducts = async (ids: number[]): Promise<ProductPrevi
         }, 500);
     });
 };
+
 
 export const fetchToDoProducts = async (userId: number): Promise<ProductPreviewCardDto[]> => {
     const toDoMocks = mockProducts.filter(product => product.status === Status.MODERATION_DENIED && product.ownerId === userId)
