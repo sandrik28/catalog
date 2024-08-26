@@ -10,6 +10,9 @@ import { ProductDto, ProductId } from '@/05_entities/product'
 import { Status } from '@/05_entities/product/model/types'
 import { DeleteProductButton } from '@/04_features/deleteProduct'
 import { deleteProductRequest } from '@/04_features/deleteProduct/category/api/deleteProductRequest'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export type TCreateProductForm = {
   title: string
@@ -28,12 +31,16 @@ const defaultFormValues = {
 }
 
 type Props = {
-  productId?: string | undefined
+  productId: string | undefined,
+  formMode: 'add' | 'edit'
 }
 
-export const CreateProductForm = ({productId} : Props) => {
+export const CreateProductForm = ({productId, formMode} : Props) => {
   const { isModalOpen, modalContent, modalType, openModal } = useModal();
-  const numericId = Number(productId)
+  const numericId = Number(productId);
+  const [ownerId, setOwnerId] = useState<number | null>(null);
+  const userId = useSelector((state: RootState) => state.session.userId);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -43,7 +50,10 @@ export const CreateProductForm = ({productId} : Props) => {
     defaultValues: async () => {
       if (productId) {
         try {
-          return await getProductById(numericId)
+          // return await getProductById(numericId)
+          const product = await getProductById(numericId)
+          setOwnerId(product.ownerId)
+          return product
         } catch (error) {
           openModal('Произошла ошибка при загрузке данных', 'error')
           return defaultFormValues
@@ -53,6 +63,12 @@ export const CreateProductForm = ({productId} : Props) => {
       }
     }
   })
+
+  useEffect(() => {
+    if (formMode === 'edit' && userId !== ownerId) {
+      navigate('/')
+    }
+  }, [])
 
   // моковый запрос получения данных продукта
   const getProductById = (productId: ProductId): Promise<ProductDto> => {
