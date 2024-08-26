@@ -10,10 +10,13 @@ interface ProductFilterButtonsProps {
 }
 
 export const ProductFilterButtons: React.FC<ProductFilterButtonsProps> = ({
+    
     currentCategory,
     categories,
     onCategoryChange,
+    
 }) => {
+
     return (
         <div className="category-buttons">
             {categories.map(category => (
@@ -25,6 +28,7 @@ export const ProductFilterButtons: React.FC<ProductFilterButtonsProps> = ({
                         category === ProductCategory.All ? ProductCategory.All :
                         category === ProductCategory.Favorites ? ProductCategory.Favorites :
                         category === ProductCategory.ToDo ? ProductCategory.ToDo :
+                        category === ProductCategory.UserProducts ? ProductCategory.UserProducts : 
                         category === ProductCategory.Archive ? ProductCategory.Archive  : ''
                     }
                 />

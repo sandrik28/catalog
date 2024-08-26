@@ -13,6 +13,7 @@ import { ProductCardList } from '@/03_widgets/ProductCardList/ui/ProductCardList
 import { MainPage } from '@/02_pages/main';
 import { mockProductDto } from '@/05_entities/product/api/__mocks__/mockProductDto';
 import { HomePage } from '@/02_pages/catalog/ui/HomePage';
+import { ProfilePageTest } from '@/02_pages/catalog/ui/ProfilePage';
 
 
 
@@ -26,7 +27,8 @@ export function AppEnter() {
                 <LayoutHeader />
                 <Routes>
                     <Route path='/' element={<MainPage />} />
-                    <Route path='/profile/:id' element={<ProfilePage />} />
+                    {/* <Route path='/profile/:id' element={<ProfilePage />} /> */}
+                    <Route path='/profile/:id' element={<ProfilePageTest />} />
                     <Route path='/product/:id' element={<ProductPage />} />
                     <Route path='/product/:id/edit' element={<ProductFormPage />} />
                     <Route path='/addNewProduct' element={<ProductFormPage />} />

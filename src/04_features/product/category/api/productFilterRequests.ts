@@ -10,10 +10,10 @@ const mockProducts: ProductPreviewCardDto[] = productsMockCards.map(product => {
 });
 
 
-export const fetchMainProducts = async (ids?: number[]): Promise<ProductPreviewCardDto[]> => {
+export const fetchMainProducts = async (id?: number): Promise<ProductPreviewCardDto[]> => {
     let activeMocks = mockProducts.filter(product => product.status === Status.APPROVED)
-    if (ids) {
-        activeMocks = activeMocks.filter(product => ids.includes(product.ownerId));
+    if (id) {
+        activeMocks = activeMocks.filter(product => id === product.ownerId);
     }
     return new Promise(resolve => {
         setTimeout(() => {

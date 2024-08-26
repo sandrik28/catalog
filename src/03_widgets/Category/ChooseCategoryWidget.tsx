@@ -8,23 +8,39 @@ import { selectProductIdsInWishlist } from '@/05_entities/wishlist';
 import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddToWishlistIcon';
 import { ProductCategory } from '@/05_entities/product/model/types';
 import { ProductFilterButtons } from '@/04_features/product/ui/ProductFilterButtons';
+import { useParams } from 'react-router-dom';
 
 interface ChooseCategoryWidgetProps {
     isMainMenu?: boolean;
 }
 
 export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMainMenu = false }) => {
-    const [products, setProducts] = useState<ProductPreviewCardDto[]>([]);
-    const [currentCategory, setCurrentCategory] = useState<ProductCategory>(ProductCategory.All);
+    const { id: profileId } = useParams<{ id: string }>();
     const favoriteProductIds = useSelector(selectProductIdsInWishlist);
     const userId = useSelector((state: RootState) => state.session.userId);
+    const parsedProfileId = profileId ? parseInt(profileId, 10) : null;
+
+    let categoriesToShow: ProductCategory[];
+    if (isMainMenu) {
+        categoriesToShow = [ProductCategory.All, ProductCategory.Favorites];
+    } else {
+        categoriesToShow = userId === parsedProfileId
+            ? [ProductCategory.UserProducts, ProductCategory.ToDo, ProductCategory.Archive]
+            : [ProductCategory.UserProducts, ProductCategory.Archive];
+    }
+
+    const [currentCategory, setCurrentCategory] = useState<ProductCategory>(categoriesToShow[0]);
+
+    const [products, setProducts] = useState<ProductPreviewCardDto[]>([]);
 
     const categoryFetchers: Record<ProductCategory, () => Promise<ProductPreviewCardDto[]>> = {
         [ProductCategory.All]: fetchMainProducts,
         [ProductCategory.Favorites]: () => fetchFavoriteProducts(favoriteProductIds),
         [ProductCategory.ToDo]: () => userId ? fetchToDoProducts(userId) : Promise.resolve([]),
-        [ProductCategory.Archive]: () => userId ? fetchArchiveProducts(userId) : Promise.resolve([]),
+        [ProductCategory.Archive]: () => parsedProfileId ? fetchArchiveProducts(parsedProfileId) : Promise.resolve([]),
+        [ProductCategory.UserProducts]: () => parsedProfileId ? fetchMainProducts(parsedProfileId) : Promise.resolve([]),
     };
+    
 
     useEffect(() => {
         const loadProducts = async () => {
@@ -39,10 +55,6 @@ export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMa
     const handleCategoryChange = (category: ProductCategory) => {
         setCurrentCategory(category);
     };
-
-    const categoriesToShow = isMainMenu
-        ? [ProductCategory.All, ProductCategory.Favorites] 
-        : Object.values(ProductCategory);
 
     return (
         <>

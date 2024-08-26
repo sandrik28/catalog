@@ -26,6 +26,7 @@ export enum ProductCategory {
     Favorites = 'Отслеживаемые',
     ToDo = 'Ждут действий',
     Archive = 'Архив',
+    UserProducts = 'Активные',
 }
 
 export interface ProductPreviewCardDto {

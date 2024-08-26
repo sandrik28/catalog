@@ -7,7 +7,7 @@ export interface SessionState {
 }
 
 const initialState: SessionState = {
-  userId: 0,
+  userId: 1,
   role: "ROLE_USER" as Roles,
 };
 
