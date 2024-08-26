@@ -1,16 +1,18 @@
 import { UseFormRegisterReturn } from 'react-hook-form'
 import css from './Input.module.css'
 import cn from 'classnames'
+import { InputHTMLAttributes } from 'react'
 
 type Props = {
   maxLength?: number
   value?: string
-  type?: 'default' | 'description'
+  inputStyle?: 'default' | 'description'
   register: UseFormRegisterReturn
+  type?: InputHTMLAttributes<HTMLInputElement>['type']
 }
 
-export const Input = ({ maxLength = 50, value, type = 'default', register }: Props) => {
-  return type === 'description' ? (
+export const Input = ({ maxLength = 50, value, inputStyle = 'default', register, type }: Props) => {
+  return inputStyle === 'description' ? (
     <textarea
       {...register}
       maxLength={maxLength}
@@ -20,6 +22,7 @@ export const Input = ({ maxLength = 50, value, type = 'default', register }: Pro
   ) : (
     <input
       {...register}
+      type={type}
       maxLength={maxLength}
       className={cn(css.root, css.input_text)}
       value={value}

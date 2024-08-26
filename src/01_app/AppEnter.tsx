@@ -14,6 +14,7 @@ import { MainPage } from '@/02_pages/main';
 import { mockProductDto } from '@/05_entities/product/api/__mocks__/mockProductDto';
 import { HomePage } from '@/02_pages/catalog/ui/HomePage';
 import { ProfilePageTest } from '@/02_pages/catalog/ui/ProfilePage';
+import { LoginPage } from '@/02_pages/login';
 
 
 
@@ -27,6 +28,7 @@ export function AppEnter() {
                 <LayoutHeader />
                 <Routes>
                     <Route path='/' element={<MainPage />} />
+                    <Route path='/login' element={<LoginPage />} />
                     {/* <Route path='/profile/:id' element={<ProfilePage />} /> */}
                     <Route path='/profile/:id' element={<ProfilePageTest />} />
                     <Route path='/product/:id' element={<ProductPage />} />

@@ -136,7 +136,7 @@ export const CreateProductForm = ({productId, formMode} : Props) => {
           />
           <LabeledField
             label={'Описание продукта'}
-            type={'description'}
+            inputStyle={'description'}
             maxLength={500}
             register={register('description', { 
               required: true, 

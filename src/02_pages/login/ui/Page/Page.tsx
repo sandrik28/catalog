@@ -1,9 +1,10 @@
+import { LoginForm } from '@/04_features/auth'
 import React from 'react'
 
-export function LoginPage () {
+export const LoginPage = () => {
   return (
-    <div>
-      <h1>Привет</h1>
-    </div>
+    <main>
+      <LoginForm/>
+    </main>
   )
 }
