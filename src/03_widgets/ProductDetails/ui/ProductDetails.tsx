@@ -1,8 +1,9 @@
-import { IProductDetails } from '@/05_entities/product/model/types'
+import { IProductDetails, Status } from '@/05_entities/product/model/types'
 import css from './ProductDetails.module.css'
 import { Link } from 'react-router-dom'
 import { Button } from '@/06_shared/ui/Button/Button'
 import { useSelector } from 'react-redux'
+import { StatusMessage } from './StatusMessage/StatusMessage'
 
 type Props = {
   product: IProductDetails
@@ -13,6 +14,7 @@ export const ProductDetails = ({ product }: Props) => {
 
   return (
     <>
+      <StatusMessage status={product.status}/>
       <h1>{product.title}</h1>
       <div className={css.content}>
         <div className={css.info}>
@@ -22,7 +24,7 @@ export const ProductDetails = ({ product }: Props) => {
         <div className={css.info}>
           <h2>Ссылка на продукт</h2>
           <Link 
-            to={`/profile/${product.ownerId}`} 
+            to={product.linkToWebSite}
             className={css.text}
           >
             {product.linkToWebSite}

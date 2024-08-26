@@ -9,7 +9,6 @@ import { useParams } from 'react-router-dom'
 export const ProductPage = () => {
   const { isModalOpen, modalContent, modalType, openModal } = useModal();
   const { id: productId } = useParams<{ id: string }>();
-
   const [product, setProduct] = useState<IProductDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   // TODO: доавить лоадер

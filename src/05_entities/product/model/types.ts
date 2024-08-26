@@ -48,4 +48,5 @@ export interface IProductDetails {
     emailOfSupport: string;
     linkToWebSite: string;
     description: string;
+    status: Status;
 }
