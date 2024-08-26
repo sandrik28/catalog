@@ -9,7 +9,11 @@ import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddTo
 import { ProductCategory } from '@/05_entities/product/model/types';
 import { ProductFilterButtons } from '@/04_features/product/ui/ProductFilterButtons';
 
-export const ChooseCategoryWidget: React.FC = () => {
+interface ChooseCategoryWidgetProps {
+    isMainMenu?: boolean;
+}
+
+export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMainMenu = false }) => {
     const [products, setProducts] = useState<ProductPreviewCardDto[]>([]);
     const [currentCategory, setCurrentCategory] = useState<ProductCategory>(ProductCategory.All);
     const favoriteProductIds = useSelector(selectProductIdsInWishlist);
@@ -36,11 +40,15 @@ export const ChooseCategoryWidget: React.FC = () => {
         setCurrentCategory(category);
     };
 
+    const categoriesToShow = isMainMenu
+        ? [ProductCategory.All, ProductCategory.Favorites] 
+        : Object.values(ProductCategory);
+
     return (
         <>
             <ProductFilterButtons
                 currentCategory={currentCategory}
-                categories={Object.values(ProductCategory)}
+                categories={categoriesToShow}
                 onCategoryChange={handleCategoryChange}
             />
             <ProductCardList 

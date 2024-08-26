@@ -4,7 +4,7 @@ import { ChooseCategoryWidget } from '@/03_widgets/Category/ChooseCategoryWidget
 export const HomePage: React.FC = () => {
   return (
     <div>
-      <ChooseCategoryWidget />
+      <ChooseCategoryWidget isMainMenu={true} />
       
     </div>
   );
