@@ -1,5 +1,5 @@
 export type ProductId = number;
-export type OwnerId = Brand<number, 'OwnerId'>;
+export type ownerId = Brand<number, 'ownerId'>;
 
 export interface ProductDto {
     id: number;
@@ -21,6 +21,12 @@ export enum Status {
     MODERATION_DENIED = 'MODERATION_DENIED',
 }
 
+export enum ProductCategory {
+    All = 'Все',
+    Favorites = 'Отслеживаемые',
+    ToDo = 'Ждут действий',
+    Archive = 'Архив',
+}
 
 export interface ProductPreviewCardDto {
     id: number;
@@ -34,11 +40,3 @@ export interface ProductPreviewCardDto {
 }
 
 
-
-export type ProductCardType = {
-    id: number;
-    title: string;
-    description: string;
-    category: string;
-    status: Status;
-}
