@@ -40,4 +40,12 @@ export interface ProductPreviewCardDto {
     timeOfLastApproval: Date;
 }
 
-
+export interface IProductDetails {
+    id: number;
+    ownerId: number;
+    nameOfOwner: string;
+    title: string;
+    emailOfSupport: string;
+    linkToWebSite: string;
+    description: string;
+}

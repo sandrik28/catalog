@@ -52,6 +52,11 @@ a, span, p,h1,h2,h3{
     display: block;  
 }
 
+h1 {
+    font-size: 48px;
+    line-height: 56px;
+}
+
 
 .text_header {
     color: var(--text-color);

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 export const ProductFormPage = () => {
   const { id } = useParams();
-  const formMode = id ? 'edit' : 'add'
+  const formMode = id ? 'edit' : 'add';
 
   return (
     <main>

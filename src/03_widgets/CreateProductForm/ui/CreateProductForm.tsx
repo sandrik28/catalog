@@ -35,6 +35,25 @@ type Props = {
   formMode: 'add' | 'edit'
 }
 
+// моковый запрос получения данных продукта
+export const getProductById = (productId: ProductId): Promise<ProductDto> => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const product = productsMock.find(product => product.id === productId)
+      if (product) {
+        const productWithCorrectTypes: ProductDto = {
+          ...product,
+          timeOfLastApproval: new Date(product.timeOfLastApproval),
+          status: product.status as Status, 
+        };
+        resolve(productWithCorrectTypes);
+      } else {
+        reject(new Error('Продукт не найден'))
+      }
+    }, 2000)
+  })
+}
+
 export const CreateProductForm = ({productId, formMode} : Props) => {
   const { isModalOpen, modalContent, modalType, openModal } = useModal();
   const numericId = Number(productId);
@@ -69,25 +88,6 @@ export const CreateProductForm = ({productId, formMode} : Props) => {
       navigate('/')
     }
   }, [])
-
-  // моковый запрос получения данных продукта
-  const getProductById = (productId: ProductId): Promise<ProductDto> => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const product = productsMock.find(product => product.id === productId)
-        if (product) {
-          const productWithCorrectTypes: ProductDto = {
-            ...product,
-            timeOfLastApproval: new Date(product.timeOfLastApproval),
-            status: product.status as Status, 
-          };
-          resolve(productWithCorrectTypes);
-        } else {
-          reject(new Error('Продукт не найден'))
-        }
-      }, 2000)
-    })
-  }
 
   const onSubmit: SubmitHandler<TCreateProductForm> = async (data) => {
     if (!isDirty) {
