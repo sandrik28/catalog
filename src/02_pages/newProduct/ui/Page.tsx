@@ -8,7 +8,7 @@ export const ProductFormPage = () => {
 
   return (
     <main>
-      <CreateProductForm productId={Number(id)}/>
+      <CreateProductForm productId={id}/>
     </main>
   )
 }

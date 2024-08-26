@@ -8,6 +8,8 @@ import { Modal } from '@/06_shared/ui/Modal/Modal'
 import { productsMock } from '@/06_shared/lib/server'
 import { ProductDto, ProductId } from '@/05_entities/product'
 import { Status } from '@/05_entities/product/model/types'
+import { DeleteProductButton } from '@/04_features/deleteProduct'
+import { deleteProductRequest } from '@/04_features/deleteProduct/category/api/deleteProductRequest'
 
 export type TCreateProductForm = {
   title: string
@@ -26,11 +28,12 @@ const defaultFormValues = {
 }
 
 type Props = {
-  productId?: ProductId | undefined
+  productId?: string | undefined
 }
 
 export const CreateProductForm = ({productId} : Props) => {
-  const { isModalOpen, modalContent, modalType, openModal } = useModal()
+  const { isModalOpen, modalContent, modalType, openModal } = useModal();
+  const numericId = Number(productId)
 
   const {
     register,
@@ -40,7 +43,7 @@ export const CreateProductForm = ({productId} : Props) => {
     defaultValues: async () => {
       if (productId) {
         try {
-          return await getProductById(Number(productId))
+          return await getProductById(numericId)
         } catch (error) {
           openModal('Произошла ошибка при загрузке данных', 'error')
           return defaultFormValues
@@ -91,6 +94,15 @@ export const CreateProductForm = ({productId} : Props) => {
     console.log(data)
   };
 
+  const handleDelete = async () => {
+    try {
+      await deleteProductRequest(numericId)
+      openModal('Продукт успешно удалён', 'success')
+    } catch (error) {
+      openModal('Произошла ошибка при удалении продукта', 'error')
+    }
+  }
+
   return (
     <>
       {
@@ -121,8 +133,20 @@ export const CreateProductForm = ({productId} : Props) => {
             <div className={css.field_error}>Продукт не был изменен</div>
           )}
           <div className={css.container}>
-            <SendToModeratorButton disabled={isSubmitting} />
-            <CancelButton />
+            {productId ? (
+              <>
+              <div className={css.container}>
+                <SendToModeratorButton disabled={isSubmitting} />
+                <CancelButton />
+              </div>
+              <DeleteProductButton onClick={handleDelete}/>
+              </>
+            ) : (
+              <>
+                <SendToModeratorButton disabled={isSubmitting} />
+                <CancelButton />
+              </>
+            )}
           </div>
         </form>
       }
