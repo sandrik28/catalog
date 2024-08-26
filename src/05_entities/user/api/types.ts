@@ -1,6 +1,13 @@
-export type UserDto = {
+export enum Roles {
+  ROLE_ADMIN = 'ROLE_ADMIN',
+  ROLE_USER = 'ROLE_USER',
+}
+
+export interface UserDto {
   id: number;
-  name: string,
-  email: string,
-  role: string
-};
+  name: string;
+  password: string;
+  email: string;
+  idOfFollowedProductsList: number[];
+  role: Roles;
+}
