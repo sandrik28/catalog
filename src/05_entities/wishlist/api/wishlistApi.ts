@@ -1,6 +1,5 @@
 import mockProducts from '@/06_shared/lib/server/__mocks__/productsCards.json';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { ProductCardType } from '@/05_entities/product';
 import type { WishlistDto } from './types';
 import { mapWishlist } from '../lib/mapWishList';
 import { ProductPreviewCardDto } from '@/05_entities/product/model/types';
@@ -18,7 +17,7 @@ export const wishlistApi = createApi({
     reducerPath: 'wishlistApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
     endpoints: (build) => ({
-        wishlistProducts: build.query<ProductCardType[], void>({
+        wishlistProducts: build.query<ProductPreviewCardDto[], void>({
             query: () => `/wishlist/products`,
             transformResponse: () => mapWishlist(mockWishlist),
         }),
@@ -42,5 +41,5 @@ export const wishlistApi = createApi({
     }),
 });
 
-// Экспорт хуков для использования в компонентах
+
 export const { useWishlistProductsQuery, useAddToWishlistMutation } = wishlistApi;

@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import type { ProductCardType } from '../../model/types';
+import type { ProductPreviewCardDto } from '../../model/types';
 import css from './ProductCard.module.css';
 import { ReactNode } from 'react';
 
 type Props = {
-    product: ProductCardType;
+    product: ProductPreviewCardDto;
     actionSlot?: ReactNode;
     info?: ReactNode;
 };
