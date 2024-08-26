@@ -87,7 +87,7 @@ a, span, p,h1,h2,h3{
 .text_product_description{
     font-size: 14px;
     line-height: 1;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-color)
 }
 
@@ -102,5 +102,17 @@ a, span, p,h1,h2,h3{
     color: var(--color-red);
     font-size: 14px;
     line-height: 1;
+}
 
+.product_card_info_span{
+    color: var(--color-red);
+    font-size: 14px;
+    line-height: 1;
+}
+
+
+.category-buttons{
+    margin: 0 15px 32px 15px;
+    display: flex;
+    flex-direction: row;
 }
