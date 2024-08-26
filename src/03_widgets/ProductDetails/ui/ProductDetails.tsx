@@ -1,9 +1,11 @@
-import { IProductDetails, Status } from '@/05_entities/product/model/types'
+import { IProductDetails } from '@/05_entities/product/model/types'
 import css from './ProductDetails.module.css'
 import { Link } from 'react-router-dom'
-import { Button } from '@/06_shared/ui/Button/Button'
 import { useSelector } from 'react-redux'
 import { StatusMessage } from './StatusMessage/StatusMessage'
+import { Roles } from '@/05_entities/user/api/types'
+import { AdminButtons } from '@/04_features/adminButtons'
+import { UserButtons } from './UserButtons/UserButtons'
 
 type Props = {
   product: IProductDetails
@@ -11,10 +13,12 @@ type Props = {
 
 export const ProductDetails = ({ product }: Props) => {
   const userId = useSelector((state: RootState) => state.session.userId);
+  const userRole = useSelector((state: RootState) => state.session.role);
+  const isOwner = product.ownerId === userId;
 
   return (
     <>
-      <StatusMessage status={product.status}/>
+      {userRole === Roles.ROLE_USER && <StatusMessage status={product.status}/>}
       <h1>{product.title}</h1>
       <div className={css.content}>
         <div className={css.info}>
@@ -46,12 +50,9 @@ export const ProductDetails = ({ product }: Props) => {
           </a>
         </div>
       </div>
-      {
-        product.ownerId === userId ? (
-          <Link to='edit'>
-            <Button>Редактировать</Button>
-          </Link>
-        ) : null
+      {userRole === Roles.ROLE_USER ? 
+        <UserButtons isOwner={isOwner} status={product.status}/> : 
+        <AdminButtons status={product.status}/>
       }
     </>
   )

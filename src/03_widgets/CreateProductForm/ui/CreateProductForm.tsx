@@ -153,11 +153,11 @@ export const CreateProductForm = ({productId, formMode} : Props) => {
           <div className={css.container}>
             {productId ? (
               <>
-              <div className={css.container}>
-                <SendToModeratorButton disabled={isSubmitting} />
-                <CancelButton />
-              </div>
-              <DeleteProductButton onClick={handleDelete}/>
+                <div className={css.container}>
+                  <SendToModeratorButton disabled={isSubmitting} />
+                  <CancelButton />
+                </div>
+                <DeleteProductButton onClick={handleDelete}/>
               </>
             ) : (
               <>
