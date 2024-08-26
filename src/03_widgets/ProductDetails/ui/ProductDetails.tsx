@@ -1,12 +1,16 @@
 import { IProductDetails } from '@/05_entities/product/model/types'
 import css from './ProductDetails.module.css'
 import { Link } from 'react-router-dom'
+import { Button } from '@/06_shared/ui/Button/Button'
+import { useSelector } from 'react-redux'
 
 type Props = {
   product: IProductDetails
 }
 
 export const ProductDetails = ({ product }: Props) => {
+  const userId = useSelector((state: RootState) => state.session.userId);
+
   return (
     <>
       <h1>{product.title}</h1>
@@ -40,6 +44,13 @@ export const ProductDetails = ({ product }: Props) => {
           </a>
         </div>
       </div>
+      {
+        product.ownerId === userId ? (
+          <Link to='edit'>
+            <Button>Редактировать</Button>
+          </Link>
+        ) : null
+      }
     </>
   )
 }

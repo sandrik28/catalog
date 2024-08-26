@@ -69,7 +69,6 @@ export const CreateProductForm = ({productId, formMode} : Props) => {
     defaultValues: async () => {
       if (productId) {
         try {
-          // return await getProductById(numericId)
           const product = await getProductById(numericId)
           setOwnerId(product.ownerId)
           return product
@@ -84,10 +83,13 @@ export const CreateProductForm = ({productId, formMode} : Props) => {
   })
 
   useEffect(() => {
-    if (formMode === 'edit' && userId !== ownerId) {
-      navigate('/')
+    if (formMode === 'edit' && ownerId !== null) {
+      if (userId !== ownerId) {
+        navigate('/')
+      }
     }
-  }, [])
+  }, [ownerId, userId, formMode, navigate]);
+  
 
   const onSubmit: SubmitHandler<TCreateProductForm> = async (data) => {
     if (!isDirty) {
