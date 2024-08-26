@@ -6,12 +6,13 @@ import { RootState } from '@/01_app/AppStore'
 
 export const Profile = () => {
   const userId = useSelector((state: RootState) => state.session.userId);
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>(); 
+  const numericId = id ? Number(id) : null;
 
   return (
     <div className={css.root}>
       <h2 className={css.profile_title}>Профиль</h2>
-      { userId === id ? <AddNewProduct/> : null }
+      { userId === numericId ? <AddNewProduct/> : null }
     </div>
   )
 }
