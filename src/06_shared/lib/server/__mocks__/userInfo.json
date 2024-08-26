@@ -1,10 +1,8 @@
-[
-    {
-        "id": 0,
-        "role": "USER",
-        "Name": "Егор Росошанский",
-        "email": "user@example.com",
-        "followed": [0,1]
-        
-    }
-]
+ {
+  "id": 1,
+  "name": "Eгор Росошанский",
+  "password": "",
+  "email": "test.doe@example.com",
+  "idOfFollowedProductsList": [1, 2, 3],
+  "role": "ROLE_USER"
+}
