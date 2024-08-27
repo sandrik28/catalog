@@ -27,15 +27,6 @@ public class ProductController {
         this.mapper = mapper;
     }
 
-//    TODO. Is it necessary?
-//    @GetMapping("/status")
-//    public ResponseEntity<List<ProductPreviewCardDto>> getByStatus(@RequestParam(name = "status", required = false) Status status) {
-//        return new ResponseEntity<>(
-//                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsByStatus(status)),
-//                HttpStatus.OK
-//        );
-//    }
-
     @GetMapping("all_approved")
     public ResponseEntity<List<ProductPreviewCardDto>> getAllApproved() {
         return new ResponseEntity<>(

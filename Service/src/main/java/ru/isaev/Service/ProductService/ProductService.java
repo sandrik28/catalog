@@ -51,14 +51,6 @@ public class ProductService implements IProductService {
         return productRepo.findByStatus(Status.APPROVED);
     }
 
-//    use on main screen only
-//    @Override
-//    public List<Product> getProductsByStatus(Status status) {
-//        List<Product> validProducts = productRepo.findByStatus(status)
-//                .stream().
-//                filter(product -> product.getStatus().equals(Status.APPROVED))
-//    }
-
     @Override
     public List<Product> getAllProductsByUser(User user) {
         if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
@@ -235,11 +227,17 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getAllApprovedProductsByTitle(String title) {
+        if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new NotYourNotificationException("You do not have access to products on moderation");
+
         return productRepo.findProductsByStatusAndTitle(Status.APPROVED, title);
     }
 
     @Override
     public List<Product> getProductsForModeratorByTitle(String title) {
+        if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new NotYourNotificationException("You do not have access to products on moderation");
+
         List<Product> productsOnModerationList = productRepo.findByTitle(title).
                 stream().
                 filter(product -> product.getStatus() == Status.ON_MODERATION).
@@ -250,6 +248,9 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getProductsForModeratorByCategory(String category) {
+        if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new NotYourNotificationException("You do not have access to products on moderation");
+
         List<Product> productsOnModerationList = productRepo.findByCategory(category).
                 stream().
                 filter(product -> product.getStatus() == Status.ON_MODERATION).
