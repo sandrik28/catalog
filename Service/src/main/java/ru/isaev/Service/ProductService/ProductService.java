@@ -164,7 +164,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<Product> getAllApprovedProductsFollowedByUserByCategory(Long id, String category) {{
+    public List<Product> getAllApprovedProductsFollowedByUserByCategory(Long id, String category) {
             if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
                 throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
 
@@ -188,8 +188,8 @@ public class ProductService implements IProductService {
                     stream().
                     filter(product -> product.getCategory().equals(category)).
                     collect(Collectors.toList());
-        }
     }
+
 
     @Override
     public List<Product> getAllApprovedProductsFollowedByUserByTitleAndCategory(Long id, String title, String category) {
