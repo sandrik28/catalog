@@ -27,7 +27,6 @@ public class ProductController {
         this.mapper = mapper;
     }
 
-    // in use
     @GetMapping("/status")
     public ResponseEntity<List<ProductPreviewCardDto>> getByStatus(@RequestParam(name = "status", required = false) Status status) {
         return new ResponseEntity<>(
@@ -36,6 +35,7 @@ public class ProductController {
         );
     }
 
+    // TODO. Is it necessary?
     @GetMapping("/followed_by_user/{id}")
     public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUser(@PathVariable Long id) {
         return new ResponseEntity<>(
@@ -44,7 +44,6 @@ public class ProductController {
         );
     }
 
-    // in use
     @GetMapping("/title")
     public ResponseEntity<List<ProductPreviewCardDto>> getByTitle(@RequestParam(name = "title", required = false) String title) {
         return new ResponseEntity<>(
@@ -53,7 +52,6 @@ public class ProductController {
         );
     }
 
-    // in use
     @GetMapping("/category")
     public ResponseEntity<List<ProductPreviewCardDto>> getByCategory(@RequestParam(name = "category", required = false) String category) {
         return new ResponseEntity<>(
@@ -62,7 +60,6 @@ public class ProductController {
         );
     }
 
-    // in use
     @GetMapping("/title_and_category")
     public ResponseEntity<List<ProductPreviewCardDto>> getByTitleAndCategory(
             @RequestParam(name = "title", required = false) String title,
@@ -82,7 +79,6 @@ public class ProductController {
         );
     }
 
-    // in use
     @GetMapping("/moderator/category")
     public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByCategory(@RequestParam(name = "category", required = false) String category) {
         return new ResponseEntity<>(
@@ -91,7 +87,6 @@ public class ProductController {
         );
     }
 
-//    in use
     @GetMapping("moderator/title_and_category")
     public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByTitleAndCategory(
             @RequestParam(name = "title", required = false) String title,
@@ -103,7 +98,6 @@ public class ProductController {
         );
     }
 
-    // in use
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(
@@ -112,7 +106,6 @@ public class ProductController {
         );
     }
 
-//    in use
     @GetMapping("/all")
     public ResponseEntity<List<ProductPreviewCardDto>> getAll() {
         return new ResponseEntity<>(
@@ -121,7 +114,7 @@ public class ProductController {
         );
     }
 
-//    in use
+
     @GetMapping("/all/{id}")
     public ResponseEntity<List<ProductPreviewCardDto>> getAllProductsOfUserById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(
@@ -129,6 +122,7 @@ public class ProductController {
                 HttpStatus.OK
         );
     }
+
     @PostMapping("/add")
     public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto) {
         Product product = mapper.productDtoToProduct(productDto);
@@ -144,13 +138,6 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteProductById(@PathVariable Long id) {
-        productService.removeProductById(id);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-    // In use
     @PostMapping("/subscribe_on_product/{id}")
     public ResponseEntity<IdsOfFollowedProductsDto> subscribeOnProductById(@PathVariable Long id) {
         IdsOfFollowedProductsDto response = productService.subscribeOnProductById(id);
@@ -158,9 +145,9 @@ public class ProductController {
     }
 
     @PostMapping("/unsubscribe_from_product/{id}")
-    public ResponseEntity<ProductDto> unsubscribeFromProductById(@PathVariable Long id) {
-        ProductDto productDto = mapper.productToProductDto(productService.unsubscribeFromProductById(id));
-        return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
+    public ResponseEntity<IdsOfFollowedProductsDto> unsubscribeFromProductById(@PathVariable Long id) {
+        IdsOfFollowedProductsDto response =productService.unsubscribeFromProductById(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/approve_of_publishing_or_editing/{id}")

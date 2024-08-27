@@ -274,7 +274,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product unsubscribeFromProductById(Long productId) {
+    public IdsOfFollowedProductsDto unsubscribeFromProductById(Long productId) {
         MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = currentPrincipal.getUser();
 
@@ -294,7 +294,15 @@ public class ProductService implements IProductService {
         userRepo.save(currentUser);
         productRepo.save(product);
 
-        return product;
+        List<Long> idsOfFollowedProductsList = currentUser.getFollowedProductsList().
+                stream().
+                map(p -> p.getId()).
+                collect(Collectors.toList());
+
+        IdsOfFollowedProductsDto dto = new IdsOfFollowedProductsDto();
+        dto.setIdsOfFollowedProducts(idsOfFollowedProductsList);
+
+        return dto;
     }
 
     @Override

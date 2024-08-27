@@ -40,7 +40,7 @@ public interface IProductService {
 
     public IdsOfFollowedProductsDto subscribeOnProductById(Long id);
 
-    public Product unsubscribeFromProductById(Long productId);
+    public IdsOfFollowedProductsDto unsubscribeFromProductById(Long productId);
 
     public Product approveProductById(Long productId);
 
