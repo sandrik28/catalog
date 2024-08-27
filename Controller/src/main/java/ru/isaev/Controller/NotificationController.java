@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.isaev.Service.Mapper.IMyMapper;
 import ru.isaev.Domain.NotificationDtos.NotificationDto;
+import ru.isaev.Service.Mapper.IMyMapper;
 import ru.isaev.Service.NotificationService.INotificationService;
 
 import java.util.List;
@@ -26,6 +26,14 @@ public class NotificationController {
     public ResponseEntity<List<NotificationDto>> getAll() {
         return new ResponseEntity<>(
                 mapper.mapListOfNotificationsToListOfDtos(notificationService.getAllNotificationsOfCurrentUser()),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<NotificationDto> getById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(
+                mapper.notificationToNotificationDto(notificationService.getNotificationById(id)),
                 HttpStatus.OK
         );
     }
