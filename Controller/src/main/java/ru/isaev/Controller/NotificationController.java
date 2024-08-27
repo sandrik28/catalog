@@ -22,10 +22,10 @@ public class NotificationController {
         this.mapper = mapper;
     }
     
-    @GetMapping("/all")
-    public ResponseEntity<List<NotificationDto>> getAll() {
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<NotificationDto>> getAllByUserId(@PathVariable("id") Long id) {
         return new ResponseEntity<>(
-                mapper.mapListOfNotificationsToListOfDtos(notificationService.getAllNotificationsOfCurrentUser()),
+                mapper.mapListOfNotificationsToListOfDtos(notificationService.getAllNotificationsOfUserById(id)),
                 HttpStatus.OK
         );
     }

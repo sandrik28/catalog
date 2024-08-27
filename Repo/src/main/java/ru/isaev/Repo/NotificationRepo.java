@@ -5,6 +5,8 @@ import ru.isaev.Domain.Notifications.Notification;
 
 import java.util.List;
 
-public interface NotificationRepo  extends JpaRepository<Notification, Long> {
-    List<Notification> findByUserId(Long userId);
+public interface NotificationRepo extends JpaRepository<Notification, Long> {
+    List<Notification> findAllByUserId(Long userId);
+
+    Notification findByUserId(Long userId);
 }
