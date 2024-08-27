@@ -146,7 +146,7 @@ public class ProductController {
 
     @PostMapping("/unsubscribe_from_product/{id}")
     public ResponseEntity<IdsOfFollowedProductsDto> unsubscribeFromProductById(@PathVariable Long id) {
-        IdsOfFollowedProductsDto response =productService.unsubscribeFromProductById(id);
+        IdsOfFollowedProductsDto response = productService.unsubscribeFromProductById(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
