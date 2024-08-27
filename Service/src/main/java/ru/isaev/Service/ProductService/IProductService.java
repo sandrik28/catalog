@@ -24,6 +24,12 @@ public interface IProductService {
 
     public List<Product> getProductsByTitleAndCategory(String title, String category);
 
+    public List<Product> getProductsForModeratorByTitle(String title);
+
+    public List<Product> getProductsForModeratorByCategory(String category);
+
+    public List<Product> getProductsForModeratorByTitleAndCategory(String title, String category);
+
     public void addProduct(Product product);
 
     public Product getProductById(Long id);

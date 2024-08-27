@@ -27,6 +27,7 @@ public class ProductController {
         this.mapper = mapper;
     }
 
+    // in use
     @GetMapping("/status")
     public ResponseEntity<List<ProductPreviewCardDto>> getByStatus(@RequestParam(name = "status", required = false) Status status) {
         return new ResponseEntity<>(
@@ -43,6 +44,7 @@ public class ProductController {
         );
     }
 
+    // in use
     @GetMapping("/title")
     public ResponseEntity<List<ProductPreviewCardDto>> getByTitle(@RequestParam(name = "title", required = false) String title) {
         return new ResponseEntity<>(
@@ -51,6 +53,7 @@ public class ProductController {
         );
     }
 
+    // in use
     @GetMapping("/category")
     public ResponseEntity<List<ProductPreviewCardDto>> getByCategory(@RequestParam(name = "category", required = false) String category) {
         return new ResponseEntity<>(
@@ -59,6 +62,7 @@ public class ProductController {
         );
     }
 
+    // in use
     @GetMapping("/title_and_category")
     public ResponseEntity<List<ProductPreviewCardDto>> getByTitleAndCategory(
             @RequestParam(name = "title", required = false) String title,
@@ -66,6 +70,35 @@ public class ProductController {
     ) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsByTitleAndCategory(title, category)),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/moderator/title")
+    public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByTitle(@RequestParam(name = "title", required = false) String title) {
+        return new ResponseEntity<>(
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsForModeratorByTitle(title)),
+                HttpStatus.OK
+        );
+    }
+
+    // in use
+    @GetMapping("/moderator/category")
+    public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByCategory(@RequestParam(name = "category", required = false) String category) {
+        return new ResponseEntity<>(
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsForModeratorByCategory(category)),
+                HttpStatus.OK
+        );
+    }
+
+//    in use
+    @GetMapping("moderator/title_and_category")
+    public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByTitleAndCategory(
+            @RequestParam(name = "title", required = false) String title,
+            @RequestParam(name = "title", required = false) String category
+    ) {
+        return new ResponseEntity<>(
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsForModeratorByTitleAndCategory(title, category)),
                 HttpStatus.OK
         );
     }
@@ -79,6 +112,7 @@ public class ProductController {
         );
     }
 
+//    in use
     @GetMapping("/all")
     public ResponseEntity<List<ProductPreviewCardDto>> getAll() {
         return new ResponseEntity<>(

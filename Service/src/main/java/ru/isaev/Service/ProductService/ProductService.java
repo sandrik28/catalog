@@ -94,6 +94,35 @@ public class ProductService implements IProductService {
         return productRepo.findByTitleAndCategory(title, category);
     }
 
+    @Override
+    public List<Product> getProductsForModeratorByTitle(String title) {
+        List<Product> productsOnModerationList = productRepo.findByTitle(title).
+                stream().
+                filter(product -> product.getStatus() == Status.ON_MODERATION).
+                collect(Collectors.toList());
+
+        return productsOnModerationList;
+    }
+
+    @Override
+    public List<Product> getProductsForModeratorByCategory(String category) {
+        List<Product> productsOnModerationList = productRepo.findByCategory(category).
+                stream().
+                filter(product -> product.getStatus() == Status.ON_MODERATION).
+                collect(Collectors.toList());
+
+        return productsOnModerationList;
+    }
+
+    @Override
+    public List<Product> getProductsForModeratorByTitleAndCategory(String title, String category) {
+        List<Product> productsOnModerationList = productRepo.findByTitleAndCategory(title, category).
+                stream().
+                filter(product -> product.getStatus() == Status.ON_MODERATION).
+                collect(Collectors.toList());
+
+        return productsOnModerationList;
+    }
 
     @Override
     public void addProduct(Product product) {
