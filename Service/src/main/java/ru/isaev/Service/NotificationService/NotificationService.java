@@ -23,19 +23,17 @@ public class NotificationService implements INotificationService {
 
     private final NotificationRepo notificationRepo;
 
-    private final User currentUser;
-
     @Autowired
     public NotificationService(UserRepo userRepo, NotificationRepo notificationRepo) {
         this.userRepo = userRepo;
         this.notificationRepo = notificationRepo;
-
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        currentUser = currentPrincipal.getUser();
     }
 
     @Override
     public Notification getNotificationById(Long id) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
         Notification notification = notificationRepo.findById(id).orElseThrow(
                 () -> new UserNotFoundException("Not found notification with id= " + id)
         );
@@ -47,6 +45,9 @@ public class NotificationService implements INotificationService {
     }
     @Override
     public List<Notification> getAllNotificationsOfUserById(Long userId) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
         if (!currentUser.getId().equals(userId) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
             throw new NotYourNotificationException("You do not have access to notifications of user with id = " + userId);
 
@@ -73,6 +74,9 @@ public class NotificationService implements INotificationService {
 
     @Override
     public void deleteNotificationById(Long notificationId) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
         Notification notification = notificationRepo.findById(notificationId).orElseThrow(
                 () -> new UserNotFoundException("Not found notification with id= " + notificationId)
         );

@@ -23,14 +23,10 @@ public class UserService implements IUserService {
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
 
-    private final User currentUser;
-
     @Autowired
     public UserService(UserRepo userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        currentUser = currentPrincipal.getUser();
     }
 
     public void addUser(User user) {
@@ -58,6 +54,9 @@ public class UserService implements IUserService {
     }
 
     public void updateUser(User user) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
         if (user.getId() == null)
             throw new InvalidProductOperationException("You can't edit user who doesn't exist. No id provided");
 
@@ -74,6 +73,9 @@ public class UserService implements IUserService {
     }
 
     public void removeUserById(Long id) {
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
         User user = userRepo.findById(id).orElseThrow(
                 () -> new UserNotFoundException("No user with id = " + id));
 
