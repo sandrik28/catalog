@@ -34,9 +34,8 @@ public class NotificationService implements INotificationService {
 
         return notification;
     }
-
     @Override
-    public List<Notification> getAllNotifications() {
+    public List<Notification> getAllNotificationsOfCurrentUser() {
         MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = currentPrincipal.getUser();
 

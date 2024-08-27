@@ -8,7 +8,7 @@ import java.util.List;
 public interface INotificationService {
     public Notification getNotificationById(Long id);
 
-    public List<Notification> getAllNotifications();
+    public List<Notification> getAllNotificationsOfCurrentUser();
 
     public void addNotification(Notification notification);
 

@@ -25,8 +25,14 @@ public class NotificationController {
     @GetMapping("/all")
     public ResponseEntity<List<NotificationDto>> getAll() {
         return new ResponseEntity<>(
-                mapper.mapListOfNotificationsToListOfDtos(notificationService.getAllNotifications()),
+                mapper.mapListOfNotificationsToListOfDtos(notificationService.getAllNotificationsOfCurrentUser()),
                 HttpStatus.OK
         );
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteNotificationById(@PathVariable Long id) {
+        notificationService.deleteNotificationById(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }
