@@ -42,7 +42,7 @@ public class ServiceExceptionsHandler {
     }
 
     @ExceptionHandler(NotYourProductException.class)
-    public ResponseEntity<ErrorMessage> notYourCatException(NotYourProductException ex) {
+    public ResponseEntity<ErrorMessage> notYourProductException(NotYourProductException ex) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.NOT_FOUND.value(),
                 new Date(),
@@ -53,6 +53,16 @@ public class ServiceExceptionsHandler {
 
     @ExceptionHandler(NotYourProfileException.class)
     public ResponseEntity<ErrorMessage> notYourProfileException(NotYourProfileException ex) {
+        ErrorMessage message = new ErrorMessage(
+                HttpStatus.NOT_FOUND.value(),
+                new Date(),
+                ex.getMessage());
+
+        return new ResponseEntity<ErrorMessage>(message, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(NotYourNotificationException.class)
+    public ResponseEntity<ErrorMessage> notYourNotificationException(NotYourNotificationException ex) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.NOT_FOUND.value(),
                 new Date(),
