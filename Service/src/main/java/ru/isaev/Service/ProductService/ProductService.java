@@ -24,15 +24,21 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService implements IProductService {
     private final ProductRepo productRepo;
+
     private final UserRepo userRepo;
 
     private final NotificationService notificationService;
+
+    private final User currentUser;
 
     @Autowired
     public ProductService(ProductRepo productRepo, UserRepo userRepo, NotificationService notificationService) {
         this.productRepo = productRepo;
         this.userRepo = userRepo;
         this.notificationService = notificationService;
+
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        currentUser = currentPrincipal.getUser();
     }
 
     @Override
@@ -41,13 +47,37 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<Product> getProductsByStatus(Status status) {
-        return productRepo.findByStatus(status);
+    public List<Product> getAllApprovedProducts() {
+        return productRepo.findByStatus(Status.APPROVED);
     }
+
+//    use on main screen only
+//    @Override
+//    public List<Product> getProductsByStatus(Status status) {
+//        List<Product> validProducts = productRepo.findByStatus(status)
+//                .stream().
+//                filter(product -> product.getStatus().equals(Status.APPROVED))
+//    }
 
     @Override
     public List<Product> getAllProductsByUser(User user) {
+        if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new NotYourNotificationException("You do not have access to all products of user with id = " + user.getId() +
+                    "because they contain products on moderation");
+
         return productRepo.getProductsByOwner(user);
+    }
+
+    @Override
+    public List<Product> getProductsByUserIdAndStatus(Long userId, Status status) {
+        User user = userRepo.findById(userId).orElseThrow(
+                () -> new UserNotFoundException("Not found user with id = " + userId));
+
+        if (status.equals(Status.ON_MODERATION) || status.equals(Status.MODERATION_DENIED) &&
+        !currentUser.getId().equals(userId) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new NotYourNotificationException("You do not have access to products on moderation of user with id = " + userId);
+
+        return productRepo.findProductsByOwnerAndStatus(user, status);
     }
 
     @Override
@@ -60,6 +90,9 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getProductsFollowedByUser(Long id) {
+        if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
+
         List<Product> allProducts =  productRepo.findAll();
         List<Product> productsFollowedByUser = new ArrayList<>();
 
@@ -85,13 +118,17 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<Product> getProductsByCategory(String category) {
-        return productRepo.findByCategory(category);
+    public List<Product> getAllApprovedProductsByCategory(String category) {
+        return productRepo.findProductsByStatusAndCategory(Status.APPROVED, category);
+    }
+
+    public List<Product> getAllApprovedProductsByTitleAndCategory(String title, String category) {
+        return productRepo.findProductsByStatusAndTitleAndCategory(Status.APPROVED, title, category);
     }
 
     @Override
-    public List<Product> getProductsByTitleAndCategory(String title, String category) {
-        return productRepo.findByTitleAndCategory(title, category);
+    public List<Product> getAllApprovedProductsByTitle(String title) {
+        return productRepo.findProductsByStatusAndTitle(Status.APPROVED, title);
     }
 
     @Override
@@ -307,9 +344,6 @@ public class ProductService implements IProductService {
 
     @Override
     public Product approveProductById(Long productId) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
-
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );

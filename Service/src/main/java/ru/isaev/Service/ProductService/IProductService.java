@@ -10,9 +10,13 @@ import java.util.List;
 public interface IProductService {
     public List<Product> getAllProducts();
 
-    public List<Product> getProductsByStatus(Status status);
+//    public List<Product> getProductsByStatus(Status status);
+
+    public List<Product> getAllApprovedProducts();
 
     public List<Product> getAllProductsByUser(User user);
+
+    public List<Product> getProductsByUserIdAndStatus(Long userId, Status status);
 
     public List<Product> getAllProductsByUserId(Long userId);
 
@@ -20,9 +24,13 @@ public interface IProductService {
 
     public List<Product> getProductsByTitle(String title);
 
-    public List<Product> getProductsByCategory(String category);
+//    public List<Product> getProductsByCategory(String category);
 
-    public List<Product> getProductsByTitleAndCategory(String title, String category);
+    public List<Product> getAllApprovedProductsByTitle(String title);
+
+//    public List<Product> getProductsByTitleAndCategory(String title, String category);
+
+    public List<Product> getAllApprovedProductsByTitleAndCategory(String title, String category);
 
     public List<Product> getProductsForModeratorByTitle(String title);
 
@@ -35,6 +43,8 @@ public interface IProductService {
     public Product getProductById(Long id);
 
     public void updateProduct(Product product);
+
+    public List<Product> getAllApprovedProductsByCategory(String category);
 
     public void removeProductById(Long id);
 

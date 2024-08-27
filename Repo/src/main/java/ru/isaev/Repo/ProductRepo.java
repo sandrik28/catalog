@@ -17,4 +17,12 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     List<Product> findByTitleAndCategory(String title, String category);
 
     public List<Product> getProductsByOwner(User owner);
+
+    public List<Product> findProductsByOwnerAndStatus(User owner, Status status);
+
+    public List<Product> findProductsByStatusAndCategory(Status status, String category);
+
+    public List<Product> findProductsByStatusAndTitle(Status status, String title);
+
+    public List<Product> findProductsByStatusAndTitleAndCategory(Status status, String title, String category);
 }
