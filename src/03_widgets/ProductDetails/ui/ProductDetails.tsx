@@ -2,13 +2,13 @@ import { IProductDetails, Status } from '@/05_entities/product/model/types'
 import css from './ProductDetails.module.css'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { StatusMessage } from './StatusMessage/StatusMessage'
 import { Roles } from '@/05_entities/user/api/types'
 import { AdminButtons } from '@/04_features/adminButtons'
 import { UserButtons } from './UserButtons/UserButtons'
 import { useEffect } from 'react'
 import { useModal } from '@/06_shared/lib/useModal'
 import { Modal } from '@/06_shared/ui/Modal/Modal'
+import { StatusMessage } from '@/05_entities/product'
 
 type Props = {
   product: IProductDetails
