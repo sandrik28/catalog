@@ -80,7 +80,7 @@ public class ProductController {
     @GetMapping("all_approved/title")
     public ResponseEntity<List<ProductPreviewCardDto>> getByTitle(@RequestParam(name = "title", required = false) String title) {
         return new ResponseEntity<>(
-                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsByTitle(title)),
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsByTitle(title)),
                 HttpStatus.OK
         );
     }
@@ -138,23 +138,6 @@ public class ProductController {
                 HttpStatus.OK
         );
     }
-
-    @GetMapping("/all")
-    public ResponseEntity<List<ProductPreviewCardDto>> getAll() {
-        return new ResponseEntity<>(
-                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllProducts()),
-                HttpStatus.OK
-        );
-    }
-
-//    TODO. Is it necessary?
-//    @GetMapping("/all/{id}")
-//    public ResponseEntity<List<ProductPreviewCardDto>> getAllProductsOfUserById(@PathVariable("id") Long id) {
-//        return new ResponseEntity<>(
-//                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllProductsByUserId(id)),
-//                HttpStatus.OK
-//        );
-//    }
 
     @GetMapping("/{id}/status")
     public ResponseEntity<List<ProductPreviewCardDto>> getProductsOfUserByIdAndStatus(

@@ -54,7 +54,7 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getAllProductsByUser(User user) {
         if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
-            throw new NotYourNotificationException("You do not have access to all products of user with id = " + user.getId() +
+            throw new NotYourProductException("You do not have access to all products of user with id = " + user.getId() +
                     "because they contain products on moderation");
 
         return productRepo.getProductsByOwner(user);
@@ -67,7 +67,7 @@ public class ProductService implements IProductService {
 
         if (status.equals(Status.ON_MODERATION) || status.equals(Status.MODERATION_DENIED) &&
         !currentUser.getId().equals(userId) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
-            throw new NotYourNotificationException("You do not have access to products on moderation of user with id = " + userId);
+            throw new NotYourProductException("You do not have access to products on moderation of user with id = " + userId);
 
         return productRepo.findProductsByOwnerAndStatus(user, status);
     }
@@ -83,7 +83,7 @@ public class ProductService implements IProductService {
 //    @Override
 //    public List<Product> getProductsFollowedByUser(Long id) {
 //        if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
-//            throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
+//            throw new NotYourProductException("You do not have access to followed products of user with id = " + id);
 //
 //        List<Product> allProducts =  productRepo.findAll();
 //        List<Product> productsFollowedByUser = new ArrayList<>();
@@ -107,7 +107,7 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getAllApprovedProductsFollowedByUser(Long id) {
         if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
-            throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
+            throw new NotYourProductException("You do not have access to followed products of user with id = " + id);
 
         List<Product> allProducts =  productRepo.findByStatus(Status.APPROVED);
         List<Product> productsFollowedByUser = new ArrayList<>();
@@ -131,7 +131,7 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getAllApprovedProductsFollowedByUserByTitle(Long id, String title) {
         if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
-            throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
+            throw new NotYourProductException("You do not have access to followed products of user with id = " + id);
 
         List<Product> allProducts =  productRepo.findByStatus(Status.APPROVED);
         List<Product> productsFollowedByUser = new ArrayList<>();
@@ -158,7 +158,7 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getAllApprovedProductsFollowedByUserByCategory(Long id, String category) {
             if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
-                throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
+                throw new NotYourProductException("You do not have access to followed products of user with id = " + id);
 
             List<Product> allProducts =  productRepo.findByStatus(Status.APPROVED);
             List<Product> productsFollowedByUser = new ArrayList<>();
@@ -186,7 +186,7 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getAllApprovedProductsFollowedByUserByTitleAndCategory(Long id, String title, String category) {
         if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
-            throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
+            throw new NotYourProductException("You do not have access to followed products of user with id = " + id);
 
         List<Product> allProducts =  productRepo.findByStatus(Status.APPROVED);
         List<Product> productsFollowedByUser = new ArrayList<>();
@@ -228,7 +228,7 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getAllApprovedProductsByTitle(String title) {
         if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
-            throw new NotYourNotificationException("You do not have access to products on moderation");
+            throw new NotYourProductException("You do not have access to products on moderation");
 
         return productRepo.findProductsByStatusAndTitle(Status.APPROVED, title);
     }
@@ -236,7 +236,7 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getProductsForModeratorByTitle(String title) {
         if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
-            throw new NotYourNotificationException("You do not have access to products on moderation");
+            throw new NotYourProductException("You do not have access to products on moderation");
 
         List<Product> productsOnModerationList = productRepo.findByTitle(title).
                 stream().
@@ -249,7 +249,7 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getProductsForModeratorByCategory(String category) {
         if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
-            throw new NotYourNotificationException("You do not have access to products on moderation");
+            throw new NotYourProductException("You do not have access to products on moderation");
 
         List<Product> productsOnModerationList = productRepo.findByCategory(category).
                 stream().
@@ -271,8 +271,9 @@ public class ProductService implements IProductService {
 
     @Override
     public void addProduct(Product product) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
+        if (currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new InvalidProductOperationException("Moderators can't create products");
+
 
         product.setId(currentUser.getId());
 
@@ -297,9 +298,6 @@ public class ProductService implements IProductService {
 
     @Override
     public Product getProductById(Long id) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
-
         Product product = productRepo.findById(id).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + id)
         );
@@ -314,9 +312,6 @@ public class ProductService implements IProductService {
 
     @Override
     public void updateProduct(Product product) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
-
         if (product.getId() == null)
             throw new InvalidProductOperationException("You can't edit product which doesn't exist. No id provided");
 
@@ -325,7 +320,7 @@ public class ProductService implements IProductService {
             throw new NotYourProductException("Not your product with id = " + productSavedInDatabase.getId());
 
         if (productSavedInDatabase.getStatus().equals(Status.ARCHIVED))
-            throw new InvalidProductOperationException("You can't edit archive product. Product id = " + product.getId());
+            throw new InvalidProductOperationException("You can't edit archived product. Product id = " + product.getId());
 
         if (productSavedInDatabase.getStatus().equals(Status.APPROVED) ||
                 productSavedInDatabase.getStatus().equals(Status.MODERATION_DENIED)) {
@@ -366,24 +361,18 @@ public class ProductService implements IProductService {
 
     @Override
     public void removeProductById(Long id) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
-
-        productRepo.findById(id).orElseThrow(
+        Product product = productRepo.findById(id).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + id)
         );
 
-        if (!Objects.equals(currentUser.getId(), id)  && currentUser.getRole() != Roles.ROLE_ADMIN)
-            throw new NotYourProfileException("Not your profile with id = " + id);
+        if (!Objects.equals(product.getOwner().getId(), currentUser.getId()) && currentUser.getRole() != Roles.ROLE_ADMIN)
+            throw new NotYourProductException("You can't archive product with id= " + id + " as it does not belong to you");
 
         productRepo.deleteById(id);
     }
 
     @Override
     public IdsOfFollowedProductsDto subscribeOnProductById(Long productId) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
-
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
@@ -420,12 +409,13 @@ public class ProductService implements IProductService {
 
     @Override
     public IdsOfFollowedProductsDto unsubscribeFromProductById(Long productId) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
-
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
+
+        if (!(product.getStatus().equals(Status.APPROVED) || product.getStatus().equals(Status.ARCHIVED))) {
+            throw new SubscriptionException("You can't unsubscribe from project on moderation");
+        }
 
         List<Product> productsFollowedByUserList = currentUser.getFollowedProductsList();
         List<User> subsbcribersOfProductList = product.getSubscribersList();
@@ -452,6 +442,9 @@ public class ProductService implements IProductService {
 
     @Override
     public Product approveProductById(Long productId) {
+        if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new InvalidProductOperationException("Only moderators hava access to products on moderation");
+
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
@@ -476,8 +469,8 @@ public class ProductService implements IProductService {
 
     @Override
     public Product declineOfModerationByProductId(Long productId) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
+        if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new InvalidProductOperationException("Only moderators can decline products on moderation");
 
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
@@ -503,12 +496,12 @@ public class ProductService implements IProductService {
 
     @Override
     public void archiveProductById(Long productId) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
-
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
+
+        if (!Objects.equals(product.getOwner().getId(), currentUser.getId()) && currentUser.getRole() != Roles.ROLE_ADMIN)
+            throw new NotYourProductException("You can't archive product with id= " + productId + " as it does not belong to you");
 
         if (product.getStatus().equals(Status.ARCHIVED)) {
             this.removeProductById(productId);
@@ -543,12 +536,12 @@ public class ProductService implements IProductService {
 
     @Override
     public Product unarchiveProductById(Long productId) {
-        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentPrincipal.getUser();
-
         Product product = productRepo.findById(productId).orElseThrow(
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
+
+        if (!Objects.equals(product.getOwner().getId(), currentUser.getId()) && currentUser.getRole() != Roles.ROLE_ADMIN)
+            throw new NotYourProductException("You can't unarchive product with id= " + productId + " as it does not belong to you");
 
         if (!product.getStatus().equals(Status.ARCHIVED))
             throw new InvalidProductOperationException("You can't unarchive product which hasn't been archived. Product id = " + product.getId());
