@@ -71,7 +71,6 @@ public class MyMapper implements IMyMapper {
        dto.setName(user.getName());
        dto.setEmail(user.getEmail());
        dto.setRole(user.getRole());
-       dto.setPassword(user.getPassword());
 
        List<Long> idsOfFollowedProductsList = user.getFollowedProductsList().stream().map(p -> p.getId()).collect(Collectors.toList());
        dto.setIdOfFollowedProductsList(idsOfFollowedProductsList);

@@ -9,8 +9,6 @@ public class UserDto {
 
     private String name;
 
-    private String password;
-
     private String email;
 
     private List<Long> idOfFollowedProductsList;
@@ -51,14 +49,6 @@ public class UserDto {
 
     public void setRole(Roles role) {
         this.role = role;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setIdOfFollowedProductsList(List<Long> idOfFollowedProductsList) {
