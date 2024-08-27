@@ -44,10 +44,44 @@ public class ProductController {
         );
     }
 
-    @GetMapping("/followed_by_user/{id}")
+    @GetMapping("all_approved/followed_by_user/{id}")
     public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUser(@PathVariable Long id) {
         return new ResponseEntity<>(
-                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsFollowedByUser(id)),
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsFollowedByUser(id)),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("all_approved/followed_by_user/{id}/title")
+    public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUserByTitle(
+            @PathVariable Long id,
+            @RequestParam(name = "title", required = false) String title) {
+        return new ResponseEntity<>(
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsFollowedByUserByTitle(id, title)),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("all_approved/followed_by_user/{id}/category")
+    public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUserByCategory(
+            @PathVariable Long id,
+            @RequestParam(name = "category", required = false) String category) {
+        return new ResponseEntity<>(
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsFollowedByUserByCategory(id, category)),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("all_approved/followed_by_user/{id}/title_and_category")
+    public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUserByTitleAndCategory(
+            @PathVariable Long id,
+            @RequestParam(name = "title", required = false) String title,
+            @RequestParam(name = "category", required = false) String category) {
+        return new ResponseEntity<>(
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsFollowedByUserByTitleAndCategory(
+                        id,
+                        title,
+                        category)),
                 HttpStatus.OK
         );
     }

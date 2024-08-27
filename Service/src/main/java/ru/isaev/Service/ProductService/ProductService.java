@@ -88,12 +88,36 @@ public class ProductService implements IProductService {
         return productRepo.getProductsByOwner(user);
     }
 
+//    @Override
+//    public List<Product> getProductsFollowedByUser(Long id) {
+//        if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
+//            throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
+//
+//        List<Product> allProducts =  productRepo.findAll();
+//        List<Product> productsFollowedByUser = new ArrayList<>();
+//
+//        for (Product p :
+//                allProducts) {
+//            List<User> subscribersList = p.getSubscribersList();
+//
+//            for (User user:
+//                 subscribersList) {
+//                if (user.getId().equals(id)) {
+//                    productsFollowedByUser.add(p);
+//                    break;
+//                }
+//            }
+//        }
+//
+//        return productsFollowedByUser;
+//    }
+
     @Override
-    public List<Product> getProductsFollowedByUser(Long id) {
+    public List<Product> getAllApprovedProductsFollowedByUser(Long id) {
         if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
             throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
 
-        List<Product> allProducts =  productRepo.findAll();
+        List<Product> allProducts =  productRepo.findByStatus(Status.APPROVED);
         List<Product> productsFollowedByUser = new ArrayList<>();
 
         for (Product p :
@@ -101,7 +125,7 @@ public class ProductService implements IProductService {
             List<User> subscribersList = p.getSubscribersList();
 
             for (User user:
-                 subscribersList) {
+                    subscribersList) {
                 if (user.getId().equals(id)) {
                     productsFollowedByUser.add(p);
                     break;
@@ -110,6 +134,89 @@ public class ProductService implements IProductService {
         }
 
         return productsFollowedByUser;
+    }
+
+    @Override
+    public List<Product> getAllApprovedProductsFollowedByUserByTitle(Long id, String title) {
+        if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
+
+        List<Product> allProducts =  productRepo.findByStatus(Status.APPROVED);
+        List<Product> productsFollowedByUser = new ArrayList<>();
+
+        for (Product p :
+                allProducts) {
+            List<User> subscribersList = p.getSubscribersList();
+
+            for (User user:
+                    subscribersList) {
+                if (user.getId().equals(id)) {
+                    productsFollowedByUser.add(p);
+                    break;
+                }
+            }
+        }
+
+        return productsFollowedByUser.
+                stream().
+                filter(product -> product.getTitle().equals(title)).
+                collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> getAllApprovedProductsFollowedByUserByCategory(Long id, String category) {{
+            if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
+                throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
+
+            List<Product> allProducts =  productRepo.findByStatus(Status.APPROVED);
+            List<Product> productsFollowedByUser = new ArrayList<>();
+
+            for (Product p :
+                    allProducts) {
+                List<User> subscribersList = p.getSubscribersList();
+
+                for (User user:
+                        subscribersList) {
+                    if (user.getId().equals(id)) {
+                        productsFollowedByUser.add(p);
+                        break;
+                    }
+                }
+            }
+
+            return productsFollowedByUser.
+                    stream().
+                    filter(product -> product.getCategory().equals(category)).
+                    collect(Collectors.toList());
+        }
+    }
+
+    @Override
+    public List<Product> getAllApprovedProductsFollowedByUserByTitleAndCategory(Long id, String title, String category) {
+        if (!currentUser.getId().equals(id) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
+            throw new NotYourNotificationException("You do not have access to followed products of user with id = " + id);
+
+        List<Product> allProducts =  productRepo.findByStatus(Status.APPROVED);
+        List<Product> productsFollowedByUser = new ArrayList<>();
+
+        for (Product p :
+                allProducts) {
+            List<User> subscribersList = p.getSubscribersList();
+
+            for (User user:
+                    subscribersList) {
+                if (user.getId().equals(id)) {
+                    productsFollowedByUser.add(p);
+                    break;
+                }
+            }
+        }
+
+        return productsFollowedByUser.
+                stream().
+                filter(product -> product.getCategory().equals(category)).
+                filter(product -> product.getTitle().equals(title)).
+                collect(Collectors.toList());
     }
 
     @Override

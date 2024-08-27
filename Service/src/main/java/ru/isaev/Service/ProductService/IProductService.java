@@ -20,9 +20,17 @@ public interface IProductService {
 
     public List<Product> getAllProductsByUserId(Long userId);
 
-    public List<Product> getProductsFollowedByUser(Long id);
+//    public List<Product> getProductsFollowedByUser(Long id);
 
     public List<Product> getProductsByTitle(String title);
+
+    public List<Product> getAllApprovedProductsFollowedByUser(Long userId);
+
+    public List<Product> getAllApprovedProductsFollowedByUserByTitle(Long id, String title);
+
+    public List<Product> getAllApprovedProductsFollowedByUserByCategory(Long id, String category);
+
+    public List<Product> getAllApprovedProductsFollowedByUserByTitleAndCategory(Long id, String title, String category);
 
 //    public List<Product> getProductsByCategory(String category);
 
