@@ -546,15 +546,14 @@ public class ProductService implements IProductService {
         if (!product.getStatus().equals(Status.ARCHIVED))
             throw new InvalidProductOperationException("You can't unarchive product which hasn't been archived. Product id = " + product.getId());
 
-        product.setStatus(Status.APPROVED);
+        product.setStatus(Status.ON_MODERATION);
         Notification notification = new Notification(
                 product.getOwner().getId(),
                 product.getId(),
                 product.getCategory(),
-                NotificationMessage.PRODUCT_WAS_UNARCHIVED
+                NotificationMessage.PRODUCT_WAS_SET_ON_MODERATION
         );
         notificationService.addNotification(notification);
-        notificationService.addNotificationToSubscribersOfProduct(notification, product);
         productRepo.save(product);
 
         return product;
