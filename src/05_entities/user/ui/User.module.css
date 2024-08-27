@@ -3,3 +3,8 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.link {
+  display: flex;
+  gap: 6px
+}

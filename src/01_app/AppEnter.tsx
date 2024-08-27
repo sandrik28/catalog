@@ -29,8 +29,8 @@ export function AppEnter() {
                 <Routes>
                     <Route path='/' element={<MainPage />} />
                     <Route path='/login' element={<LoginPage />} />
-                    {/* <Route path='/profile/:id' element={<ProfilePage />} /> */}
-                    <Route path='/profile/:id' element={<ProfilePageTest />} />
+                    <Route path='/profile/:id' element={<ProfilePage />} />
+                    {/* <Route path='/profile/:id' element={<ProfilePageTest />} /> */}
                     <Route path='/product/:id' element={<ProductPage />} />
                     <Route path='/product/:id/edit' element={<ProductFormPage />} />
                     <Route path='/addNewProduct' element={<ProductFormPage />} />

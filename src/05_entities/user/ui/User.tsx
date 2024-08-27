@@ -9,9 +9,10 @@ export const User = ({user} : Props) => {
   return (
     <div className={css.root}>
       <h1>{user.name}</h1>
-      <p>Связаться: 
+      <div className={css.link}>
+        <p>Связаться:</p>
         <a href={`mailto:${user.email}`}>{user.email}</a>
-      </p>
+      </div>
     </div> 
   )
 };
