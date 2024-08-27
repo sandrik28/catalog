@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.isaev.Domain.ProductDtos.IdsOfFollowedProductsDto;
 import ru.isaev.Service.Mapper.IMyMapper;
 import ru.isaev.Domain.ProductDtos.ProductDto;
 import ru.isaev.Domain.ProductDtos.ProductPreviewCardDto;
@@ -69,6 +70,7 @@ public class ProductController {
         );
     }
 
+    // in use
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(
@@ -85,6 +87,7 @@ public class ProductController {
         );
     }
 
+//    in use
     @GetMapping("/all/{id}")
     public ResponseEntity<List<ProductPreviewCardDto>> getAllProductsOfUserById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(
@@ -113,10 +116,11 @@ public class ProductController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    // In use
     @PostMapping("/subscribe_on_product/{id}")
-    public ResponseEntity<ProductDto> subscribeOnProductById(@PathVariable Long id) {
-        ProductDto productDto = mapper.productToProductDto(productService.subscribeOnProductById(id));
-        return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
+    public ResponseEntity<IdsOfFollowedProductsDto> subscribeOnProductById(@PathVariable Long id) {
+        IdsOfFollowedProductsDto response = productService.subscribeOnProductById(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/unsubscribe_from_product/{id}")

@@ -1,5 +1,6 @@
 package ru.isaev.Service.ProductService;
 
+import ru.isaev.Domain.ProductDtos.IdsOfFollowedProductsDto;
 import ru.isaev.Domain.Products.Product;
 import ru.isaev.Domain.Products.Status;
 import ru.isaev.Domain.Users.User;
@@ -31,7 +32,7 @@ public interface IProductService {
 
     public void removeProductById(Long id);
 
-    public Product subscribeOnProductById(Long id);
+    public IdsOfFollowedProductsDto subscribeOnProductById(Long id);
 
     public Product unsubscribeFromProductById(Long productId);
 

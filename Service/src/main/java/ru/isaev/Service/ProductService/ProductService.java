@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.isaev.Domain.Notifications.Notification;
 import ru.isaev.Domain.Notifications.NotificationMessage;
+import ru.isaev.Domain.ProductDtos.IdsOfFollowedProductsDto;
 import ru.isaev.Domain.Products.Product;
 import ru.isaev.Domain.Products.Status;
 import ru.isaev.Domain.Users.Roles;
@@ -18,6 +19,7 @@ import ru.isaev.Service.Utilities.Exceptions.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService implements IProductService {
@@ -204,7 +206,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product subscribeOnProductById(Long productId) {
+    public IdsOfFollowedProductsDto subscribeOnProductById(Long productId) {
         MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = currentPrincipal.getUser();
 
@@ -231,7 +233,15 @@ public class ProductService implements IProductService {
         userRepo.save(currentUser);
         productRepo.save(product);
 
-        return product;
+        List<Long> idsOfFollowedProductsList = currentUser.getFollowedProductsList().
+                stream().
+                map(p -> p.getId()).
+                collect(Collectors.toList());
+
+        IdsOfFollowedProductsDto dto = new IdsOfFollowedProductsDto();
+        dto.setIdsOfFollowedProducts(idsOfFollowedProductsList);
+
+        return dto;
     }
 
     @Override
