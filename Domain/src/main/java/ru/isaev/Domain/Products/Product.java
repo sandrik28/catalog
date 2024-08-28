@@ -17,11 +17,10 @@ public class Product {
 
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "subscribers_of_product",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+
+    @ManyToMany(
+            mappedBy = "followedProductsList",
+            fetch = FetchType.EAGER
     )
     private List<User> subscribersList = new ArrayList<>();
 

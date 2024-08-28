@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     @GetMapping("all_approved/followed_by_user/{id}")
-    public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUser(@PathVariable Long id) {
+    public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUser(@PathVariable("id") Long id) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsFollowedByUser(id)),
                 HttpStatus.OK
@@ -45,7 +45,7 @@ public class ProductController {
 
     @GetMapping("all_approved/followed_by_user/{id}/title")
     public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUserByTitle(
-            @PathVariable Long id,
+            @PathVariable("id") Long id,
             @RequestParam(name = "title", required = false) String title) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsFollowedByUserByTitle(id, title)),
@@ -55,7 +55,7 @@ public class ProductController {
 
     @GetMapping("all_approved/followed_by_user/{id}/category")
     public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUserByCategory(
-            @PathVariable Long id,
+            @PathVariable("id") Long id,
             @RequestParam(name = "category", required = false) String category) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsFollowedByUserByCategory(id, category)),
@@ -65,7 +65,7 @@ public class ProductController {
 
     @GetMapping("all_approved/followed_by_user/{id}/title_and_category")
     public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUserByTitleAndCategory(
-            @PathVariable Long id,
+            @PathVariable("id") Long id,
             @RequestParam(name = "title", required = false) String title,
             @RequestParam(name = "category", required = false) String category) {
         return new ResponseEntity<>(
@@ -154,7 +154,7 @@ public class ProductController {
         Product product = mapper.productDtoToProduct(productDto);
         productService.addProduct(product);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.productToProductDto(product));
     }
 
     @PutMapping("/edit")
@@ -165,38 +165,38 @@ public class ProductController {
     }
 
     @PostMapping("/subscribe_on_product/{id}")
-    public ResponseEntity<IdsOfFollowedProductsDto> subscribeOnProductById(@PathVariable Long id) {
+    public ResponseEntity<IdsOfFollowedProductsDto> subscribeOnProductById(@PathVariable("id") Long id) {
         IdsOfFollowedProductsDto response = productService.subscribeOnProductById(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/unsubscribe_from_product/{id}")
-    public ResponseEntity<IdsOfFollowedProductsDto> unsubscribeFromProductById(@PathVariable Long id) {
+    public ResponseEntity<IdsOfFollowedProductsDto> unsubscribeFromProductById(@PathVariable("id") Long id) {
         IdsOfFollowedProductsDto response = productService.unsubscribeFromProductById(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/approve_of_publishing_or_editing/{id}")
-    public ResponseEntity<ProductDto> approveOfPublishingOrEditingProductById(@PathVariable Long id) {
+    public ResponseEntity<ProductDto> approveOfPublishingOrEditingProductById(@PathVariable("id") Long id) {
         ProductDto productDto = mapper.productToProductDto(productService.approveProductById(id));
         return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
     }
 
     @PostMapping("/decline_of_moderation/{id}")
-    public ResponseEntity<ProductDto> declineOfModerationByProductId(@PathVariable Long id) {
+    public ResponseEntity<ProductDto> declineOfModerationByProductId(@PathVariable("id") Long id) {
         ProductDto productDto = mapper.productToProductDto(productService.declineOfModerationByProductId(id));
         return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
     }
 
     @PostMapping("/unarchive/{id}")
-    public ResponseEntity<Void> unarchiveProductById(@PathVariable Long id) {
+    public ResponseEntity<Long> unarchiveProductById(@PathVariable("id") Long id) {
         productService.unarchiveProductById(id);
-        return (ResponseEntity<Void>) ResponseEntity.status(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
     @PostMapping("/archive/{id}")
-    public ResponseEntity<Void> archiveProductById(@PathVariable Long id) {
+    public ResponseEntity<Long> archiveProductById(@PathVariable("id") Long id) {
         productService.archiveProductById(id);
-        return (ResponseEntity<Void>) ResponseEntity.status(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 }

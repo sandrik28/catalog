@@ -275,8 +275,15 @@ public class ProductService implements IProductService {
         if (currentUser.getRole().equals(Roles.ROLE_ADMIN))
             throw new InvalidProductOperationException("Moderators can't create products");
 
+        product.setOwner(currentUser);
 
-        product.setId(currentUser.getId());
+        product.setOwner(currentUser);
+        List<Product> productsOfUser = currentUser.getProductsList();
+        productsOfUser.add(product);
+        currentUser.setProductsList(productsOfUser);
+
+        productRepo.save(product);
+        userRepo.save(currentUser);
 
         product.setStatus(Status.ON_MODERATION);
         Notification notification = new Notification(
@@ -287,14 +294,6 @@ public class ProductService implements IProductService {
         );
 
         notificationService.addNotification(notification);
-
-        product.setOwner(currentUser);
-        List<Product> productsOfUser = currentUser.getProductsList();
-        productsOfUser.add(product);
-        currentUser.setProductsList(productsOfUser);
-
-        productRepo.save(product);
-        userRepo.save(currentUser);
     }
 
     @Override
@@ -377,6 +376,17 @@ public class ProductService implements IProductService {
 
         if (!Objects.equals(product.getOwner().getId(), currentUser.getId()) && currentUser.getRole() != Roles.ROLE_ADMIN)
             throw new NotYourProductException("You can't archive product with id= " + id + " as it does not belong to you");
+
+        List<Product> productList = currentUser.getProductsList();
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getId().equals(id))
+                productList.remove(i);
+        }
+        currentUser.setProductsList(productList);
+        product.setOwner(null);
+
+        productRepo.save(product);
+        userRepo.save(currentUser);
 
         productRepo.deleteById(id);
     }
@@ -532,13 +542,13 @@ public class ProductService implements IProductService {
             this.removeProductById(productId);
 
             Notification notification = new Notification(
-                    product.getOwner().getId(),
+                    currentUser.getId(),
                     product.getId(),
                     product.getCategory(),
                     NotificationMessage.PRODUCT_WAS_DELETED
             );
             notificationService.addNotification(notification);
-            notificationService.addNotificationToSubscribersOfProduct(notification, product);
+            notificationService.addNotificationToSubscribersOfProduct(notification, product, product.getSubscribersList());
 
             return;
         }
@@ -555,7 +565,7 @@ public class ProductService implements IProductService {
         notificationService.addNotification(notification);
 
         if (oldStatus.equals(Status.APPROVED))
-            notificationService.addNotificationToSubscribersOfProduct(notification, product);
+            notificationService.addNotificationToSubscribersOfProduct(notification, product, product.getSubscribersList());
         productRepo.save(product);
     }
 
