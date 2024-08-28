@@ -67,11 +67,14 @@ public class UserService implements IUserService {
         User userSavedInDatabase = this.getUserById(user.getId());
         if (user.getName() != null)
             userSavedInDatabase.setName(user.getName());
-        userSavedInDatabase.setPassword(user.getPassword());
-        userSavedInDatabase.setRole(user.getRole());
-        userSavedInDatabase.setEmail(user.getEmail());
+        if (user.getPassword() != null)
+            userSavedInDatabase.setPassword(user.getPassword());
+        if (user.getRole() != null)
+            userSavedInDatabase.setRole(user.getRole());
+        if (user.getEmail() != null)
+            userSavedInDatabase.setEmail(user.getEmail());
 
-        userRepo.save(user);
+        userRepo.save(userSavedInDatabase);
     }
 
     public void removeUserById(Long id) {
