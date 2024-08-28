@@ -62,9 +62,9 @@ public class NotificationService implements INotificationService {
     }
 
     @Override
-    public void addNotificationToSubscribersOfProduct(Notification notification, Product product) {
+    public void addNotificationToSubscribersOfProduct(Notification notification, Product product, List<User> productSubscribersList) {
         for (User user :
-                product.getSubscribersList()) {
+               productSubscribersList) {
             notification.setUserId(user.getId());
             notification.setProductId(product.getId());
             notification.setCategoryOfProduct(product.getCategory());

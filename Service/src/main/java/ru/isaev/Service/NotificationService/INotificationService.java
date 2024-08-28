@@ -2,6 +2,7 @@ package ru.isaev.Service.NotificationService;
 
 import ru.isaev.Domain.Notifications.Notification;
 import ru.isaev.Domain.Products.Product;
+import ru.isaev.Domain.Users.User;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface INotificationService {
 
     public void addNotification(Notification notification);
 
-    public void addNotificationToSubscribersOfProduct(Notification notification, Product product);
+    public void addNotificationToSubscribersOfProduct(Notification notification, Product product, List<User> productSubscribersList);
 
     public void deleteNotificationById(Long notificationId);
 }
