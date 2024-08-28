@@ -314,7 +314,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public void updateProduct(Product product) {
+    public Product updateProduct(Product product) {
         MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = currentPrincipal.getUser();
 
@@ -331,11 +331,16 @@ public class ProductService implements IProductService {
         if (productSavedInDatabase.getStatus().equals(Status.APPROVED) ||
                 productSavedInDatabase.getStatus().equals(Status.MODERATION_DENIED)) {
             productSavedInDatabase.setStatus(Status.ON_MODERATION);
-            productSavedInDatabase.setTitle(product.getTitle());
-            productSavedInDatabase.setCategory(product.getCategory());
-            productSavedInDatabase.setLinkToWebSite(product.getLinkToWebSite());
-            productSavedInDatabase.setDescription(product.getDescription());
-            productSavedInDatabase.setEmailOFSupport(product.getEmailOFSupport());
+            if (product.getTitle() != null)
+                productSavedInDatabase.setTitle(product.getTitle());
+            if (product.getCategory() != null)
+                productSavedInDatabase.setCategory(product.getCategory());
+            if (product.getLinkToWebSite() != null)
+                productSavedInDatabase.setLinkToWebSite(product.getLinkToWebSite());
+            if (product.getDescription() != null)
+                productSavedInDatabase.setDescription(product.getDescription());
+            if (product.getEmailOFSupport() != null)
+                productSavedInDatabase.setEmailOFSupport(product.getEmailOFSupport());
 
             Notification notificationToOwner = new Notification(
                     productSavedInDatabase.getOwner().getId(),
@@ -347,11 +352,16 @@ public class ProductService implements IProductService {
         }
 
         if (productSavedInDatabase.getStatus().equals(Status.ON_MODERATION)) {
-            productSavedInDatabase.setTitle(product.getTitle());
-            productSavedInDatabase.setCategory(product.getCategory());
-            productSavedInDatabase.setLinkToWebSite(product.getLinkToWebSite());
-            productSavedInDatabase.setDescription(product.getDescription());
-            productSavedInDatabase.setEmailOFSupport(product.getEmailOFSupport());
+            if (product.getTitle() != null)
+                productSavedInDatabase.setTitle(product.getTitle());
+            if (product.getCategory() != null)
+                productSavedInDatabase.setCategory(product.getCategory());
+            if (product.getLinkToWebSite() != null)
+                productSavedInDatabase.setLinkToWebSite(product.getLinkToWebSite());
+            if (product.getDescription() != null)
+                productSavedInDatabase.setDescription(product.getDescription());
+            if (product.getEmailOFSupport() != null)
+                productSavedInDatabase.setEmailOFSupport(product.getEmailOFSupport());
 
             Notification notificationToOwner = new Notification(
                     productSavedInDatabase.getOwner().getId(),
@@ -362,7 +372,7 @@ public class ProductService implements IProductService {
             notificationService.addNotification(notificationToOwner);
         }
 
-        productRepo.save(productSavedInDatabase);
+        return productRepo.save(productSavedInDatabase);
     }
 
     @Override

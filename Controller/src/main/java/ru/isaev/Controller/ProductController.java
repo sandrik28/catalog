@@ -160,8 +160,8 @@ public class ProductController {
     @PutMapping("/edit")
     public ResponseEntity<ProductDto> editProduct(@RequestBody ProductDto productDto) {
         Product product = mapper.productDtoToProduct(productDto);
-        productService.updateProduct(product);
-        return ResponseEntity.status(HttpStatus.OK).body(productDto);
+        product = productService.updateProduct(product);
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.productToProductDto(product));
     }
 
     @PostMapping("/subscribe_on_product/{id}")
