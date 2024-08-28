@@ -6,24 +6,24 @@ import { Icon } from '@/06_shared/ui/Icon/Icon'
 import { useAppDispatch, useAppSelector } from '@/06_shared/model/hooks'
 
 type Props = {
-  productId: ProductId
+    productId: ProductId
 }
 
 export function AddToWishlistIcon({ productId }: Props) {
-  const isInWishlist = useAppSelector(state => selectIsInWishlist(state, productId));
+    const isInWishlist = useAppSelector(state => selectIsInWishlist(state, productId));
 
-  const dispatch = useAppDispatch();
-  
-  const onClick = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
-      e.stopPropagation();
-      e.preventDefault();
-      dispatch(toggleWishlistProduct(productId));
-    },
-    [dispatch, productId],
-  );
+    const dispatch = useAppDispatch();
 
-  return (
-    <Icon onClick={onClick} className={css.iconStyle} type={isInWishlist ? 'activeHeart' : 'heart'} />
-  );
+    const onClick = useCallback(
+        (e: React.MouseEvent<HTMLElement>) => {
+            e.stopPropagation();
+            e.preventDefault();
+            dispatch(toggleWishlistProduct(productId));
+        },
+        [dispatch, productId],
+    );
+
+    return (
+        <Icon onClick={onClick} className={css.iconStyle} type={isInWishlist ? 'activeHeart' : 'heart'} />
+    );
 }
