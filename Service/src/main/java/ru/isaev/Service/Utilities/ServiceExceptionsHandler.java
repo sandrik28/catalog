@@ -11,6 +11,16 @@ import java.util.Date;
 
 @ControllerAdvice
 public class ServiceExceptionsHandler {
+    @ExceptionHandler(InvalidInputForProductEditingException.class)
+    public ResponseEntity<ErrorMessage> invalidInputForProductEditingException(InvalidProductOperationException ex) {
+        ErrorMessage message = new ErrorMessage(
+                HttpStatus.NOT_FOUND.value(),
+                new Date(),
+                ex.getMessage());
+
+        return new ResponseEntity<ErrorMessage>(message, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(InvalidProductOperationException.class)
     public ResponseEntity<ErrorMessage> invalidProductOperationException(InvalidProductOperationException ex) {
         ErrorMessage message = new ErrorMessage(
