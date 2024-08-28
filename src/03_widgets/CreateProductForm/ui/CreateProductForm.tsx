@@ -50,7 +50,7 @@ export const getProductById = (productId: ProductId): Promise<ProductDto> => {
       } else {
         reject(new Error('Продукт не найден'))
       }
-    }, 2000)
+    }, 500)
   })
 }
 
@@ -132,7 +132,7 @@ export const CreateProductForm = ({productId, formMode} : Props) => {
             label={'Ссылка на продукт'} 
             register={register('linkToWebSite', { 
               required: true, 
-            })} 
+            })}
           />
           <LabeledField
             label={'Описание продукта'}
@@ -141,15 +141,17 @@ export const CreateProductForm = ({productId, formMode} : Props) => {
             register={register('description', { 
               required: true, 
               // minLength: 10
-            })}     
+            })}
           />
           <LabeledField label={'Контакт поддержки'} register={register('emailOfSupport', { required: true })} />
-          {Object.keys(errors).length > 0 && 
-            <div className={css.field_error}>Все поля должны быть заполнены</div>
-          }
-          {productId && Object.keys(dirtyFields).length === 0 && (
-            <div className={css.field_error}>Продукт не был изменен</div>
-          )}
+          <div className={css.field_error}>
+            {Object.keys(errors).length > 0 &&
+              <span>Все поля должны быть заполнены</span>
+            }
+            {productId && Object.keys(dirtyFields).length === 0 && (
+              <span>Продукт не был изменен</span>
+            )}
+          </div>
           <div className={css.container}>
             {productId ? (
               <>

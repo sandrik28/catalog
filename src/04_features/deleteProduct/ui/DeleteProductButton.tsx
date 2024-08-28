@@ -6,16 +6,14 @@ type Props = {
 }
 
 export const DeleteProductButton = ({onClick} : Props) => {
-  const [isDisabled, setIsDisabled] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleClick = () => {
-    setIsDisabled(true)
+    setIsLoading(true)
     onClick()
   }
 
   return (
-    <Button disabled={isDisabled} onClick={handleClick}>
-      { isDisabled ? 'Загрузка' : 'Удалить' }
-    </Button>
+    <Button isLoading={isLoading} onClick={handleClick}>Удалить</Button>
   )
 }

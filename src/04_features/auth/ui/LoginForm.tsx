@@ -16,7 +16,9 @@ export function LoginForm(){
     handleSubmit,
     setError,
     formState: {errors, isSubmitting},
-  } = useForm<FormFields>();
+  } = useForm<FormFields>({
+    mode: 'onBlur'
+  });
 
   // TODO: запрос + записать в стор
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
@@ -41,22 +43,28 @@ export function LoginForm(){
             // type="email" 
             register={register('email', { required: 'Логин не может быть пустым' })}
           />
-          {errors.email && <span className={css.error_message}>
-            {errors.email.message}
-          </span>}
+          <div className={css.error_block}>
+            {errors.email && <span className={css.error_message}>
+              {errors.email.message}
+            </span>}
+          </div>
           <label className={css.label}>Пароль</label>
           <Input 
             type="password" 
             register={register('password', { required: 'Пароль не может быть пустым' })}
           />
-          {errors.password && <span className={css.error_message}>
-            {errors.password.message}
-          </span>}
+          <div className={css.error_block}>
+            {errors.password && <span className={css.error_message}>
+              {errors.password.message}
+            </span>}
+          </div>
       </div>
-      <Button disabled={isSubmitting} type={'submit'}>
-        {isSubmitting ? 'Загрузка' : 'Войти в систему'}
+      <Button isLoading={isSubmitting} type={'submit'}>
+        Войти в систему
       </Button>
-      {errors.root && <span className={css.error_message}>{errors.root.message}</span>}
+      <div className={css.error_block}>
+        {errors.root && <span className={css.error_message}>{errors.root.message}</span>}
+      </div>
     </form>
   );
 };

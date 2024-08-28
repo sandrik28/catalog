@@ -4,7 +4,6 @@ import { Button } from "../Button/Button"
 export const EditProductButton = () => {
   return (
     <Link to='edit'>
-    {/* <Link to='/edit'> */}
       <Button>Редактировать</Button>
     </Link>
   )
