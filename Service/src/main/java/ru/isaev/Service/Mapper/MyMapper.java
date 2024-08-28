@@ -144,12 +144,14 @@ public class MyMapper implements IMyMapper {
 
         product.setId(productDto.getId());
         product.setTitle(productDto.getTitle());
-        product.setStatus(Status.valueOf(productDto.getStatus().toString()));
+        if (productDto.getStatus() != null)
+            product.setStatus(Status.valueOf(productDto.getStatus().toString()));
         product.setEmailOFSupport(productDto.getEmailOFSupport());
         product.setLinkToWebSite(productDto.getLinkToWebSite());
         product.setDescription(productDto.getDescription());
         product.setCategory(productDto.getCategory());
-        product.setTimeOfLastApproval(LocalDateTime.parse(productDto.getTimeOfLastApproval().toString()));
+        if (productDto.getTimeOfLastApproval() != null)
+            product.setTimeOfLastApproval(LocalDateTime.parse(productDto.getTimeOfLastApproval().toString()));
 
         return product;
     }
