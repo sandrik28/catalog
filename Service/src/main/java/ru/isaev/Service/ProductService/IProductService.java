@@ -48,7 +48,7 @@ public interface IProductService {
 
     public Product getProductById(Long id);
 
-    public void updateProduct(Product product);
+    public Product updateProduct(Product product);
 
     public List<Product> getAllApprovedProductsByCategory(String category);
 
