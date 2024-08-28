@@ -7,7 +7,6 @@ import { ProfilePage } from '@/02_pages/profile/ui/Page/Page';
 import { ProductFormPage } from '@/02_pages/newProduct';
 import { ProductPage } from '@/02_pages/product/ui/Page/Page';
 import { MainPage } from '@/02_pages/main';
-import { mockProductDto } from '@/05_entities/product/api/__mocks__/mockProductDto';
 import { HomePage } from '@/02_pages/catalog/ui/HomePage';
 import { LoginPage } from '@/02_pages/login';
 
