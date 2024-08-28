@@ -32,15 +32,7 @@ public class User {
     )
     private List<Product> productsList = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "notifications_of_user",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "notification_id")
-    )
-    private List<Notification> notificationsList = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "followed_products_of_user",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -99,14 +91,6 @@ public class User {
         this.email = email;
     }
 
-    public List<Notification> getNotificationsList() {
-        return notificationsList;
-    }
-
-    public void setNotificationsList(List<Notification> notificationsList) {
-        this.notificationsList = notificationsList;
-    }
-
     public List<Product> getFollowedProductsList() {
         return followedProductsList;
     }
@@ -129,11 +113,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(password, user.password) && role == user.role && Objects.equals(email, user.email) && Objects.equals(productsList, user.productsList) && Objects.equals(notificationsList, user.notificationsList) && Objects.equals(followedProductsList, user.followedProductsList);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(password, user.password) && role == user.role && Objects.equals(email, user.email) && Objects.equals(productsList, user.productsList) && Objects.equals(followedProductsList, user.followedProductsList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password, role, email, productsList, notificationsList, followedProductsList);
+        return Objects.hash(id, name, password, role, email, productsList, followedProductsList);
     }
 }

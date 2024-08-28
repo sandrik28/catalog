@@ -49,7 +49,6 @@ public class UserController {
         );
     }
 
-
     @PostMapping("/add")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
         User user = mapper.userDtoToUser(userDto);

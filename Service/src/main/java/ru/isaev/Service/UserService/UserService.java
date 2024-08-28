@@ -31,6 +31,7 @@ public class UserService implements IUserService {
 
     public void addUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
     }
 
@@ -64,7 +65,8 @@ public class UserService implements IUserService {
             throw new NotYourProfileException("Not your profile with id = " + user.getId());
 
         User userSavedInDatabase = this.getUserById(user.getId());
-        userSavedInDatabase.setName(user.getName());
+        if (user.getName() != null)
+            userSavedInDatabase.setName(user.getName());
         userSavedInDatabase.setPassword(user.getPassword());
         userSavedInDatabase.setRole(user.getRole());
         userSavedInDatabase.setEmail(user.getEmail());
