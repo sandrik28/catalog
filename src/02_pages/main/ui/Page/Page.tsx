@@ -4,13 +4,14 @@ import { InputSearch } from '@/04_features/search'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import css from './Page.module.css'
+import { ProductPreviewCardDto } from '@/05_entities/product/model/types';
 
 
 export function MainPage() {
     const { register } = useForm();
-    const [searchResults, setSearchResults] = useState(null);
+    const [searchResults, setSearchResults] = useState<ProductPreviewCardDto[]>([]);
 
-    const handleApiResponse = (data: any) => {
+    const handleApiResponse = (data: ProductPreviewCardDto[]) => {
         setSearchResults(data);
     };
 
@@ -20,12 +21,11 @@ export function MainPage() {
                 <h1>Цифровые продукты</h1>
                 <AddNewProduct />
             </div>
+            
             <InputSearch
                 register={register('searchInput')}
                 onApiResponse={handleApiResponse}
             />
-            <AddNewProduct />
-
 
             <ChooseCategoryWidget isMainMenu={true} />
         </main>
