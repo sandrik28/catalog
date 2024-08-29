@@ -1,3 +1,7 @@
+.blur, .blur a {
+  color: var(--color-gray)
+}
+
 .content {
   padding: 20px 0;
   margin-top: 25px;

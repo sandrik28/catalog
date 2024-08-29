@@ -19,12 +19,15 @@ export function LayoutHeader() {
                     <SiteName />
                 </div>
             </Link>
-
-            <Link to={`/profile/${userId}`}>
-                <div className={css.right}>
-                    <Icon type = "headerUser" className={css.icon}/>
-                </div>
-            </Link>
+            {
+                userId &&
+                <Link to={`/profile/${userId}`}>
+                    <div className={css.right}>
+                        <span>Личный кабинет</span>
+                        <Icon type = "headerUser" className={css.icon}/>
+                    </div>
+                </Link>
+            }
         </header>
     )
 }
