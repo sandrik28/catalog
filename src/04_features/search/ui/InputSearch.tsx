@@ -21,7 +21,6 @@ export const InputSearch = ({ maxLength = 50, value, inputStyle = 'default', reg
                 });
         }
 
-        // Обновляем предыдущее значение
         previousDebouncedValue.current = debouncedValue;
     }, [debouncedValue, onApiResponse]);
 
