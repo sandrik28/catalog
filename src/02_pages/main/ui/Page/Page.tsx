@@ -7,7 +7,9 @@ import css from './Page.module.css'
 import { ProductPreviewCardDto } from '@/05_entities/product/model/types';
 
 
+
 export function MainPage() {
+    const { register } = useForm();
     const [searchResults, setSearchResults] = useState<ProductPreviewCardDto[]>([]);
 
     const handleApiResponse = (data: ProductPreviewCardDto[]) => {

@@ -9,7 +9,7 @@ type Props = {
   inputStyle?: 'default' | 'description'
   register?: UseFormRegisterReturn
   type?: InputHTMLAttributes<HTMLInputElement>['type']
-  id: string
+  id?: string
 }
 
 export const Input = ({ 

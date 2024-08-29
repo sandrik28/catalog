@@ -38,10 +38,11 @@ export function LoginForm(){
     <form className={css.form_login} onSubmit={handleSubmit(onSubmit)}>
       <h1>Вход</h1>
       <div className={css.container}>
-          <label className={css.label} htmlFor='login'>Логин</label>
-          <Input
+          <label className={css.label}>Логин</label>
+          <Input 
             // type="email" 
-            id='login'
+            id='email'
+
             register={register('email', { required: 'Логин не может быть пустым' })}
           />
           <div className={css.error_block}>
@@ -49,7 +50,7 @@ export function LoginForm(){
               {errors.email.message}
             </span>}
           </div>
-          <label htmlFor='password' className={css.label}>Пароль</label>
+          <label className={css.label}>Пароль</label>
           <Input 
             id='password'
             type='password' 

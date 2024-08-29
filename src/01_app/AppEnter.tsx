@@ -1,8 +1,8 @@
-import { LayoutHeader } from '@/03_widgets/LayoutHeader'
 import { Provider} from 'react-redux'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import '@/06_shared/ui/base.css'
 import store from './AppStore'
+import '@/06_shared/ui/base.css'
+import { LayoutHeader } from '@/03_widgets/LayoutHeader'
 import { ProfilePage } from '@/02_pages/profile/ui/Page/Page';
 import { ProductFormPage } from '@/02_pages/newProduct';
 import { ProductPage } from '@/02_pages/product/ui/Page/Page';
