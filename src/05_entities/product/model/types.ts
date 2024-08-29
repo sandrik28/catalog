@@ -21,6 +21,11 @@ export enum Status {
     MODERATION_DENIED = 'MODERATION_DENIED',
 }
 
+
+export enum ProductMainPageCategory {
+    All = 'Все',
+    Favorites = 'Отслеживаемые',
+}
 export enum ProductCategory {
     All = 'Все',
     Favorites = 'Отслеживаемые',

@@ -1,12 +1,12 @@
 import React from 'react';
-import { ProductCategory } from '@/05_entities/product/model/types';
+import {  ProductMainPageCategory } from '@/05_entities/product/model/types';
 import { ChooseCategoryButton } from '@/06_shared/ui/ChooseCategoryButton/ChooseCategoryButton';
 
 
 interface ProductFilterButtonsProps {
-    currentCategory: ProductCategory;
-    categories: ProductCategory[];
-    onCategoryChange: (category: ProductCategory) => void;
+    currentCategory:  ProductMainPageCategory;
+    categories:  ProductMainPageCategory[];
+    onCategoryChange: (category:  ProductMainPageCategory) => void ;
 }
 
 export const ProductFilterButtons: React.FC<ProductFilterButtonsProps> = ({
@@ -25,11 +25,12 @@ export const ProductFilterButtons: React.FC<ProductFilterButtonsProps> = ({
                     isActive={currentCategory === category}
                     onClick={() => onCategoryChange(category)}
                     label={
-                        category === ProductCategory.All ? ProductCategory.All :
-                        category === ProductCategory.Favorites ? ProductCategory.Favorites :
-                        category === ProductCategory.ToDo ? ProductCategory.ToDo :
-                        category === ProductCategory.UserProducts ? ProductCategory.UserProducts : 
-                        category === ProductCategory.Archive ? ProductCategory.Archive  : ''
+                        category === ProductMainPageCategory.All ? ProductMainPageCategory.All :
+                        category === ProductMainPageCategory.Favorites ? ProductMainPageCategory.Favorites :
+                        // category === ProductCategory.ToDo ? ProductCategory.ToDo :
+                        // category === ProductCategory.UserProducts ? ProductCategory.UserProducts : 
+                        // category === ProductCategory.Archive ? ProductCategory.Archive  : 
+                        ''
                     }
                 />
             ))}

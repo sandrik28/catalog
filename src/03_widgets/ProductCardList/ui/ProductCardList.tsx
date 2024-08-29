@@ -17,6 +17,7 @@ type ProductCardListType = {
 
 
 export function ProductCardList(props: ProductCardListType) {
+    console.log(props)
     const { products } = props
     const userId = useSelector((state: RootState) => state.session.userId);
     const userRole = useSelector((state: RootState) => state.session.role);
