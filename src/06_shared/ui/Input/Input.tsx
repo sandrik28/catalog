@@ -7,7 +7,7 @@ type Props = {
   maxLength?: number
   value?: string
   inputStyle?: 'default' | 'description'
-  register: UseFormRegisterReturn
+  register?: UseFormRegisterReturn
   type?: InputHTMLAttributes<HTMLInputElement>['type']
 }
 
