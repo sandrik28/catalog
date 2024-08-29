@@ -16,7 +16,8 @@
 .right {
     display: flex;
     justify-content: flex-end;
-    
+    color: var(--color-black);
+    gap: 12px;
 }
 
 
