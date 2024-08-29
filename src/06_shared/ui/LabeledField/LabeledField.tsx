@@ -5,11 +5,12 @@ type Props = {
   label: string
 } & React.ComponentProps<typeof Input>;
 
-export const LabeledField = ({label, register, inputStyle, maxLength}: Props) => {
+export const LabeledField = ({label, register, inputStyle, maxLength, id}: Props) => {
   return (
     <div className={css.root}>
-      <label className={css.label_name}>{label}</label>
+      <label htmlFor={id} className={css.label_name}>{label}</label>
       <Input
+        id={id}
         register={register}
         inputStyle={inputStyle}
         maxLength={maxLength}

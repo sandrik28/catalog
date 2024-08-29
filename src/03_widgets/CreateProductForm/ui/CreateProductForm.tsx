@@ -126,15 +126,17 @@ export const CreateProductForm = ({productId, formMode} : Props) => {
       {
         isLoading ? <h1>Загрузка</h1> : 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <LabeledField label={'Название продукта'} register={register('title', { required: true })} />
-          <LabeledField label={'Категория'} register={register('category', { required: true })} />
+          <LabeledField id='title' label={'Название продукта'} register={register('title', { required: true })} />
+          <LabeledField id='category' label={'Категория'} register={register('category', { required: true })} />
           <LabeledField 
+            id='linkToWebSite'
             label={'Ссылка на продукт'} 
             register={register('linkToWebSite', { 
               required: true, 
             })}
           />
           <LabeledField
+            id='description'
             label={'Описание продукта'}
             inputStyle={'description'}
             maxLength={500}
@@ -143,7 +145,7 @@ export const CreateProductForm = ({productId, formMode} : Props) => {
               // minLength: 10
             })}
           />
-          <LabeledField label={'Контакт поддержки'} register={register('emailOfSupport', { required: true })} />
+          <LabeledField id='emailOfSupport' label={'Контакт поддержки'} register={register('emailOfSupport', { required: true })} />
           <div className={css.field_error}>
             {Object.keys(errors).length > 0 &&
               <span>Все поля должны быть заполнены</span>
