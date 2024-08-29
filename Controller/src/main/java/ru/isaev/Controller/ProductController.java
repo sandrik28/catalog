@@ -96,7 +96,7 @@ public class ProductController {
     @GetMapping("all_approved/title_and_category")
     public ResponseEntity<List<ProductPreviewCardDto>> getAllApprovedByTitleAndCategory(
             @RequestParam(name = "title", required = false) String title,
-            @RequestParam(name = "title", required = false) String category
+            @RequestParam(name = "category", required = false) String category
     ) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsByTitleAndCategory(title, category)),
@@ -123,7 +123,7 @@ public class ProductController {
     @GetMapping("moderator/title_and_category")
     public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByTitleAndCategory(
             @RequestParam(name = "title", required = false) String title,
-            @RequestParam(name = "title", required = false) String category
+            @RequestParam(name = "category", required = false) String category
     ) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsForModeratorByTitleAndCategory(title, category)),
