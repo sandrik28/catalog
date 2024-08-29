@@ -50,7 +50,7 @@ export function LoginForm(){
           </div>
           <label className={css.label}>Пароль</label>
           <Input 
-            type="password" 
+            type='password' 
             register={register('password', { required: 'Пароль не может быть пустым' })}
           />
           <div className={css.error_block}>

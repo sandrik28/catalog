@@ -9,6 +9,7 @@ import { ProductPage } from '@/02_pages/product/ui/Page/Page';
 import { MainPage } from '@/02_pages/main';
 import { HomePage } from '@/02_pages/catalog/ui/HomePage';
 import { LoginPage } from '@/02_pages/login';
+import { NotFoundPage } from '@/02_pages/notFound';
 
 
 
@@ -27,6 +28,7 @@ export function AppEnter() {
                     <Route path='/product/:id/edit' element={<ProductFormPage />} />
                     <Route path='/addNewProduct' element={<ProductFormPage />} />
                     <Route path='/catalog/all' element={<HomePage />}/>
+                    <Route path='*' element={<NotFoundPage/>}/>
                 </Routes>
             </Router>
         </Provider>
