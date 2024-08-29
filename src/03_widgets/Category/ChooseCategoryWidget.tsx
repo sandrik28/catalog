@@ -9,12 +9,19 @@ import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddTo
 import { ProductCategory } from '@/05_entities/product/model/types';
 import { ProductFilterButtons } from '@/04_features/product/ui/ProductFilterButtons';
 import { useParams } from 'react-router-dom';
+import { InputSearch } from '@/04_features/search';
 
 interface ChooseCategoryWidgetProps {
     isMainMenu?: boolean;
 }
 
 export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMainMenu = false }) => {
+    const [searchResults, setSearchResults] = useState<ProductPreviewCardDto[]>([]);
+
+    const handleApiResponse = (data: ProductPreviewCardDto[]) => {
+        setSearchResults(data);
+    };
+
     const { id: profileId } = useParams<{ id: string }>();
     const favoriteProductIds = useSelector(selectProductIdsInWishlist);
     const userId = useSelector((state: RootState) => state.session.userId);
@@ -31,7 +38,6 @@ export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMa
 
     const [currentCategory, setCurrentCategory] = useState<ProductCategory>(categoriesToShow[0]);
 
-    const [products, setProducts] = useState<ProductPreviewCardDto[]>([]);
 
     const categoryFetchers: Record<ProductCategory, () => Promise<ProductPreviewCardDto[]>> = {
         [ProductCategory.All]: fetchMainProducts,
@@ -40,13 +46,13 @@ export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMa
         [ProductCategory.Archive]: () => parsedProfileId ? fetchArchiveProducts(parsedProfileId) : Promise.resolve([]),
         [ProductCategory.UserProducts]: () => parsedProfileId ? fetchMainProducts(parsedProfileId) : Promise.resolve([]),
     };
-    
+
 
     useEffect(() => {
         const loadProducts = async () => {
             const fetchProducts = categoryFetchers[currentCategory];
             const loadedProducts = await fetchProducts();
-            setProducts(loadedProducts);
+            setSearchResults(loadedProducts);
         };
 
         loadProducts();
@@ -55,18 +61,25 @@ export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMa
     const handleCategoryChange = (category: ProductCategory) => {
         setCurrentCategory(category);
     };
-
+    console.log()
     return (
         <>
+            {/* {isMainMenu ?
+            <InputSearch
+                onApiResponse={handleApiResponse}
+            /> : null
+            }
+
             <ProductFilterButtons
                 currentCategory={currentCategory}
                 categories={categoriesToShow}
                 onCategoryChange={handleCategoryChange}
             />
-            <ProductCardList 
-                products={products} 
-                productCardActionsSlot={(productId: ProductId) => <AddToWishlistIcon productId={productId} />} 
-            />
+
+            <ProductCardList
+                products={searchResults}
+                productCardActionsSlot={(productId: ProductId) => <AddToWishlistIcon productId={productId} />}
+            /> */}
         </>
     );
 };

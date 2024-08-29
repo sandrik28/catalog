@@ -16,7 +16,7 @@ export const InputSearch = ({ maxLength = 50, value, type, onApiResponse }: Inpu
     const previousDebouncedValue = useRef(debouncedValue); 
 
     useEffect(() => {
-        if (debouncedValue.trim().length > 0 && debouncedValue !== previousDebouncedValue.current && !isRequestSent.current) {
+        if (debouncedValue !== previousDebouncedValue.current && !isRequestSent.current) {
             isRequestSent.current = true;
             fetchSearchResults(debouncedValue)
                 .then(onApiResponse)
