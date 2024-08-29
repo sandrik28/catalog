@@ -32,7 +32,7 @@ export const ProductDetails = ({ product }: Props) => {
   }
 
   return (
-    <>
+    <div className={product.status === Status.ARCHIVED ? css.blur : ''}>
       {userRole === Roles.ROLE_USER && <StatusMessage status={product.status}/>}
       <h1>{product.title}</h1>
       <div className={css.content}>
@@ -69,6 +69,6 @@ export const ProductDetails = ({ product }: Props) => {
         <UserButtons isOwner={isOwner} status={product.status}/> : 
         <AdminButtons status={product.status}/>
       }
-    </>
+    </div>
   )
 }
