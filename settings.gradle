@@ -1,8 +1,1 @@
 rootProject.name = 'catalog'
-
-include ':Domain'
-include ':Repo'
-include ':Controller'
-include ':Service'
-include ':App'
-
