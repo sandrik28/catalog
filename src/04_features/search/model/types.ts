@@ -1,3 +1,4 @@
+import { ProductPreviewCardDto } from '@/05_entities/product/model/types';
 import { InputHTMLAttributes } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
@@ -7,5 +8,6 @@ export type InputSearchProps = {
     inputStyle?: 'default' | 'description';
     register: UseFormRegisterReturn;
     type?: InputHTMLAttributes<HTMLInputElement>['type'];
-    onApiResponse: (data: any) => void;
+    onApiResponse: (data: ProductPreviewCardDto[]) => void;
+
 };
