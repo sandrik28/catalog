@@ -9,7 +9,6 @@ export const fetchSearchResults = async (query: string = ""): Promise<ProductPre
       resolve(productsMockCards.map(product => ({
         ...product,
         status: product.status as Status,
-        timeOfLastApproval: new Date(product.timeOfLastApproval),
       })).filter(product => product.status === Status.APPROVED).filter(product => product.title.includes(query)));
     })
   })

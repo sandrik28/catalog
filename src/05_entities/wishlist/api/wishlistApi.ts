@@ -5,8 +5,7 @@ import { mapWishlist } from '../lib/mapWishList';
 import { ProductPreviewCardDto } from '@/05_entities/product/model/types';
 
 const convertToProductPreviewCardDto = (product: any): ProductPreviewCardDto => ({
-    ...product,
-    timeOfLastApproval: new Date(product.timeOfLastApproval),
+    ...product
 });
 
 let mockWishlist: WishlistDto = mockProducts

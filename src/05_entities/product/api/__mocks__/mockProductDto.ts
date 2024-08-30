@@ -6,7 +6,6 @@ export function mockProductDto(): ProductPreviewCardDto[] {
     .map(product => ({
       ...product,
       status: product.status as Status,
-      timeOfLastApproval: new Date(product.timeOfLastApproval),
     }))
 
   return data;

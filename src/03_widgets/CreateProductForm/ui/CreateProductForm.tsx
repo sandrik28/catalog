@@ -44,7 +44,6 @@ export const getProductById = (productId: ProductId): Promise<ProductDto> => {
       if (product) {
         const productWithCorrectTypes: ProductDto = {
           ...product,
-          timeOfLastApproval: new Date(product.timeOfLastApproval),
           status: product.status as Status, 
         };
         resolve(productWithCorrectTypes);
