@@ -31,6 +31,7 @@ export enum ProductCategory {
     ToDo = 'Ждут действий',
     Archive = 'Архив',
     UserProducts = 'Активные',
+    Notifications = "Уведомления"
 }
 
 export interface ProductPreviewCardDto {

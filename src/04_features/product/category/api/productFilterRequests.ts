@@ -1,6 +1,6 @@
+import { NotificationDto, NotificationMessage } from '@/05_entities/notification/model/types';
 import { ProductPreviewCardDto, Status } from '@/05_entities/product/model/types';
-import { productsMockCards } from '@/06_shared/lib/server';
-
+import { productsMockCards, notificationMock } from '@/06_shared/lib/server';
 const mockProducts: ProductPreviewCardDto[] = productsMockCards.map(product => {
     return {
         ...product,
@@ -9,6 +9,20 @@ const mockProducts: ProductPreviewCardDto[] = productsMockCards.map(product => {
     };
 });
 
+
+export const fetchNotifications = async (): Promise<NotificationDto[]> => {
+    let activeMocks = notificationMock.map(item => ({
+        id: item.id,
+        ProductId: item.ProductId,
+        ProductName: item.ProductName,
+        message: NotificationMessage[item.message as keyof typeof NotificationMessage]
+      }));
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(activeMocks);
+        }, 500);
+    });
+};
 
 export const fetchMainProducts = async (id?: number): Promise<ProductPreviewCardDto[]> => {
     let activeMocks = mockProducts.filter(product => product.status === Status.APPROVED)
