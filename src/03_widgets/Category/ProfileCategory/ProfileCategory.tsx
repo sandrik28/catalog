@@ -4,7 +4,7 @@ import { ProductPreviewCardDto } from '@/05_entities/product/model/types';
 import { RootState } from '@/01_app/AppStore';
 import { fetchArchiveProducts, fetchFavoriteProducts, fetchNotifications, fetchToDoProducts, fetchMainProducts } from '@/04_features/product/category/api/productFilterRequests';
 import { selectProductIdsInWishlist } from '@/05_entities/wishlist';
-import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddToWishlistIcon';
+import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddToWishlistIcon/AddToWishlistIcon';
 import { ProductCategory } from '@/05_entities/product/model/types';
 import { useParams } from 'react-router-dom';
 import { ProductFilterButtonsProfile } from '@/04_features/product/ui/ProductFilterButtonsProfile';

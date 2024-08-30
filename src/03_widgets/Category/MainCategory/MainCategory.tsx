@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { ProductId, ProductMainPageCategory, ProductPreviewCardDto } from '@/05_entities/product/model/types';
 import { RootState } from '@/01_app/AppStore';
 import { selectProductIdsInWishlist } from '@/05_entities/wishlist';
-import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddToWishlistIcon';
+import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddToWishlistIcon/AddToWishlistIcon';
 import { ProductFilterButtons } from '@/04_features/product/ui/ProductFilterButtons';
 import { fetchSearchResults, InputSearch } from '@/04_features/search';
 import { ProductCardList } from '@/03_widgets/ProductCardList/ui/ProductCardList';

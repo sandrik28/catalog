@@ -4,19 +4,21 @@ import { Status } from '@/05_entities/product/model/types'
 import { Button } from '@/06_shared/ui/Button/Button'
 import { EditProductButton } from '@/06_shared/ui/EditProductButton/EditProductButton'
 import css from './UserButtons.module.css'
+import { AddToWishlistButton } from '@/04_features/wishlist/addToWishlist/ui/AddToWishlistButton/AddToWishlistButton'
 
 type Props = {
   isOwner: boolean
+  productId: number
   status: Status
 }
 
-export const UserButtons = ({isOwner, status} : Props) => {
+export const UserButtons = ({isOwner, status, productId} : Props) => {
   // Если ты не владелец продукта
   // TODO: запрос
   if (!isOwner) {
     if (status === Status.APPROVED) {
       return (
-        <Button>В избранное</Button>
+        <AddToWishlistButton productId={productId}/>
       )
     }
     return null

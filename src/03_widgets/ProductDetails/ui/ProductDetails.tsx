@@ -66,7 +66,7 @@ export const ProductDetails = ({ product }: Props) => {
         </div>
       </div>
       {userRole === Roles.ROLE_USER ? 
-        <UserButtons isOwner={isOwner} status={product.status}/> : 
+        <UserButtons isOwner={isOwner} productId={product.id} status={product.status}/> : 
         <AdminButtons status={product.status}/>
       }
     </div>
