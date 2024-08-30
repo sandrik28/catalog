@@ -8,7 +8,7 @@ export function ProfilePage() {
   // TODO: получить данные пользователя по id при загрузке страницы
 
   return (
-    <main>
+    <>
       <Profile />
       <User
         // TODO: берется из запроса
@@ -19,6 +19,6 @@ export function ProfilePage() {
         }}
       />
       <ProfileCategory />
-    </main>
+    </>
   )
 }

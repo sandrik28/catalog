@@ -6,8 +6,6 @@ export const ProductFormPage = () => {
   const formMode = id ? 'edit' : 'add';
 
   return (
-    <main>
-      <CreateProductForm formMode={formMode} productId={id}/>
-    </main>
+    <CreateProductForm formMode={formMode} productId={id}/>
   )
 }

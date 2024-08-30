@@ -14,8 +14,6 @@ export const LoginPage = () => {
   }, [userId, navigate]);
 
   return (
-    <main>
-      <LoginForm/>
-    </main>
+    <LoginForm/>
   )
 }

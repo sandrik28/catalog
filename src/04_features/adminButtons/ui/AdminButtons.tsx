@@ -9,7 +9,7 @@ type Props = {
 export const AdminButtons = ({status} : Props) => {
   // TODO: запрос
   return (
-    <>
+    <>  
       {status === Status.ON_MODERATION && (
       <div className={css.container}>
         <Button>Опубликовать</Button>

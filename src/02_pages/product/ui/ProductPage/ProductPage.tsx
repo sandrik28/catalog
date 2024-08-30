@@ -39,9 +39,9 @@ export const ProductPage = () => {
   }
 
   return (
-    <main>
+    <>
       {product && <ProductDetails product={product} />}
       {isModalOpen && <Modal type={modalType}><h3>{modalContent}</h3></Modal>}
-    </main>
+    </>
   )
 }
