@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.isaev.domain.ProductDtos.IdsOfFollowedProductsDto;
 import ru.isaev.domain.Users.Roles;
 import ru.isaev.domain.Users.User;
 import ru.isaev.repo.UserRepo;
 import ru.isaev.service.Security.MyUserDetails;
+import ru.isaev.service.Utilities.Exceptions.InvalidLoginAndPasswordException;
 import ru.isaev.service.Utilities.Exceptions.InvalidProductOperationException;
 import ru.isaev.service.Utilities.Exceptions.NotYourProfileException;
 import ru.isaev.service.Utilities.Exceptions.UserNotFoundException;
@@ -15,6 +17,7 @@ import ru.isaev.service.Utilities.Exceptions.UserNotFoundException;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -33,6 +36,25 @@ public class UserService implements IUserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
+    }
+
+    @Override
+    public IdsOfFollowedProductsDto login(String email, String password) {
+        User user = userRepo.findByEmail(email).orElseThrow(
+                () -> new UserNotFoundException("Not found user with email = " + email));
+
+        if (!user.getPassword().equals(password))
+            throw new InvalidLoginAndPasswordException("Invalid login and pwd");
+
+        List<Long> idsOfFollowedProductsList = user.getFollowedProductsList().
+                stream().
+                map(p -> p.getId()).
+                collect(Collectors.toList());
+
+        IdsOfFollowedProductsDto dto = new IdsOfFollowedProductsDto();
+        dto.setIdsOfFollowedProducts(idsOfFollowedProductsList);
+
+        return dto;
     }
 
     public User getUserById(Long id) {

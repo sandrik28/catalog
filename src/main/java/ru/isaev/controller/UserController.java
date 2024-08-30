@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.isaev.domain.ProductDtos.IdsOfFollowedProductsDto;
 import ru.isaev.service.Mapper.IMyMapper;
 import ru.isaev.domain.UserDtos.UserDto;
 import ru.isaev.domain.Users.Roles;
@@ -37,6 +38,18 @@ public class UserController {
     public ResponseEntity<UserDto> getByEmail(@RequestParam(name = "email", required = false) String email) {
         return new ResponseEntity<>(
                 mapper.userToUserDto(userService.getUserByEmail(email)),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<IdsOfFollowedProductsDto> login(
+            @RequestParam(name = "email", required = false) String email,
+            @RequestParam(name = "password", required = false) String password
+            ) {
+        IdsOfFollowedProductsDto response = userService.login(email, password);
+        return new ResponseEntity<>(
+                response,
                 HttpStatus.OK
         );
     }
