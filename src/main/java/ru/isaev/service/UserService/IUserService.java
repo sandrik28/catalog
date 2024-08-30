@@ -9,7 +9,7 @@ import java.util.List;
 public interface IUserService {
     public void addUser(User user);
 
-    public IdsOfFollowedProductsDto login(String email, String password);
+    public IdsOfFollowedProductsDto login(String email, String hashedPassword);
 
     public User getUserById(Long id);
 

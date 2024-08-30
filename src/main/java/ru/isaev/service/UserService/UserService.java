@@ -2,6 +2,7 @@ package ru.isaev.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.isaev.domain.ProductDtos.IdsOfFollowedProductsDto;
@@ -27,23 +28,22 @@ public class UserService implements IUserService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepo userRepo, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepo userRepo) {
         this.userRepo = userRepo;
-        this.passwordEncoder = passwordEncoder;
+//        this.passwordEncoder = passwordEncoder;
+        passwordEncoder = new BCryptPasswordEncoder();
     }
 
     public void addUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
     }
 
     @Override
-    public IdsOfFollowedProductsDto login(String email, String password) {
+    public IdsOfFollowedProductsDto login(String email, String hashedPassword) {
         User user = userRepo.findByEmail(email).orElseThrow(
                 () -> new UserNotFoundException("Not found user with email = " + email));
 
-        if (!user.getPassword().equals(password))
+        if (!passwordEncoder.matches(user.getPassword(), hashedPassword))
             throw new InvalidLoginAndPasswordException("Invalid login and pwd");
 
         List<Long> idsOfFollowedProductsList = user.getFollowedProductsList().
