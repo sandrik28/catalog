@@ -29,7 +29,7 @@ public class Product {
 
     private Status status;
 
-    private String emailOFSupport;
+    private String emailOfSupport;
 
     private String linkToWebSite;
 
@@ -91,11 +91,11 @@ public class Product {
     }
 
     public String getEmailOFSupport() {
-        return emailOFSupport;
+        return emailOfSupport;
     }
 
     public void setEmailOFSupport(String emailOFSupport) {
-        this.emailOFSupport = emailOFSupport;
+        this.emailOfSupport = emailOFSupport;
     }
 
     public String getLinkToWebSite() {
@@ -134,11 +134,11 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(title, product.title) && Objects.equals(subscribersList, product.subscribersList) && Objects.equals(owner, product.owner) && status == product.status && Objects.equals(emailOFSupport, product.emailOFSupport) && Objects.equals(linkToWebSite, product.linkToWebSite) && Objects.equals(description, product.description) && Objects.equals(category, product.category);
+        return Objects.equals(id, product.id) && Objects.equals(title, product.title) && Objects.equals(subscribersList, product.subscribersList) && Objects.equals(owner, product.owner) && status == product.status && Objects.equals(emailOfSupport, product.emailOfSupport) && Objects.equals(linkToWebSite, product.linkToWebSite) && Objects.equals(description, product.description) && Objects.equals(category, product.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, subscribersList, owner, status, emailOFSupport, linkToWebSite, description, category);
+        return Objects.hash(id, title, subscribersList, owner, status, emailOfSupport, linkToWebSite, description, category);
     }
 }

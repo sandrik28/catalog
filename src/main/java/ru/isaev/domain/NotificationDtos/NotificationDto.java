@@ -11,6 +11,8 @@ public class NotificationDto {
 
     private Long productId;
 
+    private String titleOfProduct;
+
     private NotificationMessage message;
 
     private LocalDateTime timestamp;
@@ -53,5 +55,13 @@ public class NotificationDto {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getTitleOfProduct() {
+        return titleOfProduct;
+    }
+
+    public void setTitleOfProduct(String titleOfProduct) {
+        this.titleOfProduct = titleOfProduct;
     }
 }

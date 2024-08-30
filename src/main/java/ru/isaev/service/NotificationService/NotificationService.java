@@ -66,7 +66,7 @@ public class NotificationService implements INotificationService {
                productSubscribersList) {
             notification.setUserId(user.getId());
             notification.setProductId(product.getId());
-            notification.setCategoryOfProduct(product.getCategory());
+            notification.setTitleOfProduct(product.getTitle());
             this.addNotification(notification);
         }
     }

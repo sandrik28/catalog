@@ -12,19 +12,22 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long userId;
+
     private Long productId;
-    private String categoryOfProduct;
+
+    private String titleOfProduct;
 
     private NotificationMessage message;
 
     private LocalDateTime timestamp;
 
-    public Notification(Long userId, Long productId, String categoryOfProduct, NotificationMessage message) {
+    public Notification(Long userId, Long productId, String titleOfProduct, NotificationMessage message) {
+        this.titleOfProduct = titleOfProduct;
         this.id = id;
         this.userId = userId;
         this.productId = productId;
-        this.categoryOfProduct = categoryOfProduct;
         this.message = message;
         timestamp = LocalDateTime.now();
     }
@@ -44,12 +47,12 @@ public class Notification {
         return message;
     }
 
-    public String getCategoryOfProduct() {
-        return categoryOfProduct;
+    public String getTitleOfProduct() {
+        return titleOfProduct;
     }
 
-    public void setCategoryOfProduct(String categoryOfProduct) {
-        this.categoryOfProduct = categoryOfProduct;
+    public void setTitleOfProduct(String titleOfProduct) {
+        this.titleOfProduct = titleOfProduct;
     }
 
     public void setMessage(NotificationMessage message) {
