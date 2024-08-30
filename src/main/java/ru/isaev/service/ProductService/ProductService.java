@@ -66,7 +66,8 @@ public class ProductService implements IProductService {
         User user = userRepo.findById(userId).orElseThrow(
                 () -> new UserNotFoundException("Not found user with id = " + userId));
 
-        if (status.equals(Status.ON_MODERATION) || status.equals(Status.MODERATION_DENIED) &&
+
+        if ((status.equals(Status.ON_MODERATION) || status.equals(Status.MODERATION_DENIED)) &&
         !currentUser.getId().equals(userId) && !currentUser.getRole().equals(Roles.ROLE_ADMIN))
             throw new NotYourProductException("You do not have access to products on moderation of user with id = " + userId);
 
@@ -305,11 +306,10 @@ public class ProductService implements IProductService {
                 () -> new ProductNotFoundExceptions("Not found product with id = " + id)
         );
 
-        if (!product.getOwner().getId().equals(currentUser.getId()) &&
-        product.getStatus().equals(Status.ON_MODERATION) ||
-        product.getStatus().equals(Status.MODERATION_DENIED)) {
+        if ((product.getStatus().equals(Status.MODERATION_DENIED) || product.getStatus().equals(Status.ON_MODERATION)) && product.getOwner().getId().equals(currentUser.getId())) {
             throw new InvalidProductOperationException("You can't view this product with id = " + product.getId());
         }
+
         return product;
     }
 
@@ -518,7 +518,7 @@ public class ProductService implements IProductService {
                 () -> new ProductNotFoundExceptions("Not found product with id = " + productId)
         );
 
-        if (!product.getStatus().equals(Status.MODERATION_DENIED)) {
+        if (!product.getStatus().equals(Status.ON_MODERATION)) {
             throw new InvalidProductOperationException("You can't decline moderation of product which is not on moderation. Product id = " + product.getId());
         }
 

@@ -15,24 +15,12 @@ import org.springframework.security.web.SecurityFilterChain;
 import ru.isaev.service.Security.MyUserDetailsService;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = false)
 public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
 
         return new MyUserDetailsService();
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("users/add").hasRole("ADMIN")
-                        .requestMatchers("/**").authenticated())
-                .formLogin(AbstractHttpConfigurer::disable)
-                .httpBasic(Customizer.withDefaults())
-                .build();
     }
 
 //    @Bean
@@ -49,13 +37,25 @@ public class SecurityConfig {
 
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//
 //        return http.csrf(AbstractHttpConfigurer::disable)
 //                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/**").permitAll())
+//                        .requestMatchers("users/add").hasRole("ADMIN")
+//                        .requestMatchers("/**").authenticated())
 //                .formLogin(AbstractHttpConfigurer::disable)
 //                .httpBasic(Customizer.withDefaults())
 //                .build();
 //    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/**").permitAll())
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(Customizer.withDefaults())
+                .build();
+    }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
