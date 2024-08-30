@@ -1,4 +1,3 @@
-import { ChooseCategoryWidget } from '@/03_widgets/Category/ChooseCategoryWidget'
 import { AddNewProduct } from '@/04_features/newProduct/addNewProduct'
 import css from './Page.module.css'
 import { MainCategoryWidget } from '@/03_widgets/Category/MainCategory/MainCategory'

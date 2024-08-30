@@ -1,7 +1,7 @@
 import React from 'react'
 import { Profile } from '@/03_widgets/Profile';
 import { User } from '@/05_entities/user';
-import { ChooseCategoryWidget } from '@/03_widgets/Category/ChooseCategoryWidget';
+import { ProfileCategory } from '@/03_widgets/Category/ProfileCategory/ProfileCategory';
 
 export function ProfilePage() {
 
@@ -18,7 +18,7 @@ export function ProfilePage() {
           email: 'test@mail.com',
         }}
       />
-      <ChooseCategoryWidget />
+      <ProfileCategory />
     </main>
   )
 }

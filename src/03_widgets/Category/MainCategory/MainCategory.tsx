@@ -4,7 +4,6 @@ import { ProductId, ProductMainPageCategory, ProductPreviewCardDto } from '@/05_
 import { RootState } from '@/01_app/AppStore';
 import { selectProductIdsInWishlist } from '@/05_entities/wishlist';
 import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddToWishlistIcon';
-import { ProductCategory } from '@/05_entities/product/model/types';
 import { ProductFilterButtons } from '@/04_features/product/ui/ProductFilterButtons';
 import { fetchSearchResults, InputSearch } from '@/04_features/search';
 import { ProductCardList } from '@/03_widgets/ProductCardList/ui/ProductCardList';

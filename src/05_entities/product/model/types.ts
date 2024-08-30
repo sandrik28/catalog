@@ -27,7 +27,6 @@ export enum ProductMainPageCategory {
     Favorites = 'Отслеживаемые',
 }
 export enum ProductCategory {
-    All = 'Все',
     Favorites = 'Отслеживаемые',
     ToDo = 'Ждут действий',
     Archive = 'Архив',

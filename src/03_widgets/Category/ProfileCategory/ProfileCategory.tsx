@@ -3,19 +3,18 @@ import { useSelector } from 'react-redux';
 import { ProductId, ProductPreviewCardDto } from '@/05_entities/product/model/types';
 import { RootState } from '@/01_app/AppStore';
 import { fetchArchiveProducts, fetchFavoriteProducts, fetchMainProducts, fetchToDoProducts } from '@/04_features/product/category/api/productFilterRequests';
-import { ProductCardList } from '../ProductCardList/ui/ProductCardList';
 import { selectProductIdsInWishlist } from '@/05_entities/wishlist';
 import { AddToWishlistIcon } from '@/04_features/wishlist/addToWishlist/ui/AddToWishlistIcon';
 import { ProductCategory } from '@/05_entities/product/model/types';
-import { ProductFilterButtons } from '@/04_features/product/ui/ProductFilterButtons';
 import { useParams } from 'react-router-dom';
-import { InputSearch } from '@/04_features/search';
+import { ProductFilterButtonsProfile } from '@/04_features/product/ui/ProductFilterButtonsProfile';
+import { ProductCardList } from '@/03_widgets/ProductCardList/ui/ProductCardList';
 
-interface ChooseCategoryWidgetProps {
+interface ProfileCategoryProps {
     isMainMenu?: boolean;
 }
 
-export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMainMenu = false }) => {
+export const ProfileCategory: React.FC<ProfileCategoryProps> = ({ isMainMenu = false }) => {
     const [searchResults, setSearchResults] = useState<ProductPreviewCardDto[]>([]);
 
     const handleApiResponse = (data: ProductPreviewCardDto[]) => {
@@ -28,19 +27,15 @@ export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMa
     const parsedProfileId = profileId ? parseInt(profileId, 10) : null;
 
     let categoriesToShow: ProductCategory[];
-    if (isMainMenu) {
-        categoriesToShow = [ProductCategory.All, ProductCategory.Favorites];
-    } else {
-        categoriesToShow = userId === parsedProfileId
-            ? [ProductCategory.UserProducts, ProductCategory.ToDo, ProductCategory.Archive]
-            : [ProductCategory.UserProducts, ProductCategory.Archive];
-    }
+    
+    categoriesToShow = userId === parsedProfileId
+        ? [ProductCategory.UserProducts, ProductCategory.ToDo, ProductCategory.Archive]
+        : [ProductCategory.UserProducts, ProductCategory.Archive];
 
     const [currentCategory, setCurrentCategory] = useState<ProductCategory>(categoriesToShow[0]);
 
 
     const categoryFetchers: Record<ProductCategory, () => Promise<ProductPreviewCardDto[]>> = {
-        [ProductCategory.All]: fetchMainProducts,
         [ProductCategory.Favorites]: () => fetchFavoriteProducts(favoriteProductIds),
         [ProductCategory.ToDo]: () => userId ? fetchToDoProducts(userId) : Promise.resolve([]),
         [ProductCategory.Archive]: () => parsedProfileId ? fetchArchiveProducts(parsedProfileId) : Promise.resolve([]),
@@ -64,13 +59,8 @@ export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMa
     console.log()
     return (
         <>
-            {/* {isMainMenu ?
-            <InputSearch
-                onApiResponse={handleApiResponse}
-            /> : null
-            }
 
-            <ProductFilterButtons
+            <ProductFilterButtonsProfile
                 currentCategory={currentCategory}
                 categories={categoriesToShow}
                 onCategoryChange={handleCategoryChange}
@@ -79,7 +69,7 @@ export const ChooseCategoryWidget: React.FC<ChooseCategoryWidgetProps> = ({ isMa
             <ProductCardList
                 products={searchResults}
                 productCardActionsSlot={(productId: ProductId) => <AddToWishlistIcon productId={productId} />}
-            /> */}
+            />
         </>
     );
 };
