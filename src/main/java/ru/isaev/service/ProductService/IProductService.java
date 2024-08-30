@@ -18,8 +18,6 @@ public interface IProductService {
 
     public List<Product> getAllProductsByUserId(Long userId);
 
-//    public List<Product> getProductsFollowedByUser(Long id);
-
     public List<Product> getProductsByTitle(String title);
 
     public List<Product> getAllApprovedProductsFollowedByUser(Long userId);
@@ -30,11 +28,7 @@ public interface IProductService {
 
     public List<Product> getAllApprovedProductsFollowedByUserByTitleAndCategory(Long id, String title, String category);
 
-//    public List<Product> getProductsByCategory(String category);
-
     public List<Product> getAllApprovedProductsByTitle(String title);
-
-//    public List<Product> getProductsByTitleAndCategory(String title, String category);
 
     public List<Product> getAllApprovedProductsByTitleAndCategory(String title, String category);
 
