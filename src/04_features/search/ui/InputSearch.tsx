@@ -25,7 +25,7 @@ export const InputSearch = ({ onApiResponse }: InputSearchProps) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={css.search}>
-            <Input register={register('name')}/>
+            <Input register={register('name')} id='name' placeholder='Найти'/>
             <Button isLoading={isSubmitting}>Поиск</Button>
         </form>
     );
