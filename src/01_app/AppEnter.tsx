@@ -1,34 +1,16 @@
-import { Provider} from 'react-redux'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import store from './AppStore'
-import '@/06_shared/ui/base.css'
-import { LayoutHeader } from '@/03_widgets/LayoutHeader'
-import { ProfilePage } from '@/02_pages/profile/ui/Page/Page';
-import { ProductFormPage } from '@/02_pages/newProduct';
-import { ProductPage } from '@/02_pages/product/ui/Page/Page';
-import { MainPage } from '@/02_pages/main';
-import { LoginPage } from '@/02_pages/login';
-import { NotFoundPage } from '@/02_pages/notFound';
+import { Provider} from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
+import store from './AppStore';
+import '@/06_shared/ui/base.css';
+import { appRouter } from './AppRouter';
 
 
 
 export function AppEnter() {
     
-
     return (
         <Provider store={store}>
-            <Router>
-                <LayoutHeader />
-                <Routes>
-                    <Route path='/' element={<MainPage />} />
-                    <Route path='/login' element={<LoginPage />} />
-                    <Route path='/profile/:id' element={<ProfilePage />} />
-                    <Route path='/product/:id' element={<ProductPage />} />
-                    <Route path='/product/:id/edit' element={<ProductFormPage />} />
-                    <Route path='/addNewProduct' element={<ProductFormPage />} />
-                    <Route path='*' element={<NotFoundPage/>}/>
-                </Routes>
-            </Router>
+            <RouterProvider router={appRouter()} />
         </Provider>
     )
 }

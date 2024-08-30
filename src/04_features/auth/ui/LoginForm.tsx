@@ -42,7 +42,6 @@ export function LoginForm(){
           <Input 
             // type="email" 
             id='email'
-
             register={register('email', { required: 'Логин не может быть пустым' })}
           />
           <div className={css.error_block}>
