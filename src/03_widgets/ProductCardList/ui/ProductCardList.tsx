@@ -1,5 +1,5 @@
 import { ProductCard } from '@/05_entities/product'
-import css from './ProductsCards.module.css'
+import css from './ProductsCard.module.css'
 import { ProductId, ProductPreviewCardDto, Status } from "@/05_entities/product/model/types"
 import { Roles } from "@/05_entities/user/api/types"
 import { ReactNode, useCallback } from "react"
