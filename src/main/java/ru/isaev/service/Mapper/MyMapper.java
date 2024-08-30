@@ -84,6 +84,7 @@ public class MyMapper implements IMyMapper {
         dto.setId(notification.getId());
         dto.setUserId(notification.getUserId());
         dto.setProductId(notification.getProductId());
+        dto.setTitleOfProduct(notification.getTitleOfProduct());
         dto.setMessage(notification.getMessage());
         dto.setTimestamp(notification.getTimestamp());
 
