@@ -13,6 +13,7 @@ import { deleteProductRequest } from '@/04_features/deleteProduct/category/api/d
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { Loader } from '@/06_shared/ui/Loader/Loader'
 
 export type TCreateProductForm = {
   title: string
@@ -124,7 +125,7 @@ export const CreateProductForm = ({productId, formMode} : Props) => {
   return (
     <>
       {
-        isLoading ? <h1>Загрузка</h1> : 
+        isLoading ? <Loader/> : 
         <form onSubmit={handleSubmit(onSubmit)}>
           <LabeledField id='title' label={'Название продукта'} register={register('title', { required: true })} />
           <LabeledField id='category' label={'Категория'} register={register('category', { required: true })} />

@@ -2,6 +2,7 @@ import { getProductById } from '@/03_widgets/CreateProductForm/ui/CreateProductF
 import { ProductDetails } from '@/03_widgets/ProductDetails';
 import { IProductDetails } from '@/05_entities/product/model/types';
 import { useModal } from '@/06_shared/lib/useModal';
+import { Loader } from '@/06_shared/ui/Loader/Loader';
 import { Modal } from '@/06_shared/ui/Modal/Modal';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -34,7 +35,7 @@ export const ProductPage = () => {
   }, [productId, openModal])
 
   if (loading) {
-    return <main>Загрузка</main>
+    return <Loader/>
   }
 
   return (
