@@ -7,8 +7,6 @@ type Props = {
 export const SendToModeratorButton = ({disabled} : Props) => {
 
   return (
-    <Button disabled={disabled} type='submit'>
-      { disabled ? 'Загрузка' : 'Опубликовать' }
-    </Button>
+    <Button isLoading={disabled} type='submit'>Опубликовать</Button>
   )
 }
