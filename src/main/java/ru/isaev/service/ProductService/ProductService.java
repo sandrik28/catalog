@@ -456,8 +456,18 @@ public class ProductService implements IProductService {
         List<Product> productsFollowedByUserList = currentUser.getFollowedProductsList();
         List<User> subsbcribersOfProductList = product.getSubscribersList();
 
-        productsFollowedByUserList.remove(product);
-        subsbcribersOfProductList.remove(currentUser);
+
+        for (int i = 0; i < productsFollowedByUserList.size(); i++) {
+            if (productsFollowedByUserList.get(i).getId().equals(productId)) {
+                productsFollowedByUserList.remove(i);
+            }
+        }
+
+        for (int i = 0; i < subsbcribersOfProductList.size(); i++) {
+            if (subsbcribersOfProductList.get(i).getId().equals(currentUser.getId())) {
+                subsbcribersOfProductList.remove(i);
+            }
+        }
 
         currentUser.setFollowedProductsList(productsFollowedByUserList);
         product.setSubscribersList(subsbcribersOfProductList);
