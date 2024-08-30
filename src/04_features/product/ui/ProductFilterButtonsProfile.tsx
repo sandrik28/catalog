@@ -29,6 +29,7 @@ export const ProductFilterButtonsProfile: React.FC<ProductFilterButtonsProps> = 
                         category === ProductCategory.ToDo ? ProductCategory.ToDo :
                         category === ProductCategory.UserProducts ? ProductCategory.UserProducts : 
                         category === ProductCategory.Archive ? ProductCategory.Archive  : 
+                        category === ProductCategory.Notifications ? ProductCategory.Notifications :
                         ''
                     }
                 />
