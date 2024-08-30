@@ -418,6 +418,18 @@ public class ProductService implements IProductService {
         }
 
         List<Product> productsFollowedByUserList = currentUser.getFollowedProductsList();
+        for (int i = 0; i < productsFollowedByUserList.size(); i++) {
+            if (productsFollowedByUserList.get(i).getId().equals(productId)) {
+                List<Long> idsOfFollowedProductsList = currentUser.getFollowedProductsList().
+                        stream().
+                        map(p -> p.getId()).
+                        collect(Collectors.toList());
+
+                IdsOfFollowedProductsDto dto = new IdsOfFollowedProductsDto();
+                dto.setIdsOfFollowedProducts(idsOfFollowedProductsList);
+                return dto;
+            }
+        }
         List<User> subsbcribersOfProductList = product.getSubscribersList();
 
         productsFollowedByUserList.add(product);

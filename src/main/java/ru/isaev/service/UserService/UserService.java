@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.isaev.domain.ProductDtos.IdsOfFollowedProductsDto;
+import ru.isaev.domain.UserDtos.UserIdAndLikedIdsDto;
 import ru.isaev.domain.Users.Roles;
 import ru.isaev.domain.Users.User;
 import ru.isaev.repo.UserRepo;
@@ -30,7 +31,6 @@ public class UserService implements IUserService {
     @Autowired
     public UserService(UserRepo userRepo) {
         this.userRepo = userRepo;
-//        this.passwordEncoder = passwordEncoder;
         passwordEncoder = new BCryptPasswordEncoder();
     }
 
@@ -39,7 +39,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public IdsOfFollowedProductsDto login(String email, String hashedPassword) {
+    public UserIdAndLikedIdsDto login(String email, String hashedPassword) {
         User user = userRepo.findByEmail(email).orElseThrow(
                 () -> new UserNotFoundException("Not found user with email = " + email));
 
@@ -51,8 +51,10 @@ public class UserService implements IUserService {
                 map(p -> p.getId()).
                 collect(Collectors.toList());
 
-        IdsOfFollowedProductsDto dto = new IdsOfFollowedProductsDto();
+        UserIdAndLikedIdsDto dto = new UserIdAndLikedIdsDto();
         dto.setIdsOfFollowedProducts(idsOfFollowedProductsList);
+        dto.setUserId(user.getId());
+        dto.setRole(user.getRole());
 
         return dto;
     }

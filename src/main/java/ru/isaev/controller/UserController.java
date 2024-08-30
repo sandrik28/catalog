@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.isaev.domain.ProductDtos.IdsOfFollowedProductsDto;
-import ru.isaev.service.Mapper.IMyMapper;
 import ru.isaev.domain.UserDtos.UserDto;
+import ru.isaev.domain.UserDtos.UserIdAndLikedIdsDto;
 import ru.isaev.domain.Users.Roles;
 import ru.isaev.domain.Users.User;
+import ru.isaev.service.Mapper.IMyMapper;
 import ru.isaev.service.UserService.IUserService;
 
 import java.util.List;
@@ -43,11 +43,11 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<IdsOfFollowedProductsDto> login(
+    public ResponseEntity<UserIdAndLikedIdsDto> login(
             @RequestParam(name = "email", required = false) String email,
             @RequestParam(name = "password", required = false) String password
             ) {
-        IdsOfFollowedProductsDto response = userService.login(email, password);
+        UserIdAndLikedIdsDto response = userService.login(email, password);
         return new ResponseEntity<>(
                 response,
                 HttpStatus.OK

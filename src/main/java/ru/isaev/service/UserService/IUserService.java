@@ -1,6 +1,6 @@
 package ru.isaev.service.UserService;
 
-import ru.isaev.domain.ProductDtos.IdsOfFollowedProductsDto;
+import ru.isaev.domain.UserDtos.UserIdAndLikedIdsDto;
 import ru.isaev.domain.Users.Roles;
 import ru.isaev.domain.Users.User;
 
@@ -9,7 +9,7 @@ import java.util.List;
 public interface IUserService {
     public void addUser(User user);
 
-    public IdsOfFollowedProductsDto login(String email, String hashedPassword);
+    public UserIdAndLikedIdsDto login(String email, String hashedPassword);
 
     public User getUserById(Long id);
 
