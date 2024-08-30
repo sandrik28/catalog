@@ -1,1 +1,1 @@
-import {ProfilePage} from './ui/Page/Page'
+export {ProfilePage} from './ui/ProfilePage/ProfilePage'

@@ -1,1 +1,1 @@
-import {ProductPage} from './ui/Page/Page'
+export {ProductPage} from './ui/ProductPage/ProductPage'

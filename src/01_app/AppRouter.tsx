@@ -4,7 +4,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { baseLayout } from "./layouts/baseLayouts";
 import { NotFoundPage } from "@/02_pages/notFound";
 import { MainPage } from "@/02_pages/main";
-import { ProfilePage } from "@/02_pages/profile/ui/Page/Page";
+import { ProfilePage } from "@/02_pages/profile/ui/ProfilePage/Page";
 import { ProductPage } from "@/02_pages/product/ui/Page/Page";
 import { ProductFormPage } from "@/02_pages/newProduct";
 import { LoginPage } from "@/02_pages/login";
