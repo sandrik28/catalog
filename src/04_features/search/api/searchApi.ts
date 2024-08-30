@@ -10,7 +10,7 @@ export const fetchSearchResults = async (query: string = ""): Promise<ProductPre
         ...product,
         status: product.status as Status,
         timeOfLastApproval: new Date(product.timeOfLastApproval),
-      })).filter(product => product.title.includes(query)));
+      })).filter(product => product.status === Status.APPROVED).filter(product => product.title.includes(query)));
     })
   })
 };
