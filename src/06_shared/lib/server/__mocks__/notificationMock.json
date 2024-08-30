@@ -1,0 +1,20 @@
+[
+    {
+      "id": 1,
+      "ProductId": 106,
+      "ProductName": "Видеоконференции MeetPro",
+      "message": "PRODUCT_WAS_PUBLISHED"
+    },
+    {
+      "id": 2,
+      "ProductId": 107,
+      "ProductName": "CRM система SalesBoost",
+      "message": "PRODUCT_WAS_EDITED"
+    },
+    {
+      "id": 3,
+      "ProductId": 107,
+      "ProductName": "CRM система SalesBoost",
+      "message": "PRODUCT_WAS_ARCHIVED"
+    }
+  ]
