@@ -11,7 +11,7 @@ export interface ProductDto {
     linkToWebSite: string;
     description: string;
     category: string;
-    timeOfLastApproval: Date; 
+    timeOfLastApproval: string | null; 
 }
 
 export enum Status {
@@ -42,7 +42,7 @@ export interface ProductPreviewCardDto {
     description: string;
     category: string;
     status: Status;
-    timeOfLastApproval: Date;
+    timeOfLastApproval: string | null;
 }
 
 export interface IProductDetails {

@@ -1,11 +1,11 @@
 import { NotificationDto, NotificationMessage } from '@/05_entities/notification/model/types';
 import { ProductPreviewCardDto, Status } from '@/05_entities/product/model/types';
 import { productsMockCards, notificationMock } from '@/06_shared/lib/server';
+
 const mockProducts: ProductPreviewCardDto[] = productsMockCards.map(product => {
     return {
         ...product,
         status: product.status as Status,
-        timeOfLastApproval: new Date(product.timeOfLastApproval),
     };
 });
 

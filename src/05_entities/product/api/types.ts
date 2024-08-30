@@ -11,5 +11,5 @@ export interface ProductDto {
     linkToWebSite: string;
     description: string;
     category: string;
-    timeOfLastApproval: Date; 
+    timeOfLastApproval: string | null; 
   }
