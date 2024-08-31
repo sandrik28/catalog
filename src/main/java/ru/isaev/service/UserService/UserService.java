@@ -17,6 +17,7 @@ import ru.isaev.service.Utilities.Exceptions.NotYourProfileException;
 import ru.isaev.service.Utilities.Exceptions.UserNotFoundException;
 
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -55,6 +56,13 @@ public class UserService implements IUserService {
         dto.setIdsOfFollowedProducts(idsOfFollowedProductsList);
         dto.setUserId(user.getId());
         dto.setRole(user.getRole());
+
+        String stringToCode = email + ":" + user.getPassword();
+        byte[] inputBytes = stringToCode.getBytes();
+        String encodedString = new String(Base64.getEncoder().encode(inputBytes));
+        String base64EncodedString = "Basic " + encodedString;
+
+        dto.setBase64EncodedString(base64EncodedString);
 
         return dto;
     }

@@ -11,6 +11,8 @@ public class UserIdAndLikedIdsDto {
 
     Roles role;
 
+    String base64EncodedString;
+
     public List<Long> getIdsOfFollowedProducts() {
         return idsOfFollowedProducts;
     }
@@ -33,5 +35,13 @@ public class UserIdAndLikedIdsDto {
 
     public void setRole(Roles role) {
         this.role = role;
+    }
+
+    public String getBase64EncodedString() {
+        return base64EncodedString;
+    }
+
+    public void setBase64EncodedString(String base64EncodedString) {
+        this.base64EncodedString = base64EncodedString;
     }
 }
