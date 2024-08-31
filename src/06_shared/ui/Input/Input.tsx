@@ -10,6 +10,7 @@ type Props = {
   register?: UseFormRegisterReturn
   type?: InputHTMLAttributes<HTMLInputElement>['type']
   id?: string
+  placeholder?: string
 }
 
 export const Input = ({ 
@@ -18,6 +19,7 @@ export const Input = ({
   inputStyle = 'default', 
   register, 
   type,
+  placeholder,
   id }: Props) => {
   return inputStyle === 'description' ? (
     <textarea
@@ -26,6 +28,7 @@ export const Input = ({
       className={cn(css.root, css.textArea_text)}
       value={value}
       id={id}
+      placeholder={placeholder}
     />
   ) : (
     <input
@@ -35,6 +38,7 @@ export const Input = ({
       className={cn(css.root, css.input_text)}
       value={value}
       id={id}
+      placeholder={placeholder}
     />
   );
 }

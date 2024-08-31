@@ -4,7 +4,6 @@ import {
     type PayloadAction,
 } from '@reduxjs/toolkit';
 import type { ProductId } from '@/05_entities/product';
-import { wishlistApi } from '../api/wishlistApi';
 import { RootState } from '@/01_app/AppStore';
 
 type WishlistSliceState = {
@@ -29,17 +28,6 @@ export const wishlistSlice = createSlice({
                 state.products[action.payload] = true;
             }
         },
-    },
-    extraReducers: (builder) => {
-        builder.addMatcher(
-            wishlistApi.endpoints.wishlistProducts.matchFulfilled,
-            (state, { payload }) => {
-                state.products = {};
-                payload.forEach((product) => {
-                    state.products[product.id as ProductId] = true;
-                });
-            },
-        );
     },
 });
 

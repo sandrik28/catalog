@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/01_app/AppStore'
 import { Icon} from '@/06_shared/ui/Icon/Icon';
+import { Roles } from '@/05_entities/user/api/types'
 
 
 
 export function LayoutHeader() {
     const userId = useSelector((state: RootState) => state.session.userId);
+    const isUser = useSelector((state: RootState) => state.session.role);
 
     return (
         <header className={css.root}>
@@ -20,7 +22,7 @@ export function LayoutHeader() {
                 </div>
             </Link>
             {
-                userId &&
+                (isUser === Roles.ROLE_USER) &&
                 <Link to={`/profile/${userId}`}>
                     <div className={css.right}>
                         <span>Личный кабинет</span>
