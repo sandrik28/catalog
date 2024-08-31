@@ -3,7 +3,7 @@ import { Profile } from '@/03_widgets/Profile';
 import { User, UserDto } from '@/05_entities/user';
 import { ProfileCategory } from '@/03_widgets/Category/ProfileCategory/ProfileCategory';
 import { useNavigate, useParams } from 'react-router-dom';
-import { userMock } from '@/06_shared/lib/server';
+import { usersMock } from '@/06_shared/lib/server';
 import { Roles } from '@/05_entities/user/api/types';
 import { useModal } from '@/06_shared/lib/useModal';
 
@@ -11,14 +11,15 @@ import { useModal } from '@/06_shared/lib/useModal';
 const getUserById = (profileId: number): Promise<UserDto> => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const user = userMock.find(user => user.id === profileId)
-      // if (profile) {
+
+      const user = usersMock.find(user => user.id === profileId);
       if (user) {
         const userWithCorrectTypes: UserDto = {
           ...user,
-          role: user.role as Roles, 
+          role: user.role as Roles,
         };
         resolve(userWithCorrectTypes);
+
       } else {
         reject(new Error('Профиль не найден'))
       }
@@ -31,15 +32,18 @@ export function ProfilePage() {
   // TODO: получить данные пользователя по id при загрузке страницы
   const { isModalOpen, modalContent, modalType, openModal } = useModal();
   const [user, setUser] = useState<UserDto | null>();
-  const userId = useParams();
+  const { id: userId } = useParams<{ id: string }>();
+
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+
     const fetchUser = async () => {
       try {
         // TODO: запрос на получение продукта по айди
         const fetchedUser = await getUserById(Number(userId))
+
         if (fetchedUser) {
           setUser(fetchedUser)
         } else {
@@ -59,7 +63,7 @@ export function ProfilePage() {
   return (
     <>
       <Profile />
-      {user && 
+      {user &&
         <User
           // TODO: берется из запроса
           // user={{
