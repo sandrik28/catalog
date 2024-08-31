@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/email")
-    public ResponseEntity<UserDto> getByEmail(@RequestParam(name = "email", required = false) String email) {
+    public ResponseEntity<UserDto> getByEmail(@RequestParam(name = "email") String email) {
         return new ResponseEntity<>(
                 mapper.userToUserDto(userService.getUserByEmail(email)),
                 HttpStatus.OK
@@ -44,8 +44,8 @@ public class UserController {
 
     @GetMapping("/login")
     public ResponseEntity<UserIdAndLikedIdsDto> login(
-            @RequestParam(name = "email", required = false) String email,
-            @RequestParam(name = "password", required = false) String password
+            @RequestParam(name = "email") String email,
+            @RequestParam(name = "password") String password
             ) {
         UserIdAndLikedIdsDto response = userService.login(email, password);
         return new ResponseEntity<>(
@@ -55,7 +55,7 @@ public class UserController {
     }
 
     @GetMapping("/role")
-    public ResponseEntity<List<UserDto>> getByRole(@RequestParam(name = "role", required = false) Roles role) {
+    public ResponseEntity<List<UserDto>> getByRole(@RequestParam(name = "role") Roles role) {
         return new ResponseEntity<>(
                 mapper.mapListOfUsersToListOfDtos(userService.getUserByRole(role)),
                 HttpStatus.OK
