@@ -11,6 +11,12 @@ const initialState: SessionState = {
   role: "ROLE_USER" as Roles,
 };
 
+// const initialState: SessionState = {
+//   userId: 2,
+//   role: "ROLE_ADMIN" as Roles,
+// };
+
+
 const sessionSlice = createSlice({
   name: 'session',
   initialState,
