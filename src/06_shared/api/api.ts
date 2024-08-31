@@ -63,10 +63,10 @@ export const api = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8080',
-        prepareHeaders: (headers) => {
-            headers.set('Authorization', authToken);
-            return headers;
-        },
+        // prepareHeaders: (headers) => {
+        //     headers.set('Authorization', authToken);
+        //     return headers;
+        // },
     }),
     endpoints: (builder) => ({
         getAllProducts: builder.query<ProductApiResponse[], void>({
