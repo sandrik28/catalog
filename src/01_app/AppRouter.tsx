@@ -8,6 +8,7 @@ import { ProfilePage } from "@/02_pages/profile/ui/ProfilePage/ProfilePage";
 import { ProductPage } from "@/02_pages/product/ui/ProductPage/ProductPage";
 import { ProductFormPage } from "@/02_pages/newProduct";
 import { LoginPage } from "@/02_pages/login";
+import { Roles } from "@/05_entities/user/api/types";
 
 type AuthGuardProps = {
   children: ReactElement
@@ -17,7 +18,16 @@ function AuthGuard({ children }: AuthGuardProps) {
   const isAuthorized = useSelector((state: RootState) => state.session.userId)
 
   if (!isAuthorized)
-    return <Navigate to="/login" />
+    return <Navigate to='/login' />
+
+  return children
+}
+
+function AdminGuard({ children }: AuthGuardProps) {
+  const isAdmin = useSelector((state: RootState) => state.session.role);
+
+  if (isAdmin === Roles.ROLE_ADMIN)
+    return <Navigate to='/' />
 
   return children
 }
@@ -40,7 +50,9 @@ export function appRouter() {
           path: '/profile/:id',
           element: (
             <AuthGuard>
-              <ProfilePage />
+              <AdminGuard>
+                <ProfilePage />
+              </AdminGuard>
             </AuthGuard>
           ),
         },
@@ -56,7 +68,9 @@ export function appRouter() {
           path: '/product/:id/edit',
           element: (
             <AuthGuard>
-              <ProductPage />
+              <AdminGuard>
+                <ProductFormPage />
+              </AdminGuard>
             </AuthGuard>
           ),
         },
@@ -64,7 +78,9 @@ export function appRouter() {
           path: 'addNewProduct',
           element: (
             <AuthGuard>
-              <ProductFormPage />
+              <AdminGuard>
+                <ProductFormPage />
+              </AdminGuard>
             </AuthGuard>
           ),
         },

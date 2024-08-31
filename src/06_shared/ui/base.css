@@ -1,6 +1,6 @@
 @import url('./colors.css');
 
-:root {
+:root, textarea {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 24px;
