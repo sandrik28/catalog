@@ -46,7 +46,7 @@ public class ProductController {
     @GetMapping("all_approved/followed_by_user/{id}/title")
     public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUserByTitle(
             @PathVariable("id") Long id,
-            @RequestParam(name = "title", required = false) String title) {
+            @RequestParam(name = "title") String title) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsFollowedByUserByTitle(id, title)),
                 HttpStatus.OK
@@ -56,7 +56,7 @@ public class ProductController {
     @GetMapping("all_approved/followed_by_user/{id}/category")
     public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUserByCategory(
             @PathVariable("id") Long id,
-            @RequestParam(name = "category", required = false) String category) {
+            @RequestParam(name = "category") String category) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsFollowedByUserByCategory(id, category)),
                 HttpStatus.OK
@@ -66,8 +66,8 @@ public class ProductController {
     @GetMapping("all_approved/followed_by_user/{id}/title_and_category")
     public ResponseEntity<List<ProductPreviewCardDto>> getProductsFollowedByUserByTitleAndCategory(
             @PathVariable("id") Long id,
-            @RequestParam(name = "title", required = false) String title,
-            @RequestParam(name = "category", required = false) String category) {
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "category") String category) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsFollowedByUserByTitleAndCategory(
                         id,
@@ -78,7 +78,7 @@ public class ProductController {
     }
 
     @GetMapping("all_approved/title")
-    public ResponseEntity<List<ProductPreviewCardDto>> getByTitle(@RequestParam(name = "title", required = false) String title) {
+    public ResponseEntity<List<ProductPreviewCardDto>> getByTitle(@RequestParam(name = "title") String title) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsByTitle(title)),
                 HttpStatus.OK
@@ -86,7 +86,7 @@ public class ProductController {
     }
 
     @GetMapping("/title")
-    public ResponseEntity<List<ProductPreviewCardDto>> getAllByTitle(@RequestParam(name = "title", required = false) String title) {
+    public ResponseEntity<List<ProductPreviewCardDto>> getAllByTitle(@RequestParam(name = "title") String title) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsByTitle(title)),
                 HttpStatus.OK
@@ -94,7 +94,7 @@ public class ProductController {
     }
 
     @GetMapping("all_approved/category")
-    public ResponseEntity<List<ProductPreviewCardDto>> getAllApprovedByCategory(@RequestParam(name = "category", required = false) String category) {
+    public ResponseEntity<List<ProductPreviewCardDto>> getAllApprovedByCategory(@RequestParam(name = "category") String category) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsByCategory(category)),
                 HttpStatus.OK
@@ -103,8 +103,8 @@ public class ProductController {
 
     @GetMapping("all_approved/title_and_category")
     public ResponseEntity<List<ProductPreviewCardDto>> getAllApprovedByTitleAndCategory(
-            @RequestParam(name = "title", required = false) String title,
-            @RequestParam(name = "category", required = false) String category
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "category") String category
     ) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getAllApprovedProductsByTitleAndCategory(title, category)),
@@ -113,7 +113,7 @@ public class ProductController {
     }
 
     @GetMapping("/moderator/title")
-    public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByTitle(@RequestParam(name = "title", required = false) String title) {
+    public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByTitle(@RequestParam(name = "title") String title) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsForModeratorByTitle(title)),
                 HttpStatus.OK
@@ -121,7 +121,7 @@ public class ProductController {
     }
 
     @GetMapping("/moderator/category")
-    public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByCategory(@RequestParam(name = "category", required = false) String category) {
+    public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByCategory(@RequestParam(name = "category") String category) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsForModeratorByCategory(category)),
                 HttpStatus.OK
@@ -130,8 +130,8 @@ public class ProductController {
 
     @GetMapping("moderator/title_and_category")
     public ResponseEntity<List<ProductPreviewCardDto>> getForModeratorByTitleAndCategory(
-            @RequestParam(name = "title", required = false) String title,
-            @RequestParam(name = "category", required = false) String category
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "category") String category
     ) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsForModeratorByTitleAndCategory(title, category)),
@@ -150,7 +150,7 @@ public class ProductController {
     @GetMapping("/{id}/status")
     public ResponseEntity<List<ProductPreviewCardDto>> getProductsOfUserByIdAndStatus(
             @PathVariable("id") Long id,
-            @RequestParam(name = "status", required = false) Status status) {
+            @RequestParam(name = "status") Status status) {
         return new ResponseEntity<>(
                 mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsByUserIdAndStatus(id, status)),
                 HttpStatus.OK

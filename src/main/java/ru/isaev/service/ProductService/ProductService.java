@@ -133,10 +133,15 @@ public class ProductService implements IProductService {
             }
         }
 
-        return productsFollowedByUser.
-                stream().
-                filter(product -> product.getTitle().equals(title)).
-                collect(Collectors.toList());
+        List<Product> filteredResponse = new ArrayList<>();
+
+        for (Product p :
+                productsFollowedByUser) {
+            if (p.getTitle().toLowerCase().contains(title.toLowerCase()))
+                filteredResponse.add(p);
+        }
+
+        return filteredResponse;
     }
 
     @Override
@@ -227,7 +232,17 @@ public class ProductService implements IProductService {
     }
 
     public List<Product> getAllApprovedProductsByTitleAndCategory(String title, String category) {
-        return productRepo.findProductsByStatusAndTitleAndCategory(Status.APPROVED, title, category);
+        List<Product> response = productRepo.findProductsByStatusAndTitleAndCategory(Status.APPROVED, title, category);
+
+        List<Product> filteredResponse = new ArrayList<>();
+
+        for (Product p :
+                response) {
+            if (p.getTitle().toLowerCase().contains(title.toLowerCase()))
+                filteredResponse.add(p);
+        }
+
+        return filteredResponse;
     }
 
     @Override
@@ -249,7 +264,7 @@ public class ProductService implements IProductService {
         if (!currentUser.getRole().equals(Roles.ROLE_ADMIN))
             throw new NotYourProductException("You do not have access to products on moderation");
 
-        List<Product> productsOnModerationList = productRepo.findByTitle(title).
+        List<Product> productsOnModerationList = this.getProductsByTitle(title).
                 stream().
                 filter(product -> product.getStatus() == Status.ON_MODERATION).
                 collect(Collectors.toList());
