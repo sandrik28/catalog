@@ -3,19 +3,21 @@ import css from './LoginForm.module.css'
 import { Input } from '@/06_shared/ui/Input/Input';
 import { Button } from '@/06_shared/ui/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import { genSalt, hash } from 'bcrypt-ts';
 
 type FormFields = {
   email: string
   password: string
 }
 
-export function LoginForm(){
+
+export function LoginForm() {
   const navigate = useNavigate();
   const {
-    register, 
+    register,
     handleSubmit,
     setError,
-    formState: {errors, isSubmitting},
+    formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     mode: 'onBlur'
   });
@@ -23,9 +25,11 @@ export function LoginForm(){
   // TODO: запрос + записать в стор
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      // throw new Error()
-      console.log(data)
+      genSalt(10)
+        .then((salt) => hash(data.password, salt))
+        .then((hashedPassword) => {
+          // TODO async request /login {password = hashedPassword}
+        })
       navigate('/')
     } catch (error) {
       setError('root', {
@@ -38,27 +42,27 @@ export function LoginForm(){
     <form className={css.form_login} onSubmit={handleSubmit(onSubmit)}>
       <h1>Вход</h1>
       <div className={css.container}>
-          <label htmlFor='email' className={css.label}>Логин</label>
-          <Input 
-            id='email'
-            register={register('email', { required: 'Логин не может быть пустым' })}
-          />
-          <div className={css.error_block}>
-            {errors.email && <span className={css.error_message}>
-              {errors.email.message}
-            </span>}
-          </div>
-          <label htmlFor='password' className={css.label}>Пароль</label>
-          <Input
-            id='password'
-            type='password' 
-            register={register('password', { required: 'Пароль не может быть пустым' })}
-          />
-          <div className={css.error_block}>
-            {errors.password && <span className={css.error_message}>
-              {errors.password.message}
-            </span>}
-          </div>
+        <label htmlFor='email' className={css.label}>Логин</label>
+        <Input
+          id='email'
+          register={register('email', { required: 'Логин не может быть пустым' })}
+        />
+        <div className={css.error_block}>
+          {errors.email && <span className={css.error_message}>
+            {errors.email.message}
+          </span>}
+        </div>
+        <label htmlFor='password' className={css.label}>Пароль</label>
+        <Input
+          id='password'
+          type='password'
+          register={register('password', { required: 'Пароль не может быть пустым' })}
+        />
+        <div className={css.error_block}>
+          {errors.password && <span className={css.error_message}>
+            {errors.password.message}
+          </span>}
+        </div>
       </div>
       <Button isLoading={isSubmitting} type={'submit'}>
         Войти в систему
@@ -69,4 +73,9 @@ export function LoginForm(){
     </form>
   );
 };
+
+
+
+
+
 
