@@ -1,0 +1,12 @@
+package ru.isaev.domain_made_by_isaev.notifications;
+
+public enum NotificationMessage {
+    PRODUCT_WAS_SET_ON_MODERATION,
+    PRODUCT_WAS_PUBLISHED,
+    PRODUCT_WAS_EDITED,
+    PRODUCT_ON_MODERATION_WAS_EDITED,
+    PRODUCT_WAS_DECLINED_OF_MODERATION,
+    PRODUCT_WAS_ARCHIVED,
+    PRODUCT_WAS_UNARCHIVED,
+    PRODUCT_WAS_DELETED,
+}
