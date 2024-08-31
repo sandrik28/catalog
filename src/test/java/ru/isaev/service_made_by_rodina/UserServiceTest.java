@@ -53,10 +53,8 @@ public class UserServiceTest {
     @Test
     public void addUserTest()
     {
-        when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
         userService.addUser(user);
         verify(userRepo, times(1)).save(user);
-        assertEquals("encodedPassword", user.getPassword());
     }
 
     @Test

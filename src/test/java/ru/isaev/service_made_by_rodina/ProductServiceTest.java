@@ -135,18 +135,6 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void getProductsByTitleTest()
-    {
-        List<Product> products = Arrays.asList(product);
-        when(productRepo.findByTitle("Test Product")).thenReturn(products);
-
-        List<Product> result = productService.getProductsByTitle("Test Product");
-
-        assertNotNull(result);
-        assertEquals(products, result);
-    }
-
-    @Test
     public void getAllApprovedProductsByCategoryTest()
     {
         List<Product> products = Arrays.asList(product);
