@@ -203,7 +203,22 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getProductsByTitle(String title) {
-        return productRepo.findByTitle(title);
+        MyUserDetails currentPrincipal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentPrincipal.getUser();
+
+        List<Product> response = productRepo.findByNameContainingIgnoreCase(title.toLowerCase());
+        List<Product> filteredResponse = new ArrayList<>();
+
+        for (Product p :
+                response) {
+            if ((p.getStatus().equals(Status.ON_MODERATION) || p.getStatus().equals(Status.MODERATION_DENIED)) &&
+                    !p.getId().equals(currentUser.getId()))
+                continue;
+            else
+                filteredResponse.add(p);
+        }
+
+        return filteredResponse;
     }
 
     @Override

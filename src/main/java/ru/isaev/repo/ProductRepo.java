@@ -1,6 +1,8 @@
 package ru.isaev.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.isaev.domain.Products.Product;
 import ru.isaev.domain.Products.Status;
@@ -11,6 +13,9 @@ import java.util.List;
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Long> {
     List<Product> findByStatus(Status status);
+
+    @Query("SELECT e FROM Product e WHERE LOWER(e.title) LIKE %:title%")
+    List<Product> findByNameContainingIgnoreCase(@Param("title") String title);
 
     List<Product> findByTitle(String title);
 

@@ -85,6 +85,14 @@ public class ProductController {
         );
     }
 
+    @GetMapping("/title")
+    public ResponseEntity<List<ProductPreviewCardDto>> getAllByTitle(@RequestParam(name = "title", required = false) String title) {
+        return new ResponseEntity<>(
+                mapper.mapListOfProductsToListOfProductPreviewCardDtos(productService.getProductsByTitle(title)),
+                HttpStatus.OK
+        );
+    }
+
     @GetMapping("all_approved/category")
     public ResponseEntity<List<ProductPreviewCardDto>> getAllApprovedByCategory(@RequestParam(name = "category", required = false) String category) {
         return new ResponseEntity<>(
