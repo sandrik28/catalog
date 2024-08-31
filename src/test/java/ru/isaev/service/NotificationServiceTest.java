@@ -59,7 +59,7 @@ public class NotificationServiceTest {
         notification.setId(1L);
         notification.setUserId(user.getId());
         notification.setProductId(1L);
-        notification.setCategoryOfProduct("Test Category");
+        notification.setTitleOfProduct("Test title");
 
         product = new Product();
         product.setId(1L);
