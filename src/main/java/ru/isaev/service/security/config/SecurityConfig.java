@@ -22,29 +22,6 @@ public class SecurityConfig {
         return new MyUserDetailsService();
     }
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//
-//        return http.csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("users/add").hasRole("ADMIN")
-//                        .requestMatchers("/**").authenticated())
-//                .formLogin(AbstractHttpConfigurer::disable)
-//                .httpBasic(Customizer.withDefaults())
-//                .build();
-//    }
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//
-//        return http.csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("users/add").hasRole("ADMIN")
-//                        .requestMatchers("/**").authenticated())
-//                .formLogin(AbstractHttpConfigurer::disable)
-//                .httpBasic(Customizer.withDefaults())
-//                .build();
-//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

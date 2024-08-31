@@ -50,17 +50,6 @@ jar {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17 // new
-    targetCompatibility = JavaVersion.VERSION_17 // new
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
-//
-//sourceCompatibility = '17'
-//targetCompatibility = '17'
-
-
-
-//
-//compileOptions {
-//    sourceCompatibility JavaVersion.VERSION_17
-//    targetCompatibility JavaVersion.VERSION_17
-//}
