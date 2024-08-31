@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ProductId, ProductMainPageCategory, ProductPreviewCardDto } from '@/05_entities/product/model/types';
 import { RootState } from '@/01_app/AppStore';
@@ -8,8 +8,7 @@ import { ProductFilterButtons } from '@/04_features/product/ui/ProductFilterButt
 import { fetchSearchResults, InputSearch } from '@/04_features/search';
 import { ProductCardList } from '@/03_widgets/ProductCardList/ui/ProductCardList';
 import { filterFavoriteProducts } from './module/filterFavoriteProducts';
-import { useGetAllProductsQuery } from '@/06_shared/api/api';
-import { Loader } from '@/06_shared/ui/Loader/Loader';
+
 
 export const MainCategoryWidget: React.FC = () => {
     const [searchResults, setSearchResults] = useState<ProductPreviewCardDto[]>([]);
@@ -17,36 +16,48 @@ export const MainCategoryWidget: React.FC = () => {
     const favoriteProductIds = useSelector(selectProductIdsInWishlist);
     const userId = useSelector((state: RootState) => state.session.userId);
 
-    const { data: allProducts = [], isLoading } = useGetAllProductsQuery();
-
-    const handleApiResponse = useCallback((data: ProductPreviewCardDto[]) => {
+    const handleApiResponse = (data: ProductPreviewCardDto[]) => {
         setSearchResults(data);
-    }, []);
+    };
 
-    
-   
+
+    const categoriesToShow = [ProductMainPageCategory.All, ProductMainPageCategory.Favorites]
+    const categoryFetchers: Record<ProductMainPageCategory, () => Promise<ProductPreviewCardDto[]>> = {
+        [ProductMainPageCategory.All]: () => fetchSearchResults(),
+        [ProductMainPageCategory.Favorites]: () => filterFavoriteProducts(searchResults, favoriteProductIds),
+    };
+
+
     const handleCategoryChange = (category: ProductMainPageCategory) => {
         setCurrentCategory(category);
     };
 
+    useEffect(() => {
+        const loadProducts = async () => {
+            const fetchProducts = categoryFetchers[currentCategory];
+            const loadedProducts = await fetchProducts();
+            setSearchResults(loadedProducts);
+        };
+
+        loadProducts();
+    }, [currentCategory, favoriteProductIds, userId]);
+    
     return (
         <>
-            <InputSearch onApiResponse={handleApiResponse} />
+            <InputSearch
+                onApiResponse={handleApiResponse}
+            />
 
             <ProductFilterButtons
                 currentCategory={currentCategory}
-                categories={[ProductMainPageCategory.All, ProductMainPageCategory.Favorites]}
+                categories={categoriesToShow}
                 onCategoryChange={handleCategoryChange}
             />
 
-            {isLoading ? (
-                <Loader/>
-            ) : (
-                <ProductCardList
-                    products={searchResults}
-                    productCardActionsSlot={(productId: ProductId) => <AddToWishlistIcon productId={productId} />}
-                />
-            )}
+            <ProductCardList
+                products={searchResults}
+                productCardActionsSlot={(productId: ProductId) => <AddToWishlistIcon productId={productId} />}
+            />
         </>
     );
 };
