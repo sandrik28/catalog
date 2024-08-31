@@ -24,9 +24,7 @@ export const MainCategoryWidget: React.FC = () => {
     }, []);
 
     
-    if (currentCategory === ProductMainPageCategory.All) {
-        setSearchResults(allProducts);
-    } 
+   
     const handleCategoryChange = (category: ProductMainPageCategory) => {
         setCurrentCategory(category);
     };
