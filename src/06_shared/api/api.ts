@@ -1,3 +1,5 @@
+import { Status } from '@/05_entities/product/model/types';
+import { Roles } from '@/05_entities/user/api/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export type ProductApiResponse = {
@@ -5,7 +7,8 @@ export type ProductApiResponse = {
     ownerId: number;
     nameOfOwner: string;
     title: string;
-    status: 'ON_MODERATION' | 'APPROVED' | 'ARCHIVED' | 'MODERATION_DENIED';
+    // status: 'ON_MODERATION' | 'APPROVED' | 'ARCHIVED' | 'MODERATION_DENIED';
+    status: Status;
     emailOFSupport: string;
     linkToWebSite: string;
     description: string;
@@ -26,7 +29,8 @@ export type UserApiResponse = {
     name: string;
     email: string;
     idOfFollowedProductsList: number[];
-    role: 'ROLE_ADMIN' | 'ROLE_USER';
+    // role: 'ROLE_ADMIN' | 'ROLE_USER';
+    role: Roles;
 };
 
 export type AddProductBodyRequest = {
@@ -53,6 +57,7 @@ const getBasicAuthToken = (username: string, password: string): string => {
 const username = 'yourUsername';
 const password = 'yourPassword';
 const authToken = getBasicAuthToken(username, password);
+
 
 export const api = createApi({
     reducerPath: 'api',
