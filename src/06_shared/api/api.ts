@@ -84,12 +84,6 @@ export const api = createApi({
                 body: product,
             }),
         }),
-        deleteUserById: builder.mutation<void, number>({
-            query: (id) => ({
-                url: `/users/delete/${id}`,
-                method: 'DELETE',
-            }),
-        }),
         getUserById: builder.query<UserApiResponse, number>({
             query: (id) => `/users/${id}`,
         }),
@@ -111,7 +105,6 @@ export const {
     useGetProductByIdQuery,
     useAddProductMutation,
     useEditProductMutation,
-    useDeleteUserByIdMutation,
     useGetUserByIdQuery,
     useAddUserMutation,
     useGetNotificationsQuery,  
