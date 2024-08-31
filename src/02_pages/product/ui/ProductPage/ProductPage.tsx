@@ -12,7 +12,6 @@ export const ProductPage = () => {
   const { id: productId } = useParams<{ id: string }>();
   const [product, setProduct] = useState<IProductDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  // TODO: доавить лоадер
 
   useEffect(() => {
     const fetchProduct = async () => {

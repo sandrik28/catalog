@@ -6,7 +6,6 @@ export enum Roles {
 export interface UserDto {
   id: number;
   name: string;
-  password: string;
   email: string;
   idOfFollowedProductsList: number[];
   role: Roles;
