@@ -41,7 +41,7 @@ export function ProfilePage() {
 
     const fetchUser = async () => {
       try {
-        // TODO: запрос на получение продукта по айди
+      
         const fetchedUser = await getUserById(Number(userId))
 
         if (fetchedUser) {
@@ -65,12 +65,6 @@ export function ProfilePage() {
       <Profile />
       {user &&
         <User
-          // TODO: берется из запроса
-          // user={{
-          //   id: 0,
-          //   name: 'Егор Росошанский',
-          //   email: 'test@mail.com',
-          // }}
           user={user}
         />
       }
