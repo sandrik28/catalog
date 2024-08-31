@@ -8,19 +8,19 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.context.SecurityContextHolder;
-import ru.isaev.domain.ProductDtos.IdsOfFollowedProductsDto;
-import ru.isaev.domain.Products.Product;
-import ru.isaev.domain.Products.Status;
-import ru.isaev.domain.Users.Roles;
-import ru.isaev.domain.Users.User;
+import ru.isaev.domain.productDtos.IdsOfFollowedProductsDto;
+import ru.isaev.domain.products.Product;
+import ru.isaev.domain.products.Status;
+import ru.isaev.domain.users.Roles;
+import ru.isaev.domain.users.User;
 import ru.isaev.repo.ProductRepo;
-import ru.isaev.repo.UserRepo;
-import ru.isaev.service.NotificationService.NotificationService;
-import ru.isaev.service.ProductService.ProductService;
-import ru.isaev.service.Security.MyUserDetails;
-import ru.isaev.service.Utilities.Exceptions.NotYourProductException;
-import ru.isaev.service.Utilities.Exceptions.ProductNotFoundExceptions;
-import ru.isaev.service.Utilities.Exceptions.UserNotFoundException;
+import ru.isaev.repo.IUserRepo;
+import ru.isaev.service.notificationService.NotificationService;
+import ru.isaev.service.productService.ProductService;
+import ru.isaev.service.security.MyUserDetails;
+import ru.isaev.service.utilities.Exceptions.NotYourProductException;
+import ru.isaev.service.utilities.Exceptions.ProductNotFoundExceptions;
+import ru.isaev.service.utilities.Exceptions.UserNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ public class ProductServiceTest {
     @Mock
     private ProductRepo productRepo;
     @Mock
-    private UserRepo userRepo;
+    private IUserRepo userRepo;
     @Mock
     private NotificationService notificationService;
     private Product product;

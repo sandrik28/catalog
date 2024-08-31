@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.isaev.domain.UserDtos.UserDto;
-import ru.isaev.domain.UserDtos.UserIdAndLikedIdsDto;
-import ru.isaev.domain.Users.Roles;
-import ru.isaev.domain.Users.User;
-import ru.isaev.service.Mapper.IMyMapper;
-import ru.isaev.service.UserService.IUserService;
+import ru.isaev.domain.userDtos.UserDto;
+import ru.isaev.domain.userDtos.UserIdAndLikedIdsDto;
+import ru.isaev.domain.users.Roles;
+import ru.isaev.domain.users.User;
+import ru.isaev.service.mapper.IMyMapper;
+import ru.isaev.service.userService.IUserService;
 
 import java.util.List;
 

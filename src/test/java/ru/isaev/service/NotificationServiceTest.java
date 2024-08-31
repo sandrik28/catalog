@@ -10,25 +10,22 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
-import ru.isaev.domain.Notifications.Notification;
-import ru.isaev.domain.Products.Product;
-import ru.isaev.domain.Users.Roles;
-import ru.isaev.domain.Users.User;
+import ru.isaev.domain.notifications.Notification;
+import ru.isaev.domain.products.Product;
+import ru.isaev.domain.users.Roles;
+import ru.isaev.domain.users.User;
 import ru.isaev.repo.NotificationRepo;
-import ru.isaev.repo.UserRepo;
-import ru.isaev.service.NotificationService.NotificationService;
-import ru.isaev.service.Security.MyUserDetails;
-import ru.isaev.service.Utilities.Exceptions.NotYourNotificationException;
-import ru.isaev.service.Utilities.Exceptions.UserNotFoundException;
-import ru.isaev.service.Utilities.NotificationsTimestampComparator;
+import ru.isaev.repo.IUserRepo;
+import ru.isaev.service.notificationService.NotificationService;
+import ru.isaev.service.security.MyUserDetails;
+import ru.isaev.service.utilities.Exceptions.NotYourNotificationException;
+import ru.isaev.service.utilities.Exceptions.UserNotFoundException;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,7 +35,7 @@ public class NotificationServiceTest {
     @Mock
     private NotificationRepo notificationRepo;
     @Mock
-    private UserRepo userRepo;
+    private IUserRepo userRepo;
     private User user;
     private MyUserDetails myUserDetails;
     private Authentication authentication;

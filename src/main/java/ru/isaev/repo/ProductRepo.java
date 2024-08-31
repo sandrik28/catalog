@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ru.isaev.domain.Products.Product;
-import ru.isaev.domain.Products.Status;
-import ru.isaev.domain.Users.User;
+import ru.isaev.domain.products.Product;
+import ru.isaev.domain.products.Status;
+import ru.isaev.domain.users.User;
 
 import java.util.List;
 

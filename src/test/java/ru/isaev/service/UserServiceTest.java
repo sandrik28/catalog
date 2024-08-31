@@ -8,13 +8,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.context.SecurityContextHolder;
-import ru.isaev.domain.Users.Roles;
-import ru.isaev.domain.Users.User;
-import ru.isaev.repo.UserRepo;
-import ru.isaev.service.Security.MyUserDetails;
-import ru.isaev.service.UserService.UserService;
-import ru.isaev.service.Utilities.Exceptions.NotYourProfileException;
-import ru.isaev.service.Utilities.Exceptions.UserNotFoundException;
+import ru.isaev.domain.users.Roles;
+import ru.isaev.domain.users.User;
+import ru.isaev.repo.IUserRepo;
+import ru.isaev.service.security.MyUserDetails;
+import ru.isaev.service.userService.UserService;
+import ru.isaev.service.utilities.Exceptions.NotYourProfileException;
+import ru.isaev.service.utilities.Exceptions.UserNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,7 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
     @Mock
-    private UserRepo userRepo;
+    private IUserRepo userRepo;
     @Mock
     private PasswordEncoder passwordEncoder;
     private User user;

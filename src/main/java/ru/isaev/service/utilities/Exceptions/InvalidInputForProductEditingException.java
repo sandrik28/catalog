@@ -1,0 +1,7 @@
+package ru.isaev.service.utilities.Exceptions;
+
+public class InvalidInputForProductEditingException extends RuntimeException {
+    public InvalidInputForProductEditingException(String message) {
+        super(message);
+    }
+}

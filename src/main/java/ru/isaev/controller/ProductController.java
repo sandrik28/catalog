@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.isaev.domain.ProductDtos.ProductDto;
-import ru.isaev.domain.ProductDtos.IdsOfFollowedProductsDto;
-import ru.isaev.domain.ProductDtos.ProductPreviewCardDto;
-import ru.isaev.domain.Products.Product;
-import ru.isaev.domain.Products.Status;
-import ru.isaev.service.Mapper.IMyMapper;
-import ru.isaev.service.ProductService.IProductService;
+import ru.isaev.domain.productDtos.ProductDto;
+import ru.isaev.domain.productDtos.IdsOfFollowedProductsDto;
+import ru.isaev.domain.productDtos.ProductPreviewCardDto;
+import ru.isaev.domain.products.Product;
+import ru.isaev.domain.products.Status;
+import ru.isaev.service.mapper.IMyMapper;
+import ru.isaev.service.productService.IProductService;
 
 import java.util.List;
 
