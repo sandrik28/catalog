@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.isaev.service_made_by_rodina.utilities.Exceptions.*;
 import ru.isaev.service_made_by_isaev.utilities.Exceptions.*;
 
 import java.util.Date;
