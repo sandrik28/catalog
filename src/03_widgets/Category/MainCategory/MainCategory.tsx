@@ -23,21 +23,10 @@ export const MainCategoryWidget: React.FC = () => {
         setSearchResults(data);
     }, []);
 
-    useEffect(() => {
-        const updateProducts = () => {
-            if (currentCategory === ProductMainPageCategory.All) {
-                setSearchResults(allProducts);
-            } 
-            // else if (currentCategory === ProductMainPageCategory.Favorites) {
-            //     const filteredFavorites = filterFavoriteProducts(allProducts, favoriteProductIds);
-            //     setSearchResults(filteredFavorites);
-            // }
-        };
-
-        updateProducts();
-    }, [currentCategory, allProducts, favoriteProductIds]);
-
-    // Handle category change
+    
+    if (currentCategory === ProductMainPageCategory.All) {
+        setSearchResults(allProducts);
+    } 
     const handleCategoryChange = (category: ProductMainPageCategory) => {
         setCurrentCategory(category);
     };
